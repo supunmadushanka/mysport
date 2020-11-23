@@ -1,0 +1,76 @@
+<div id="coach1">
+    <form [formGroup]="coachRegistration" (ngSubmit)="couchSubmit()">
+    <h3>Enter your details</h3><br>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="firstNamePlayer">First Name</label>
+        <input [class.is-invalid]="firstNameCoach.invalid && firstNameCoach.touched" formControlName="firstNameCoach" type="text" class="form-control form-control-lg" id="firstNamePlayer" placeholder="First name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="secondNamePlayer">Last Name</label>
+            <input [class.is-invalid]="lastNameCoach.invalid && lastNameCoach.touched" formControlName="lastNameCoach" type="text" class="form-control form-control-lg" id="secondNamePlayer" placeholder="Last name">
+        </div>
+    
+        <div *ngIf="(firstNameCoach.touched && firstNameCoach.invalid) || lastNameCoach.invalid && lastNameCoach.touched">  
+            <small class="text-danger">First name and last name reuired and must contain more than 3 charactors<br></small>
+        </div>
+    </div><br>
+
+
+      <div class="form-group">
+          <label for="curAddressPlayer">Current Address</label>
+          <input [class.is-invalid]="coachRegistration.get('addressCoach').invalid && coachRegistration.get('addressCoach').touched" formControlName="addressCoach" type="text" class="form-control form-control-lg" id="curAddressPlayer" required placeholder="1234 Main St">
+
+        <small [class.d-none]="coachRegistration.get('addressCoach').valid || coachRegistration.get('addressCoach').untouched" class="text-danger">Address is required</small>
+      </div><br>
+
+    
+      <div class="form-group">
+          <label for="teleNoPlayer">Telephone Number</label>
+          <input [class.is-invalid]="teleNoCoach.invalid && teleNoCoach.touched" formControlName="teleNoCoach" type="tel" class="form-control form-control-lg" id="teleNoPlayer" placeholder="+94 71 2345678">
+
+          <div *ngIf="teleNoCoach.invalid && teleNoCoach.touched">
+                <small *ngIf="teleNoCoach.errors?.required" class="text-danger">Telephone number required</small>
+                <small *ngIf="teleNoCoach.errors?.pattern" class="text-danger">Invalid telephone number</small>
+          </div>
+      </div><br>
+
+      <div class="form-check form-check-inline">
+        <input formControlName="genderCoach" class="form-check-input" type="radio" name="genderCoach" id="malecoach" value="male" required>
+        <label class="form-check-label" for="malecoach">Male</label>
+      </div>&nbsp;
+    <div class="form-check form-check-inline">
+        <input formControlName="genderCoach" class="form-check-input" type="radio" name="genderCoach" id="femalecoach" value="female" required>
+        <label class="form-check-label" for="femalecoach">female</label>
+    </div><br>
+        <div *ngIf="coachRegistration.get('genderCoach').errors?.required" class="text-danger"><small>required</small></div>
+    <br><br>
+
+    <div class="form-group">
+        <label for="sportsele">Sport</label>
+        <select [class.is-invalid]="coachRegistration.get('sportCoach').invalid && coachRegistration.get('sportCoach').touched" formControlName="sportCoach" class="form-control" id="sportsele">
+          <option>Cricket</option>
+          <option>Football</option>
+          <option>Rugby</option>
+        </select>
+        <small [class.d-none]="coachRegistration.get('sportCoach').valid || coachRegistration.get('sportCoach').untouched" class="text-danger">Required sport</small>
+    </div>
+    <br>   
+
+    <div class="form-group">
+        <label for="workingex">Working experience</label>
+        <textarea formControlName="workExCoach" class="form-control" id="workingex" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="otherqua">Other qualifications</label>
+        <textarea formControlName="otherQuCoach" class="form-control" id="otherqua" rows="3"></textarea>
+    </div><br>
+    
+        <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+        <button [disabled]="coachRegistration.invalid" type="submit" class="btn btn-primary">Submit</button>
+
+        
+    </form>
+    </div>

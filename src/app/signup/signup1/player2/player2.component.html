@@ -1,0 +1,60 @@
+<div id="sing2">
+<form [formGroup]="studentRegistration2" (ngSubmit)="playerSubmit()">
+  <h3>Enter your details</h3><br>
+    <div class="form-group">
+      <label for="bloodSelect">Blood Group</label>
+      <select [class.is-invalid]="studentRegistration2.get('bloodSelect').invalid && studentRegistration2.get('bloodSelect').touched" formControlName="bloodSelect" class="form-control" id="bloodSelect" required>
+        <option>A</option>
+        <option>B</option>
+        <option>AB</option>
+        <option>O</option>
+      </select>
+      <small [class.d-none]="studentRegistration2.get('bloodSelect').valid || studentRegistration2.get('bloodSelect').untouched" class="text-danger">Required blood group</small>
+    </div><br>
+
+    <div class="form-check form-check-inline">
+        <input formControlName="rhfactor" class="form-check-input" type="radio" name="rhfactor" id="Rh1" value="option1rh" required>
+        <label class="form-check-label" for="Rh1">
+          Rh+
+        </label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input formControlName="rhfactor" class="form-check-input" type="radio" name="rhfactor" id="Rh2" value="option2rh" required>
+        <label class="form-check-label" for="Rh2">
+          RH-
+        </label>
+    </div>
+    <div *ngIf="studentRegistration2.get('rhfactor').errors?.required" class="text-danger"><small>required</small></div>
+    <br><br>
+
+    <div class="form-check form-check-inline">
+      <label class="form-check-label" for="heightPlayer">
+        Height</label>&nbsp;&nbsp;
+      <input formControlName="heightPlayer" class="form-check-input" type="number" name="height" id="heightPlayer" step="1" min="0">cm
+    </div>
+    <small [class.d-none]="studentRegistration2.get('heightPlayer').valid || studentRegistration2.get('heightPlayer').untouched" class="text-danger"><br>Height required</small>
+    <br><br>
+
+    <div class="form-check form-check-inline">
+      <label class="form-check-label" for="weightPlayer">
+        Weight</label>&nbsp;&nbsp;
+      <input formControlName="weightPlayer" class="form-check-input" type="number" name="height" id="weightPlayer" step="0.01" min="0">Kg
+    </div>
+    <small [class.d-none]="studentRegistration2.get('weightPlayer').valid || studentRegistration2.get('weightPlayer').untouched" class="text-danger"><br>Weight required</small>
+    <br><br><br>
+
+    <div class="form-group">
+      <label for="diseasesPlayer">Diseases</label>
+      <textarea formControlName="diseasesPlayer" class="form-control" id="diseasesPlayer" rows="3"></textarea>
+    </div><br>
+
+    <div class="form-group">
+      <label for="PhysicalWeaknesses">Physical weaknesses</label>
+      <textarea formControlName="PhysicalWeaknesses" class="form-control" id="PhysicalWeaknesses" rows="3"></textarea>
+    </div><br>
+
+    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+    <button [disabled]="submit()" type="submit" class="btn btn-primary">Submit</button>
+    
+  </form>
+</div>

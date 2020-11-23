@@ -1,0 +1,31 @@
+<div id="ct">
+    <form>
+    <div class="form-group">
+        <h3>Create your own team</h3><br>
+        <label for="firstNamePlayer">Team Name</label>
+        <input type="text" class="form-control form-control-lg" id="firstNamePlayer" required placeholder="First name">
+      </div><br>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="MaleTeam" id="MaleTeam" value="option1player" required>
+        <label class="form-check-label" for="MaleTeam">Male team</label>
+      </div>&nbsp;
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="FeMaleTeam" id="FeMaleTeam" value="option2player" required>
+        <label class="form-check-label" for="FeMaleTeam">Female team</label>
+    </div><br><br>
+
+    <div class="form-group">
+        <label for="sportsele">Age group</label>
+        <select class="form-control" id="sportsele">
+          <option>Under 13</option>
+          <option>Under 15</option>
+          <option>Under 17</option>
+          <option>Under 19</option>
+        </select>
+    </div><br>   
+    
+        <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary" routerLink="/createteam">Next</button>
+    </form>
+    </div>

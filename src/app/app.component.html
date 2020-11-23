@@ -1,0 +1,80 @@
+<div>
+  <nav class="navbar  navbar-expand ">
+      <a class="navbar-brand mb-0 h1" routerLink="/home" open>
+          <img src="\assets\sss.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+      MySport
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-link " href="#about">About Us</a>
+          <a class="nav-link" routerLink="/home">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Log in</button></a>
+          <a class="nav-link" routerLink="/signup">
+              <button type="button" class="btn btn-success">
+              Sign up</button></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="staticBackdropLabel">Log in with your email</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="sing0">
+
+            <form [formGroup]="loginForm">
+              <div class="form-group">
+                <label for="mainemail"><b>Email address</b></label>
+                <input [class.is-invalid]="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched" formControlName="userEmail" type="email" class="form-control form-control-lg" id="mainemail" aria-describedby="emailHelpmain" placeholder="name@example.com" required>
+
+                <div *ngIf="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched;else elseBlock11">
+                  <small *ngIf="loginForm.get('userEmail').errors?.required" class="text-danger">Email is required</small>
+                  <small *ngIf="loginForm.get('userEmail').errors?.email" class="text-danger">Must be email type</small>
+                </div>
+                <ng-template #elseBlock11>
+                  <small id="signupemailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </ng-template>
+
+              </div>
+              <div class="form-group">
+                <label for="mainPassword1" ><b>Enter password</b></label>
+                <input [class.is-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched" formControlName="password" type="password" class="form-control form-control-lg" id="mainPassword1" required aria-describedby="passwordHelpmain">
+                
+                <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched;else elseBlock22">
+                  <small *ngIf="loginForm.get('password').errors?.required" class="text-danger">Password is required</small>
+                  <small *ngIf="loginForm.get('password').errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must be 8-20 characters long<br></small>
+                  <small *ngIf="loginForm.get('password').errors?.pattern" class="text-danger">must not contain spaces, special characters, or emoji</small>
+                </div>
+
+                <ng-template #elseBlock22>
+                  <small id="passwordHelpsignup" class="form-text text-muted">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                  </small>
+                </ng-template>
+
+              </div><br>
+              <div class="form-group">
+              <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+            </form>
+
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<router-outlet></router-outlet>
