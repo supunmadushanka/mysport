@@ -1,0 +1,31 @@
+<table class="center">
+    <tr>
+        <td><button class="btn-success" (click)="showParents()">Show parents</button></td>
+        <td><button class="btn-success" (click)="showPlayers()">Show players</button></td>
+        <td><button class="btn-success" (click)="showCoaches()">Show coach</button></td>
+    </tr>
+</table>
+<br><br>
+
+<table class="center1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+    </tr>
+    <tr [class.d-none]="showParent" *ngFor="let e of parent">
+        <td>{{e.pName}}</td>
+        <td>{{e.pEmail}}</td>
+        <td>{{e.pAddress}}</td>
+    </tr>
+    <tr [class.d-none]="showPlayer" *ngFor="let e of player">
+        <td>{{e.pName}}</td>
+        <td>{{e.pEmail}}</td>
+        <td>{{e.pAddress}}</td>
+    </tr>
+    <tr [class.d-none]="showCoach" *ngFor="let e of coach">
+        <td>{{e.cName}}</td>
+        <td>{{e.cEmail}}</td>
+        <td>{{e.cAddress}}</td>
+    </tr>
+</table>

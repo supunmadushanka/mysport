@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-parent',
@@ -9,7 +10,7 @@ import { RegistrationService } from '../../registration.service'
 })
 export class ParentComponent implements OnInit {
 
-  constructor(private fbParent:FormBuilder,private _registrationService:RegistrationService) { }
+  constructor(private fbParent:FormBuilder,private _registrationService:RegistrationService,private router : Router) { }
 
   get firstNameParent(){
     return this.parentRegistration.get('firstNameParent');
@@ -40,6 +41,7 @@ export class ParentComponent implements OnInit {
         response=> console.log('success',response),
         error => console.error('Error!', error)  
       );
+      this.router.navigate(['/parentHome']);
   }
 
 }

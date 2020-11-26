@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationService {
+export class RegistrationService implements OnInit{
 
   _url1 = 'http://localhost:3000/enroll';
   _url2 = 'http://localhost:3000/coachRegi';
@@ -33,5 +33,7 @@ export class RegistrationService {
   playerregister2(userData){
     return this._http.post<any>(this._url5, userData);
   }
+
+  ngOnInit():void{}
 
 }

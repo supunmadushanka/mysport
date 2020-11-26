@@ -5,6 +5,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { CreateteamComponent } from './createteam/createteam.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ParentHomeComponent } from './parent-home/parent-home.component';
 import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
 import { SelectionComponent } from './signup/selection/selection.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path : 'coach',component : CoachComponent},
   {path : 'parent',component : ParentComponent},
   {path : 'aboutus',component : AboutusComponent},
-  {path : 'createteam',component : CreateteamComponent}
+  {path : 'createteam',component : CreateteamComponent},
+  {path : 'parentHome',component:ParentHomeComponent}
 ];
 
 @NgModule({

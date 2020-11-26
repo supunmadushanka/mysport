@@ -15,6 +15,7 @@ import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
 import { Player2Component } from './signup/signup1/player2/player2.component';
 import { CreateteamComponent } from './createteam/createteam.component';
+import { ParentHomeComponent } from './parent-home/parent-home.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CreateteamComponent } from './createteam/createteam.component';
     ParentComponent,
     Player2Component,
     CreateteamComponent,
+    ParentHomeComponent,
   ],
   imports: [
     BrowserModule,
