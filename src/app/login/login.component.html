@@ -1,31 +1,52 @@
-<table class="center">
-    <tr>
-        <td><button class="btn-success" (click)="showParents()">Show parents</button></td>
-        <td><button class="btn-success" (click)="showPlayers()">Show players</button></td>
-        <td><button class="btn-success" (click)="showCoaches()">Show coach</button></td>
-    </tr>
-</table>
-<br><br>
+<div id="login-page">
+    <div class="form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="mainemail"><b>Email address</b></label>
+            <input [class.is-invalid]="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched"
+                formControlName="userEmail" type="email" class="form-control form-control-lg" id="mainemail"
+                aria-describedby="emailHelpmain" placeholder="name@example.com" required>
 
-<table class="center1">
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Address</th>
-    </tr>
-    <tr [class.d-none]="showParent" *ngFor="let e of parent">
-        <td>{{e.pName}}</td>
-        <td>{{e.pEmail}}</td>
-        <td>{{e.pAddress}}</td>
-    </tr>
-    <tr [class.d-none]="showPlayer" *ngFor="let e of player">
-        <td>{{e.pName}}</td>
-        <td>{{e.pEmail}}</td>
-        <td>{{e.pAddress}}</td>
-    </tr>
-    <tr [class.d-none]="showCoach" *ngFor="let e of coach">
-        <td>{{e.cName}}</td>
-        <td>{{e.cEmail}}</td>
-        <td>{{e.cAddress}}</td>
-    </tr>
-</table>
+            <div *ngIf="loginForm.get('userEmail').invalid && loginForm.get('userEmail').touched;else elseBlock11">
+                <small *ngIf="loginForm.get('userEmail').errors?.required" class="text-danger">Email is required</small>
+                <small *ngIf="loginForm.get('userEmail').errors?.email" class="text-danger">Must be email type</small>
+            </div>
+            <ng-template #elseBlock11>
+                <small id="signupemailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </ng-template>
+
+        </div>
+        <div class="form-group">
+            <label for="mainPassword1"><b>Enter password</b></label>
+            <input [class.is-invalid]="loginForm.get('password').invalid && loginForm.get('password').touched"
+                formControlName="password" type="password" class="form-control form-control-lg" id="mainPassword1"
+                required aria-describedby="passwordHelpmain">
+
+            <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched;else elseBlock22">
+                <small *ngIf="loginForm.get('password').errors?.required" class="text-danger">Password is
+                    required</small>
+                <small *ngIf="loginForm.get('password').errors?.minlength|| password.errors?.maxlength"
+                    class="text-danger">Your password must be 8-20 characters long<br></small>
+                <small *ngIf="loginForm.get('password').errors?.pattern" class="text-danger">must not contain spaces,
+                    special characters, or emoji</small>
+            </div>
+
+            <ng-template #elseBlock22>
+                <small id="passwordHelpsignup" class="form-text text-muted">
+                    Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                    spaces,
+                    special characters, or emoji.
+                </small>
+            </ng-template>
+
+        </div><br>
+        <div class="form-group">
+            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+            <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+
+</div>
+</div>

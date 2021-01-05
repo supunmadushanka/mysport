@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validators} from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
-import {Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 
 @Component({
-  selector: 'app-signup1',
-  templateUrl: './signup1.component.html',
-  styleUrls: ['./signup1.component.scss']
+  selector: 'app-player1',
+  templateUrl: './player1.component.html',
+  styleUrls: ['./player1.component.scss']
 })
-export class Signup1Component implements OnInit {
+export class Player1Component implements OnInit {
 
-  constructor(private fbPlayer1:FormBuilder, private _registrationServive: RegistrationService,private router : Router) { }
+  constructor(private fbPlayer1:FormBuilder, private _registrationServive: RegistrationService,private router : Router,private route :ActivatedRoute) { }
+  
+  ngOnInit(): void {
+  }
 
   get firstNamePlayer(){
     return this.studentRegistration1.get('firstNamePlayer');
@@ -22,18 +25,16 @@ export class Signup1Component implements OnInit {
     return this.studentRegistration1.get('teleNoPlayer');
   }
 
-  ngOnInit(): void {
-  }
-
   studentRegistration1=this.fbPlayer1.group({
+    userEmail:[localStorage.getItem('email')],
+    password:[localStorage.getItem('password')],
     firstNamePlayer:['',[Validators.required,Validators.minLength(3)]],
     secondNamePlayer:['',[Validators.required,Validators.minLength(3)]],
     perAddressPlayer:['',[Validators.required]],
-    curAddressPlayer:['',[Validators.maxLength(50)]],
     teleNoPlayer:['',[Validators.required,Validators.pattern('(07)[0-9]{8}')]],
     dobpPlayer:['',[Validators.required]],
     MFplayer:['',[Validators.required]],
-    schoolPlayer:['']
+    type:[localStorage.getItem('userType')]
   })
 
   submit(){

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators }  from '@angular/forms';
+import {Router} from '@angular/router'
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +9,32 @@ import { FormBuilder, Validators }  from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pr1';
 
-  constructor( private fb1 : FormBuilder){}
+  constructor( private fb1 : FormBuilder,private router : Router,public _auth : AuthService){}
 
   loginForm = this.fb1.group({
-      userEmail:['',[Validators.required,Validators.email,Validators.maxLength(20),Validators.minLength(8),Validators.pattern('[a-zA-Z1-9]*')]],
-      password:['',Validators.required]
+      userEmail:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.pattern('[a-zA-Z1-9]*'),Validators.maxLength(20),Validators.minLength(8)]]
   })
+
+  onSubmit(){
+    console.log(this.loginForm.value);
+
+    this._auth.loginUser(this.loginForm.value)
+      .subscribe(
+        response =>{
+          console.log('Success!', response)
+          localStorage.setItem('token',response.token)
+          this.router.navigate(['/selectTeam']);
+        },
+        error => {
+          console.error('Error!', error)
+          alert("Invalid login")
+          this.loginForm.reset()
+      }
+      );
+
+
+    //
+  }
 }

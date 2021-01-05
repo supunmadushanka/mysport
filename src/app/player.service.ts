@@ -22,4 +22,14 @@ export class PlayerService {
     let _url3="http://localhost:3000/coaches";
     return this.http.get<any>(_url3);
   }
+
+  getTeam(){
+    let _url4="http://localhost:3000/teams";
+    return this.http.get<any>(_url4);
+  }
+
+  getUser(){
+    let _userUrl="http://localhost:3000/api/user";
+    return this.http.get<any>(_userUrl);
+  }
 }

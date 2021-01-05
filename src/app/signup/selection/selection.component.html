@@ -4,23 +4,23 @@
 <div>
     <table align="center">
         <tr>
-            <td><a routerLink="/player">
+            <td><a>
                 <div><img src="/assets/player.jpg" style="height:15em;width: 15em;">
                 </div></a>
                 <br>
-                <button type="button" class="btn btn-success" routerLink="/player">Player</button>
+                <button type="button" (click)="selectUser('ur0002')" class="btn btn-success">Player</button>
             </td>
-            <td><a routerLink="/coach">
-                <div><img src="/assets/coach.jpg" style="height:15em;width: 15em;">
+            <td><a>
+                <div><img src="/assets/admin.jpeg" style="height:15em;width: 15em;">
                 </div></a>
                 <br>
-                <button type="button" class="btn btn-success" routerLink="/coach">Coach</button>
+                <button type="button" (click)="selectUser('ur0001')" class="btn btn-success" >Institute Admin</button>
             </td>
             <td><a routerLink="/parent">
                 <div><img src="/assets/parent.jpg" style="height:15em;width: 15em;">
                 </div></a>
                 <br>
-                <button type="button" class="btn btn-success" routerLink="/parent">Parent</button>
+                <button type="button" (click)="selectUser('ur0003')" class="btn btn-success" >Parent</button>
             </td>
         </tr>
     </table>

@@ -3,7 +3,8 @@ import {Router} from '@angular/router'
 
 import { FormBuilder ,Validators}  from '@angular/forms';
 import { PasswordValidator} from '../shared/password.validator';
-import { RegistrationService} from '../registration.service';
+import {AuthService} from '../auth.service';
+import {RegistrationService} from '../registration.service'
 
 
 @Component({
@@ -13,7 +14,7 @@ import { RegistrationService} from '../registration.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private router : Router,private fb2:FormBuilder,private _registrationService: RegistrationService) { }
+  constructor(private router : Router,private fb2:FormBuilder,private _auth: AuthService,private _registration : RegistrationService) { }
 
   ngOnInit(): void {
   }
@@ -43,14 +44,24 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     console.log(this.registrationForm.value);
 
-    this._registrationService.register(this.registrationForm.value)
+    const userEmail = this.registrationForm.get('userEmail').value
+    const password = this.registrationForm.get('password').value
+
+    this._registration.chechuser(this.registrationForm.value)
       .subscribe(
-        response => console.log('Success!', response),
-        error => console.error('Error!', error)
+        response =>{
+          console.log('Success!', response)
+          localStorage.setItem('token',response.token)
+          localStorage.setItem('email',this.registrationForm.value.userEmail)
+          localStorage.setItem('password',this.registrationForm.value.password)
+          this.router.navigate(['/select']);
+        }, 
+        error => {
+          console.error('Error!', error)
+          alert("Already have an account")
+          this.registrationForm.reset()
+      }
       );
-
-
-    this.router.navigate(['/select']);
   }
 
 }

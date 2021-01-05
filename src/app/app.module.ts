@@ -1,36 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { AboutusComponent } from './aboutus/aboutus.component';
-import { Signup1Component } from './signup/signup1/signup1.component';
 import { SelectionComponent } from './signup/selection/selection.component';
 import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
-import { Player2Component } from './signup/signup1/player2/player2.component';
+import { Player2Component } from './signup/player2/player2.component';
 import { CreateteamComponent } from './createteam/createteam.component';
-import { ParentHomeComponent } from './parent-home/parent-home.component';
+import { SelectTeamComponent } from './select-team/select-team.component';
+
+import { AuthService } from './auth.service';
+import { PlayerService } from './player.service';
+import {AuthGuard} from './auth.guard';
+import {TokenInterceptorService} from './token-interceptor.service';
+import { Player1Component } from './signup/player1/player1.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     SignupComponent,
-    AboutusComponent,
-    Signup1Component,
     SelectionComponent,
     CoachComponent,
     ParentComponent,
     Player2Component,
     CreateteamComponent,
-    ParentHomeComponent,
+    SelectTeamComponent,
+    Player1Component,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,12 @@ import { ParentHomeComponent } from './parent-home/parent-home.component';
     ReactiveFormsModule,
     HttpClientModule
     ],
-  providers: [],
+  providers: [AuthService,AuthGuard,PlayerService,
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi : true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

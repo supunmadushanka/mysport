@@ -1,31 +1,41 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AboutusComponent } from './aboutus/aboutus.component';
+import { AuthGuard } from './auth.guard';
 import { CreateteamComponent } from './createteam/createteam.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { ParentHomeComponent } from './parent-home/parent-home.component';
+import { SelectTeamComponent } from './select-team/select-team.component';
 import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
+import { Player1Component } from './signup/player1/player1.component';
 import { SelectionComponent } from './signup/selection/selection.component';
 import { SignupComponent } from './signup/signup.component';
-import { Player2Component } from './signup/signup1/player2/player2.component';
-import { Signup1Component } from './signup/signup1/signup1.component';
+import { Player2Component } from './signup/player2/player2.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path : '',component : HomeComponent},
-  {path : 'home',component : HomeComponent},
-  {path : 'login',component : LoginComponent},
-  {path : 'signup',component : SignupComponent},
-  {path : 'select',component : SelectionComponent},
-  {path : 'player',component : Signup1Component},
-  {path : 'player2',component : Player2Component},
-  {path : 'coach',component : CoachComponent},
-  {path : 'parent',component : ParentComponent},
-  {path : 'aboutus',component : AboutusComponent},
-  {path : 'createteam',component : CreateteamComponent},
-  {path : 'parentHome',component:ParentHomeComponent}
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'select',
+    component: SelectionComponent
+    //canActivate: [AuthGuard]
+  },
+  { path: 'player2', component: Player2Component },
+  { path: 'coach', component: CoachComponent },
+  { path: 'parent', component: ParentComponent },
+  { path: 'createteam', component: CreateteamComponent },
+  {
+    path: 'player1',
+    component: Player1Component
+  },
+  {
+    path: 'selectTeam',
+    component: SelectTeamComponent,
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

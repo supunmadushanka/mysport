@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,Validators} from '@angular/forms'
-import { RegistrationService } from '../../../registration.service'
+import { RegistrationService } from '../../registration.service'
+import player from '../player.json'
 
 @Component({
   selector: 'app-player2',
@@ -10,6 +11,7 @@ import { RegistrationService } from '../../../registration.service'
 export class Player2Component implements OnInit {
 
   constructor(private fbPlayer2:FormBuilder,private _registrationservice:RegistrationService) { }
+
 
   ngOnInit(): void {
   }

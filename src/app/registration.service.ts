@@ -6,17 +6,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class RegistrationService implements OnInit{
 
-  _url1 = 'http://localhost:3000/enroll';
   _url2 = 'http://localhost:3000/coachRegi';
   _url3 = 'http://localhost:3000/parentRegi';
   _url4 = 'http://localhost:3000/playereRegi1';
   _url5 = 'http://localhost:3000/playereRegi2';
 
+  private _checkuserUrl = "http://localhost:3000/api/checkuser";
+
   constructor( private _http: HttpClient) { }
 
-  register(userData){
-    return this._http.post<any>(this._url1, userData);
-  }
 
   coachregister(userData){
     return this._http.post<any>(this._url2, userData);
@@ -32,6 +30,10 @@ export class RegistrationService implements OnInit{
 
   playerregister2(userData){
     return this._http.post<any>(this._url5, userData);
+  }
+
+  chechuser(user){
+    return this._http.post<any>(this._checkuserUrl,user);
   }
 
   ngOnInit():void{}
