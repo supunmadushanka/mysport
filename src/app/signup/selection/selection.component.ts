@@ -22,7 +22,7 @@ export class SelectionComponent implements OnInit {
       localStorage.removeItem('userType')
       localStorage.setItem('userType',"ur0002")
     }else if(type=='ur0001'){
-      this.router.navigate(['/coach']);
+      this.router.navigate(['/admin']);
       localStorage.removeItem('userType')
       localStorage.setItem('userType',"ur0001")
     }else{

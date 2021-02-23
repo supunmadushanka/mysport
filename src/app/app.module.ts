@@ -11,7 +11,7 @@ import { SelectionComponent } from './signup/selection/selection.component';
 import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
 import { Player2Component } from './signup/player2/player2.component';
-import { CreateteamComponent } from './createteam/createteam.component';
+import { CreateteamComponent } from './adminpanel/createteam/createteam.component';
 import { SelectTeamComponent } from './select-team/select-team.component';
 
 import { AuthService } from './auth.service';
@@ -20,6 +20,8 @@ import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './token-interceptor.service';
 import { Player1Component } from './signup/player1/player1.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './signup/admin/admin.component';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { LoginComponent } from './login/login.component';
     SelectTeamComponent,
     Player1Component,
     LoginComponent,
+    AdminComponent,
+    AdminpanelComponent,
   ],
   imports: [
     BrowserModule,

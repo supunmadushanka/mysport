@@ -1,5 +1,6 @@
-<div id="sing1">
-    <form [formGroup]="studentRegistration1" (ngSubmit)="playerSubmit()">
+<div id="login-page">
+<div class="form">
+    <form [formGroup]="playerRegistration1" (ngSubmit)="playerSubmit()">
         <h3>Enter your details</h3><br>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -19,8 +20,8 @@
     
       <div class="form-group">
           <label for="perAddressPlayer">Address</label>
-          <input [class.is-invalid]="studentRegistration1.get('perAddressPlayer').invalid && studentRegistration1.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" required placeholder="1234 Main St">
-          <small [class.d-none]="studentRegistration1.get('perAddressPlayer').valid || studentRegistration1.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>    
+          <input [class.is-invalid]="playerRegistration1.get('perAddressPlayer').invalid && playerRegistration1.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" required placeholder="1234 Main St">
+          <small [class.d-none]="playerRegistration1.get('perAddressPlayer').valid || playerRegistration1.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>    
       </div><br>
     
       <div class="form-group">
@@ -36,22 +37,23 @@
     
       <div class="form-group">
         <label for="dobpPlayer">Date of birth</label>
-        <input [class.is-invalid]="studentRegistration1.get('dobpPlayer').invalid && studentRegistration1.get('dobpPlayer').touched" formControlName="dobpPlayer" type="date" class="form-control form-control-lg" id="dobpPlayer">
-        <small [class.d-none]="studentRegistration1.get('dobpPlayer').valid || studentRegistration1.get('dobpPlayer').untouched" class="text-danger">Date of birth required</small>
+        <input [class.is-invalid]="playerRegistration1.get('dobpPlayer').invalid && playerRegistration1.get('dobpPlayer').touched" formControlName="dobpPlayer" type="date" class="form-control form-control-lg" id="dobpPlayer">
+        <small [class.d-none]="playerRegistration1.get('dobpPlayer').valid || playerRegistration1.get('dobpPlayer').untouched" class="text-danger">Date of birth required</small>
         </div><br>
     
         <div class="form-check form-check-inline">
-            <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="maleplayer" value="option1player" required>
+            <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="maleplayer" value="male" required>
             <label class="form-check-label" for="maleplayer">Male</label>
           </div>&nbsp;
         <div class="form-check form-check-inline">
-            <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="femaleplayer" value="option2player" required>
+            <input formControlName="MFplayer" class="form-check-input" type="radio" name="MFplayer" id="femaleplayer" value="female" required>
             <label class="form-check-label" for="femaleplayer">female</label>
         </div>
-        <div *ngIf="studentRegistration1.get('MFplayer').errors?.required" class="text-danger"><small>required</small></div>
+        <div *ngIf="playerRegistration1.get('MFplayer').errors?.required" class="text-danger"><small>required</small></div>
         <br><br>
     
         <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
-        <button [disabled]="submit()" type="submit" class="btn btn-primary">Next</button>
+        <button [disabled]="playerRegistration1.invalid" type="submit" class="btn btn-primary">Next</button>
     </form>
     </div>
+</div>

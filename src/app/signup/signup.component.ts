@@ -32,7 +32,6 @@ export class SignupComponent implements OnInit {
   }
 
 
-
   registrationForm=this.fb2.group({
       userEmail:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(8),Validators.maxLength(20),Validators.maxLength,Validators.pattern('[a-zA-Z1-9]*')]],
@@ -44,17 +43,22 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     console.log(this.registrationForm.value);
 
-    const userEmail = this.registrationForm.get('userEmail').value
-    const password = this.registrationForm.get('password').value
-
-    this._registration.chechuser(this.registrationForm.value)
+    this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response =>{
           console.log('Success!', response)
           localStorage.setItem('token',response.token)
           localStorage.setItem('email',this.registrationForm.value.userEmail)
-          localStorage.setItem('password',this.registrationForm.value.password)
-          this.router.navigate(['/select']);
+          
+          this._auth.tempregister(this.registrationForm.value)
+            .subscribe(
+              response=>{
+                this.router.navigate(['/select']);
+              },
+              error=>{
+                console.error('Error!', error)
+              }
+            )       
         }, 
         error => {
           console.error('Error!', error)

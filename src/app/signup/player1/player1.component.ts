@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,Validators} from '@angular/forms'
+import { FormBuilder,FormGroup,Validators} from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
 import {ActivatedRoute, Router} from '@angular/router'
+import {AuthService} from '../../auth.service'
 
 @Component({
   selector: 'app-player1',
@@ -10,50 +11,54 @@ import {ActivatedRoute, Router} from '@angular/router'
 })
 export class Player1Component implements OnInit {
 
-  constructor(private fbPlayer1:FormBuilder, private _registrationServive: RegistrationService,private router : Router,private route :ActivatedRoute) { }
+  constructor(private _auth :AuthService,private fbPlayer1:FormBuilder, private _registrationServive: RegistrationService,private router : Router,private route :ActivatedRoute) { }
   
   ngOnInit(): void {
   }
 
   get firstNamePlayer(){
-    return this.studentRegistration1.get('firstNamePlayer');
+    return this.playerRegistration1.get('firstNamePlayer');
   }
   get secondNamePlayer(){
-    return this.studentRegistration1.get('secondNamePlayer');
+    return this.playerRegistration1.get('secondNamePlayer');
   }
   get teleNoPlayer(){
-    return this.studentRegistration1.get('teleNoPlayer');
+    return this.playerRegistration1.get('teleNoPlayer');
   }
 
-  studentRegistration1=this.fbPlayer1.group({
-    userEmail:[localStorage.getItem('email')],
-    password:[localStorage.getItem('password')],
+  register={
+    "userEmail":localStorage.getItem('email'),
+    "userType":localStorage.getItem('userType')
+  }
+
+  playerRegistration1=this.fbPlayer1.group({
     firstNamePlayer:['',[Validators.required,Validators.minLength(3)]],
     secondNamePlayer:['',[Validators.required,Validators.minLength(3)]],
     perAddressPlayer:['',[Validators.required]],
     teleNoPlayer:['',[Validators.required,Validators.pattern('(07)[0-9]{8}')]],
     dobpPlayer:['',[Validators.required]],
-    MFplayer:['',[Validators.required]],
-    type:[localStorage.getItem('userType')]
+    MFplayer:['',[Validators.required]]
   })
 
-  submit(){
-    if(this.firstNamePlayer.valid && this.secondNamePlayer.valid && this.studentRegistration1.get('perAddressPlayer').valid && this.studentRegistration1.get('teleNoPlayer').valid && this.studentRegistration1.get('dobpPlayer').valid && this.studentRegistration1.get('MFplayer').valid){
-      return false;
-    }
-    else{
-      return true;
-    }
-  }
-
   playerSubmit(){
-    console.log(this.studentRegistration1.value)
-    this._registrationServive.playerregister1(this.studentRegistration1.value)
-    .subscribe(
-        response => console.log('Success!', response),
-        error => console.error('Error!', error)
-    );
-    this.router.navigate(['/player2']);
+    this._auth.registerUser(this.register)
+      .subscribe(
+        response=>{
+          this._auth.registerplayer(this.playerRegistration1)
+            .subscribe(
+              response=>{
+                this._auth.setvalue(true)
+                this.router.navigate(['/selectTeam']);
+              },
+              error=>{
+                console.error('Error!', error)
+              }
+            )
+        },
+        error=>{
+          console.error('Error!', error)
+        }
+      );
   }
 
 }

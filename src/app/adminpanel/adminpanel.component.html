@@ -1,0 +1,145 @@
+<div>
+    <div class="aaa" style="padding-top: 2em;">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team"
+                    aria-selected="true">
+                    <h5>Teams</h5>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Coach-tab" data-toggle="pill" href="#Coach" role="tab" aria-controls="Coach"
+                    aria-selected="false">
+                    <h5>Coaches</h5>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Player-tab" data-toggle="pill" href="#Player" role="tab" aria-controls="Player"
+                    aria-selected="false">
+                    <h5>Players</h5>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Tournamet-tab" data-toggle="pill" href="#Tournamet" role="tab"
+                    aria-controls="Tournamet" aria-selected="false">
+                    <h5>Tournamets</h5>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
+            <div class="aaa">
+                <button type="button" class="btn btn-success" routerLink="/createteam">Create Team</button>
+            </div>
+
+            <div class="scroll">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Coach</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Structure</th>
+                            <th scope="col">Wins</th>
+                            <th scope="col">Losses</th>
+                            <th scope="col">Players</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <!--<tr *ngFor="let e of users" class="clickable-row pointer" onclick="location.href='https://www.youtube.com/watch?v=zTjnQ0XlAc4&list=TLPQMTUxMjIwMjA-kTnDjuKBnA&index=2'">
+                <td>{{e.userEmail}}</td>
+                <td>{{e.userPassword}}</td>
+              </tr>-->
+                        <tr *ngFor="let e of Teams">
+                            <td>{{e.teamName}}</td>
+                            <td>{{e.coachFName}} {{e.coachLName}}</td>
+                            <td>{{e.sportName}}</td>
+                            <td>{{e.strutureName}}</td>
+                            <td>Null</td>
+                            <td>Null</td>
+                            <td>{{e.Players}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
+
+            <div class="aaa">
+                <button type="button" class="btn btn-success">Create Coach</button>
+            </div>
+
+            <div class="scroll">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+
+                            <th scope="col">Name</th>
+                            <th scope="col">Sport</th>
+                            <th scope="col">Teams</th>
+                            <th scope="col">Mobile No</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <!--<tr *ngFor="let e of users" class="clickable-row pointer" onclick="location.href='https://www.youtube.com/watch?v=zTjnQ0XlAc4&list=TLPQMTUxMjIwMjA-kTnDjuKBnA&index=2'">
+                <td>{{e.userEmail}}</td>
+                <td>{{e.userPassword}}</td>
+              </tr>-->
+                        <tr *ngFor="let c of Coaches">
+                            <td>{{c.coachFName}} {{c.coachLName}}</td>
+                            <td>{{c.sportName}}</td>
+                            <td>{{c.teams}}</td>
+                            <td>{{c.coachNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="Player" role="tabpanel" aria-labelledby="Player-tab">
+
+            <div class="aaa">
+                <button type="button" class="btn btn-success">Create Player</button>
+            </div>
+
+            <div class="scroll">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <!--<tr *ngFor="let e of users" class="clickable-row pointer" onclick="location.href='https://www.youtube.com/watch?v=zTjnQ0XlAc4&list=TLPQMTUxMjIwMjA-kTnDjuKBnA&index=2'">
+                <td>{{e.userEmail}}</td>
+                <td>{{e.userPassword}}</td>
+              </tr>-->
+                        <tr *ngFor="let p of Players">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="Tournamet" role="tabpanel" aria-labelledby="Tournamet-tab">
+            Tournamet
+        </div>
+
+    </div>
+
+</div>

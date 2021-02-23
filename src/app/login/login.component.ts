@@ -23,12 +23,15 @@ export class LoginComponent implements OnInit {
 onSubmit(){
   console.log(this.loginForm.value);
 
+  localStorage.setItem('email','abc@gmail.com')
+
   this._auth.loginUser(this.loginForm.value)
     .subscribe(
       response =>{
         console.log('Success!', response)
         localStorage.setItem('token',response.token)
         localStorage.setItem('email',this.loginForm.value.userEmail)
+        this._auth.setvalue(true)
         this.router.navigate(['/selectTeam']);
       },
       error => {
