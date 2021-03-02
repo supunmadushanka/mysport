@@ -14,7 +14,8 @@ export class AuthService {
   private _tempregiUrl = "http://localhost:3000/api/tempregister";
   private _playerregister = "http://localhost:3000/api/playerregister";
   private _adminregister = "http://localhost:3000/api/adminregister";
-
+  private _coachregister = "http://localhost:3000/api/coachregister";
+  private _createplayer = "http://localhost:3000/api/createplayer";
 
   constructor(private http:HttpClient, private router : Router) {}
 
@@ -50,6 +51,14 @@ export class AuthService {
 
   adminregister(user){
     return this.http.post<any>(this._adminregister,user)
+  }
+
+  coachregister(user){
+    return this.http.post<any>(this._coachregister,user)
+  }
+
+  createplayer(user){
+    return this.http.post<any>(this._createplayer,user)
   }
 
 

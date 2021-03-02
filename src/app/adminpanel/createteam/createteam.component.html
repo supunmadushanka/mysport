@@ -17,12 +17,7 @@
                 <select
                     [class.is-invalid]="CreateTeam.get('TeamStructure').invalid && CreateTeam.get('TeamStructure').touched"
                     formControlName="TeamStructure" class="form-control" id="exampleFormControlSelect1">
-                    <option>Under 15 Male</option>
-                    <option>Under 15 FeMale</option>
-                    <option>Under 17 Male</option>
-                    <option>Under 17 FeMale</option>
-                    <option>Under 19 Male</option>
-                    <option>Under 19 FeMale</option>
+                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}</option>
                 </select>
                 <small
                     [class.d-none]="CreateTeam.get('TeamStructure').valid || CreateTeam.get('TeamStructure').untouched"
@@ -33,9 +28,7 @@
                 <label for="Sport">Sport</label>
                 <select [class.is-invalid]="CreateTeam.get('Sport').invalid && CreateTeam.get('Sport').touched"
                     formControlName="Sport" class="form-control" id="exampleFormControlSelect1">
-                    <option>Cricket</option>
-                    <option>FootBall</option>
-                    <option>Rugby</option>
+                    <option class="option" *ngFor="let s of Sports" [value]=s.sportId>{{s.sportName}}</option>
                 </select>
                 <small [class.d-none]="CreateTeam.get('Sport').valid || CreateTeam.get('Sport').untouched"
                     class="text-danger">Required</small>
@@ -45,9 +38,7 @@
                 <label for="Coach">Coach</label>
                 <select [class.is-invalid]="CreateTeam.get('Coach').invalid && CreateTeam.get('Coach').touched"
                     formControlName="Coach" class="form-control" id="exampleFormControlSelect1">
-                    <option>Cricket</option>
-                    <option>FootBall</option>
-                    <option>Rugby</option>
+                    <option class="option" *ngFor="let c of Coaches" [value]=c.userId>{{c.coachFName}} {{c.coachLName}}</option>
                 </select>
                 <small [class.d-none]="CreateTeam.get('Coach').valid || CreateTeam.get('Coach').untouched"
                     class="text-danger">Required</small>

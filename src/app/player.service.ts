@@ -23,8 +23,8 @@ export class PlayerService {
     return this.http.get<any>(_url3);
   }
 
-  getTeam(){
-    let _url4="http://localhost:3000/teams";
+  getTeams(){
+    let _url4="http://localhost:3000/api/playerteams";
     return this.http.get<any>(_url4);
   }
 

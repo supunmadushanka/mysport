@@ -22,6 +22,10 @@ import { Player1Component } from './signup/player1/player1.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './signup/admin/admin.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreatecoachComponent } from './adminpanel/createcoach/createcoach.component';
+import { CreateplayerComponent } from './adminpanel/createplayer/createplayer.component';
+import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +42,17 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
     LoginComponent,
     AdminComponent,
     AdminpanelComponent,
+    CreatecoachComponent,
+    CreateplayerComponent,
+    AdminteamComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
     ],
   providers: [AuthService,AuthGuard,PlayerService,
   {

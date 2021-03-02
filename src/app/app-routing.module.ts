@@ -14,6 +14,9 @@ import { Player2Component } from './signup/player2/player2.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './signup/admin/admin.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { CreatecoachComponent } from './adminpanel/createcoach/createcoach.component';
+import { CreateplayerComponent } from './adminpanel/createplayer/createplayer.component';
+import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,8 +45,21 @@ const routes: Routes = [
     component: CreateteamComponent
   },
   {
+    path: 'createcoach',
+    component: CreatecoachComponent
+  },
+  {
+    path: 'createplayer',
+    component: CreateplayerComponent
+  },
+  {
     path: 'selectTeam',
     component: SelectTeamComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'adminteam/:teamid',
+    component: AdminteamComponent,
     //canActivate: [AuthGuard]
   }
 ];

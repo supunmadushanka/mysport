@@ -10,15 +10,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class SelectTeamComponent implements OnInit {
 
-  public users=[];
+  public Teams=[];
 
   constructor(private _playernService: PlayerService, private router : Router) { }
 
   ngOnInit(): void {
 
-    this._playernService.getUser()
+    this._playernService.getTeams()
     .subscribe((data)=>{
-      this.users=data;
+      this.Teams=data;
     },
     err =>{
       if(err instanceof HttpErrorResponse){

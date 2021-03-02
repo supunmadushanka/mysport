@@ -1,0 +1,75 @@
+.Team {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+}
+
+.Left{
+  width: 75%; float: left;
+}
+
+.Right{
+  width: 25%;
+  float: right;
+  height: 100%;
+  background-color: rgb(82, 109, 226);
+}
+
+
+.menu {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.table {
+  margin-top: 3em;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  table-layout: fixed;
+  border-width: 0.3em;
+  border-color: rgb(10, 10, 104);
+  background-color: white;
+}
+
+.body {
+  height: 1em;
+  overflow: auto;
+}
+
+th,
+td {
+  padding: 25px;
+  border-width: 0.1em;
+  border-color: rgb(10, 10, 104);
+}
+
+td {
+  font-size: large;
+  font-weight: 600;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.tab-content {
+  margin-top: 1em;
+}
+
+.details{
+  margin-left: 10%;
+  font-size: 20px;
+  color: aliceblue;
+}
+
+.title{
+  color: black;
+  font-weight: 800;
+}
