@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
-import {Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { AuthService } from '../../auth.service'
+import { AdminService } from '../../admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-createplayer',
@@ -12,9 +14,23 @@ import { AuthService } from '../../auth.service'
 export class CreateplayerComponent implements OnInit {
 
   constructor(private _auth: AuthService, private fbPlayer1: FormBuilder, private _registrationServive: RegistrationService,
-    private router: Router,) { }
+    private router: Router, private _adminservice: AdminService) { }
+
+  public Structures = [];
 
   ngOnInit(): void {
+    this._adminservice.getStructure()
+      .subscribe((data) => {
+        this.Structures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
   }
 
   get firstNamePlayer() {
@@ -34,8 +50,9 @@ export class CreateplayerComponent implements OnInit {
     teleNoPlayer: ['', [Validators.required, Validators.pattern('(07)[0-9]{8}')]],
     dobpPlayer: ['', [Validators.required]],
     MFplayer: ['', [Validators.required]],
-    emailAddress:['',[Validators.required]],
-    password:['playerpass'],
+    emailAddress: ['', [Validators.required]],
+    password: ['playerpass'],
+    PlayerStructure: ['', [Validators.required]]
   })
 
   playerSubmit() {

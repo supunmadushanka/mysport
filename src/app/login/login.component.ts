@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
 onSubmit(){
   console.log(this.loginForm.value);
 
-  localStorage.setItem('email','abc@gmail.com')
-
   this._auth.loginUser(this.loginForm.value)
     .subscribe(
       response =>{

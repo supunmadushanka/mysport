@@ -26,6 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreatecoachComponent } from './adminpanel/createcoach/createcoach.component';
 import { CreateplayerComponent } from './adminpanel/createplayer/createplayer.component';
 import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
+import { CreatetournamentComponent } from './adminpanel/createtournament/createtournament.component';
+import { TournamentComponent } from './adminpanel/tournament/tournament.component';
+import { SelectedtourComponent } from './adminpanel/tournament/selectedtour/selectedtour.component';
+import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/createfixture/createfixture.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
     CreatecoachComponent,
     CreateplayerComponent,
     AdminteamComponent,
+    CreatetournamentComponent,
+    TournamentComponent,
+    SelectedtourComponent,
+    CreatefixtureComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +62,7 @@ import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ],
-  providers: [AuthService,AuthGuard,PlayerService,
+  providers: [AuthService,AuthGuard,PlayerService,SelectedtourComponent,
   {
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

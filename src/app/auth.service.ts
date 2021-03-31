@@ -76,6 +76,15 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
+  getEmail(){
+    if(localStorage.getItem('email')==null){
+      return 'myemail@gmail.com'
+    }else{
+      return localStorage.getItem('email')
+    } 
+  }
+
+
   logoutUser(){
     localStorage.removeItem('token')
     localStorage.removeItem('email')

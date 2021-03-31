@@ -49,6 +49,7 @@ export class Player1Component implements OnInit {
               response=>{
                 this._auth.setvalue(true)
                 this.router.navigate(['/selectTeam']);
+                this._auth.setvalue(true)
               },
               error=>{
                 console.error('Error!', error)

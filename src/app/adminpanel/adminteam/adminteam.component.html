@@ -3,20 +3,17 @@
         <div class="menu" style="padding-top: 2em;">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab"
-                        aria-controls="Players" aria-selected="true">
+                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
                         <h5>Players</h5>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" aria-controls="Achievement"
-                        aria-selected="false">
+                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
                         <h5>Team Achievements</h5>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="Player-tab" data-toggle="pill" href="#Player" role="tab"
-                        aria-controls="Player" aria-selected="false">
+                    <a class="nav-link" id="Player-tab" data-toggle="pill" href="#Player" role="tab" aria-controls="Player" aria-selected="false">
                         <h5>Tournamet</h5>
                     </a>
                 </li>
@@ -40,7 +37,7 @@
                             <tr *ngFor="let p of TeamPlayers">
                                 <td>{{p.playerFName}} {{p.playerLName}}</td>
                                 <td>{{p.playerGender}}</td>
-                                <td>{{p.playerDOB}}</td>
+                                <td>{{p.playerDOB | date:'mediumDate' }}</td>
                                 <td>{{p.playerteleNum}}</td>
                             </tr>
                         </tbody>
@@ -53,7 +50,8 @@
             <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
 
                 <div class="menu">
-                    <button type="button" class="btn btn-success" routerLink="/createcoach">Add Achievement</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Add
+                        Achievement</button>
                 </div>
 
                 <div style="height: 500px; overflow: auto;">
@@ -61,14 +59,12 @@
                         <thead class="thead-dark">
                             <tr style="height: 1em;">
 
-                                <th scope="col">Name</th>
-                                <th scope="col">coach</th>
+                                <th scope="col">Achievement</th>
                             </tr>
                         </thead>
                         <tbody class="body">
-                            <tr *ngFor="let p of TeamDetails">
-                                <td>{{p.teamName}}</td>
-                                <td>{{p.sportName}}</td>
+                            <tr *ngFor="let p of Achievements">
+                                <td>{{p.teamAchievements}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -80,30 +76,6 @@
 
                 <div class="menu">
                     <button type="button" class="btn btn-success" routerLink="/createplayer">Create Player</button>
-                </div>
-
-                <div style="height: 500px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-
-                                <th scope="col">Name</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Mobile No</th>
-                                <th scope="col">Teams</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of TeamPlayers">
-                                <td>{{p.playerFName}} {{p.playerLName}}</td>
-                                <td>{{p.playerGender}}</td>
-                                <td>{{p.playerDOB}}</td>
-                                <td>{{p.playerteleNum}}</td>
-                                <td>{{p.teams}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
 
             </div>
@@ -118,14 +90,24 @@
 
     <div class="Right">
         <div class="Team">
-            <p>{{TeamDetails[0].teamName}}</p>
+            <p>{{TeamDetails[0]?.teamName}}</p>
         </div>
+
+        <div class="menu">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add Player</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove Player</button>
+        </div><br>
+
+        <div class="menu">
+            <button type="button" class="btn btn-warning">Message</button>
+        </div><br>
+
         <div class="details">
-            <p><span class="title">Team Name : </span>{{TeamDetails[0].teamName}}</p>
-            <p><span class="title">Coach Name : </span>{{TeamDetails[0].coachFName}} {{TeamDetails[0].coachLName}}</p>
-            <p><span class="title">Sport : </span>{{TeamDetails[0].sportName}}</p>
-            <p><span class="title">Struture : </span>{{TeamDetails[0].strutureName}}</p>
-            <p><span class="title">No of Players : </span>{{TeamDetails[0].Players}}</p>
+            <p><span class="title">Team Name : </span>{{TeamDetails[0]?.teamName}}</p>
+            <p><span class="title">Coach Name : </span>{{TeamDetails[0]?.coachFName}} {{TeamDetails[0]?.coachLName}}</p>
+            <p><span class="title">Sport : </span>{{TeamDetails[0]?.sportName}}</p>
+            <p><span class="title">Struture : </span>{{TeamDetails[0]?.strutureName}}</p>
+            <p><span class="title">No of Players : </span>{{TeamDetails[0]?.Players}}</p>
             <p><span class="title">Wins : </span></p>
             <p><span class="title">Lossess : </span></p>
             <p><span class="title">Win streak : </span></p>
@@ -133,4 +115,94 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="achieve" (ngSubmit)="achieveSubmit()">
+
+
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="achieve.get('achievecontent').invalid && achieve.get('achievecontent').touched" formControlName="achievecontent" class="form-control form-control-lg" id="curachievecontent" rows="4" cols="50"></textarea>
+
+                        <small [class.d-none]="achieve.get('achievecontent').valid || achieve.get('achievecontent').untouched" class="text-danger">Address is required</small>
+
+                    </div><br>
+
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="achieve.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of addplayers">
+                            <td>{{p.playerFname}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade removeplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of TeamPlayers">
+                            <td>{{p.playerFname}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="RemovePlayer(p.userId)" type="button" class="btn btn-danger">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
 </div>

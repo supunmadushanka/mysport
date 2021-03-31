@@ -57,13 +57,14 @@ export class SignupComponent implements OnInit {
               },
               error=>{
                 console.error('Error!', error)
+                console.log('Hi error!')
               }
             )       
         }, 
         error => {
           console.error('Error!', error)
           alert("Already have an account")
-          this.registrationForm.reset()
+          //this.registrationForm.reset()
       }
       );
   }

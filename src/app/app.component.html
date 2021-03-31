@@ -1,33 +1,32 @@
 <div>
-  <nav class="navbar  navbar-expand ">
-    <a class="navbar-brand mb-0 h1" routerLink="/home" open>
-      <img src="\assets\sss.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy">
-      MySport
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar  navbar-expand ">
+        <a class="navbar-brand mb-0 h1" routerLink="/home" open>
+            <img src="\assets\sss.png" width="50" height="50" class="d-inline-block align-top" alt="" loading="lazy"> MySport
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav"> 
-          <a class="nav-item nav-link" href="#">Institute</a>
-          <a class="nav-item nav-link" routerLink="/selectTeam">Team</a>
-          <a class="nav-item nav-link" href="#">Player</a>
-        </div>
-      <div class="navbar-nav ml-auto">
-        <a class="nav-link " href="#about">About Us</a>
-        <a class="nav-link" routerLink="/login">
-          <button type="button" *ngIf="!_auth.loggedIn()" class="btn btn-primary">Log
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/adminpanel">Institute</a>
+                <a class="nav-item nav-link" routerLink="/selectTeam">Coach</a>
+                <a class="nav-item nav-link" href="#">Player</a>
+                <a class="nav-item nav-link" href="#">Parent</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link " href="#about">About Us</a>
+                <a class="nav-link" routerLink="/login">
+                    <button type="button" *ngIf="!_auth.loggedIn()" class="btn btn-primary">Log
             in</button></a>
-        <a class="nav-link" routerLink="/signup">
-          <button *ngIf="!_auth.loggedIn()" type="button" class="btn btn-success">
+                <a class="nav-link" routerLink="/signup">
+                    <button *ngIf="!_auth.loggedIn()" type="button" class="btn btn-success">
             Sign up</button></a>
-        <a class="nav-link " style="cursor:pointer" *ngIf="_auth.loggedIn()" (click)="_auth.logoutUser()">Log out</a>
-      </div>
-    </div>
-  </nav>
+                <a class="nav-link " style="cursor:pointer" *ngIf="_auth.loggedIn()" (click)="_auth.logoutUser()">Log out</a>
+            </div>
+        </div>
+    </nav>
 </div>
 
 <div>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>

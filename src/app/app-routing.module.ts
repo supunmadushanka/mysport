@@ -17,6 +17,10 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { CreatecoachComponent } from './adminpanel/createcoach/createcoach.component';
 import { CreateplayerComponent } from './adminpanel/createplayer/createplayer.component';
 import { AdminteamComponent } from './adminpanel/adminteam/adminteam.component';
+import { CreatetournamentComponent } from './adminpanel/createtournament/createtournament.component';
+import { TournamentComponent } from './adminpanel/tournament/tournament.component';
+import { SelectedtourComponent } from './adminpanel/tournament/selectedtour/selectedtour.component';
+import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/createfixture/createfixture.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,6 +57,14 @@ const routes: Routes = [
     component: CreateplayerComponent
   },
   {
+    path: 'createtourn',
+    component: CreatetournamentComponent
+  },
+  {
+    path: 'tournament',
+    component: TournamentComponent
+  },
+  {
     path: 'selectTeam',
     component: SelectTeamComponent,
     //canActivate: [AuthGuard]
@@ -61,6 +73,15 @@ const routes: Routes = [
     path: 'adminteam/:teamid',
     component: AdminteamComponent,
     //canActivate: [AuthGuard]
+  },
+  {
+    path: 'selectedtour/:tournamentId',
+    component: SelectedtourComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'createfixture/:tournamentId',
+    component: CreatefixtureComponent
   }
 ];
 

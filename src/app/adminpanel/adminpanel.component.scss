@@ -1,5 +1,4 @@
 .table {
-  margin-top: 3em;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -27,9 +26,10 @@ td {
   font-weight: 600;
 }
 
-th.team {
-  //width: 75%
-}
+
+//th.Sport{
+  //width: 6em
+//}
 
 .pointer {
   cursor: pointer;
@@ -43,4 +43,37 @@ th.team {
 
 .tab-content {
   margin-top: 1em;
+}
+
+.Left{
+  width: 75%; float: left;
+}
+
+.Right{
+  width: 25%;
+  float: right;
+  height: 100%;
+  background-color: rgb(82, 109, 226);
+}
+
+.menu {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.details{
+  margin-left: 10%;
+  font-size: 20px;
+  color: aliceblue;
+}
+
+.Team {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
 }
