@@ -75,7 +75,7 @@ export class CreatefixtureComponent implements OnInit {
       .subscribe(
         response => {
           console.log('success', response),
-            this.router.navigate(['/selectedtour',this.tournamentId]);
+            this.router.navigate(['/tournament']);
         },
         error => console.error('Error!', error)
       );

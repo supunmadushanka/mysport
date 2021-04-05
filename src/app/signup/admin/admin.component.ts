@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   }
 
   register = {
-    "userEmail": localStorage.getItem('email'),
+    "userEmail": sessionStorage.getItem('email'),
     "userType": localStorage.getItem('userType')
   }
 
@@ -52,10 +52,9 @@ export class AdminComponent implements OnInit {
           this._auth.adminregister(this.AdminRegistration.value)
             .subscribe(
               response => {
-                console.log('success', response),
-                  localStorage.removeItem('userType'),
-                  this.router.navigate(['/adminpanel']),
-                  this._auth.setvalue(true)
+                localStorage.removeItem('userType')
+                sessionStorage.removeItem('email')
+                this.router.navigate(['/adminpanel'])
               },
               error => console.error('Error!', error)
             );

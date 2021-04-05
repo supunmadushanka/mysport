@@ -1,6 +1,8 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
-        <div class="aaa" style="padding-top: 2em;">
+        <br>
+        <a routerLink="/" class="previous round">&#8249; Back</a>
+        <div class="aaa" style="padding-top: 0em;">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team" aria-selected="true">
@@ -50,8 +52,8 @@
                                 <td>{{e.coachFName}} {{e.coachLName}}</td>
                                 <td>{{e.sportName}}</td>
                                 <td>{{e.strutureName}}</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>{{e.teamWins}}</td>
+                                <td>{{e.teamLoss}}</td>
                                 <td>{{e.Players}}</td>
                             </tr>
                         </tbody>
@@ -83,7 +85,7 @@
                 <td>{{e.userEmail}}</td>
                 <td>{{e.userPassword}}</td>
               </tr>-->
-                            <tr *ngFor="let c of Coaches" class="pointer">
+                            <tr *ngFor="let c of Coaches" class="pointer" [routerLink]="['/coachProfile',c.userId]">
                                 <td>{{c.coachFName}} {{c.coachLName}}</td>
                                 <td>{{c.sportName}}</td>
                                 <td>{{c.teams}}</td>
@@ -118,7 +120,7 @@
                 <td>{{e.userEmail}}</td>
                 <td>{{e.userPassword}}</td>
               </tr>-->
-                            <tr *ngFor="let p of Players" class="pointer">
+                            <tr *ngFor="let p of Players" class="pointer" [routerLink]="['/playerProfile',p.userId]">
                                 <td>{{p.playerFName}} {{p.playerLName}}</td>
                                 <td>{{p.playerGender}}</td>
                                 <td>{{p.playerDOB | date:'mediumDate' }}</td>
@@ -145,14 +147,14 @@
         </div><br>
 
         <div class="menu">
-            <button type="button" class="btn btn-warning">Message</button>
+            <button type="button" class="btn btn-warning">Announcement</button>
         </div><br>
 
         <div class="details">
-            <p><span class="title">No of Teams : </span></p>
-            <p><span class="title">No of Coach : </span></p>
-            <p><span class="title">No of Sports : </span></p>
-            <p><span class="title">No of Players : </span></p>
+            <p><span class="title">No of Teams : {{TeamCount[0]?.noOfTeams}}</span></p>
+            <p><span class="title">No of Coach : {{CoachCount[0]?.noOfCoaches}}</span></p>
+            <p><span class="title">No of Players : {{PlayerCount[0]?.noOfPlayers}}</span></p>
+            <p><span class="title">Secrer Code : </span>{{InstituteProfile[0]?.secretNo}}</p>
             <br>
         </div>
     </div>

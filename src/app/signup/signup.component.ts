@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 
-import { FormBuilder ,Validators}  from '@angular/forms';
-import { PasswordValidator} from '../shared/password.validator';
-import {AuthService} from '../auth.service';
-import {RegistrationService} from '../registration.service'
+import { FormBuilder, Validators } from '@angular/forms';
+import { PasswordValidator } from '../shared/password.validator';
+import { AuthService } from '../auth.service';
+import { RegistrationService } from '../registration.service'
 
 
 @Component({
@@ -14,59 +14,72 @@ import {RegistrationService} from '../registration.service'
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private router : Router,private fb2:FormBuilder,private _auth: AuthService,private _registration : RegistrationService) { }
+  constructor(private router: Router, private fb2: FormBuilder, private _auth: AuthService, private _registration: RegistrationService) { }
 
   ngOnInit(): void {
   }
 
-  goToSelection(){
+  goToSelection() {
     this.router.navigate(['/select']);
   }
 
 
-  get userEmail(){
+  get userEmail() {
     return this.registrationForm.get('userEmail');
   }
-  get password(){
+  get password() {
     return this.registrationForm.get('password');
   }
 
 
-  registrationForm=this.fb2.group({
-      userEmail:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(8),Validators.maxLength(20),Validators.maxLength,Validators.pattern('[a-zA-Z1-9]*')]],
-      confirmPassword:['']
-  },{validator : PasswordValidator});
+  registrationForm = this.fb2.group({
+    userEmail: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.maxLength, Validators.pattern('[a-zA-Z1-9]*')]],
+    confirmPassword: ['']
+  }, { validator: PasswordValidator });
 
-  
 
-  onSubmit(){
+
+  onSubmit() {
     console.log(this.registrationForm.value);
 
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
-        response =>{
+        response => {
           console.log('Success!', response)
-          localStorage.setItem('token',response.token)
-          localStorage.setItem('email',this.registrationForm.value.userEmail)
-          
+          sessionStorage.setItem('email', this.registrationForm.value.userEmail)
+
           this._auth.tempregister(this.registrationForm.value)
             .subscribe(
-              response=>{
+              response => {
+                console.log('Success!', response)
                 this.router.navigate(['/select']);
               },
-              error=>{
+              error => {
                 console.error('Error!', error)
                 console.log('Hi error!')
               }
-            )       
-        }, 
+            )
+        },
         error => {
           console.error('Error!', error)
           alert("Already have an account")
-          //this.registrationForm.reset()
-      }
+          this.registrationForm.reset()
+        }
       );
+
+
   }
 
 }
+
+// this._auth.sendMail(this.registrationForm.value)
+//   .subscribe(
+//     response => {
+//       console.log('Success!', response)
+//     },
+//     error => {
+//       console.error('Error!', error)
+//       console.log('Hi error!')
+//     }
+//   )

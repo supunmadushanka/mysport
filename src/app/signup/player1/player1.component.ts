@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validators} from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
-import {ActivatedRoute, Router} from '@angular/router'
-import {AuthService} from '../../auth.service'
+import { ActivatedRoute, Router } from '@angular/router'
+import { AuthService } from '../../auth.service'
+import { AdminService } from '../../admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-player1',
@@ -11,55 +13,102 @@ import {AuthService} from '../../auth.service'
 })
 export class Player1Component implements OnInit {
 
-  constructor(private _auth :AuthService,private fbPlayer1:FormBuilder, private _registrationServive: RegistrationService,private router : Router,private route :ActivatedRoute) { }
-  
+  constructor(private _adminservice: AdminService, private _auth: AuthService, private fbPlayer1: FormBuilder, private _registrationServive: RegistrationService, private router: Router, private route: ActivatedRoute) { }
+
+  public Structures = [];
+  public Institutes = [];
+
+  secretcode: string
+
   ngOnInit(): void {
+    this._adminservice.getStructure()
+      .subscribe((data) => {
+        this.Structures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getInstitutes()
+      .subscribe((data) => {
+        this.Institutes = data;
+        this.secretcode = data[0]?.secretNo
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
   }
 
-  get firstNamePlayer(){
+  get firstNamePlayer() {
     return this.playerRegistration1.get('firstNamePlayer');
   }
-  get secondNamePlayer(){
+  get secondNamePlayer() {
     return this.playerRegistration1.get('secondNamePlayer');
   }
-  get teleNoPlayer(){
+  get teleNoPlayer() {
     return this.playerRegistration1.get('teleNoPlayer');
   }
 
-  register={
-    "userEmail":localStorage.getItem('email'),
-    "userType":localStorage.getItem('userType')
+  register = {
+    "userEmail": sessionStorage.getItem('email'),
+    "userType": localStorage.getItem('userType')
   }
 
-  playerRegistration1=this.fbPlayer1.group({
-    firstNamePlayer:['',[Validators.required,Validators.minLength(3)]],
-    secondNamePlayer:['',[Validators.required,Validators.minLength(3)]],
-    perAddressPlayer:['',[Validators.required]],
-    teleNoPlayer:['',[Validators.required,Validators.pattern('(07)[0-9]{8}')]],
-    dobpPlayer:['',[Validators.required]],
-    MFplayer:['',[Validators.required]]
+  playerRegistration1 = this.fbPlayer1.group({
+    firstNamePlayer: ['', [Validators.required, Validators.minLength(3)]],
+    secondNamePlayer: ['', [Validators.required, Validators.minLength(3)]],
+    perAddressPlayer: ['', [Validators.required]],
+    teleNoPlayer: ['', [Validators.required, Validators.pattern('(07)[0-9]{8}')]],
+    dobpPlayer: ['', [Validators.required]],
+    MFplayer: ['', [Validators.required]],
+    PlayerStructure: ['', [Validators.required]],
+    PlayerInstitute: ['', [Validators.required]],
+    SecretCode: ['', [Validators.required]],
   })
 
-  playerSubmit(){
-    this._auth.registerUser(this.register)
-      .subscribe(
-        response=>{
-          this._auth.registerplayer(this.playerRegistration1)
-            .subscribe(
-              response=>{
-                this._auth.setvalue(true)
-                this.router.navigate(['/selectTeam']);
-                this._auth.setvalue(true)
-              },
-              error=>{
-                console.error('Error!', error)
-              }
-            )
-        },
-        error=>{
-          console.error('Error!', error)
-        }
-      );
+  compare() {
+    if (this.playerRegistration1.value.SecretCode == this.secretcode) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  playerSubmit() {
+    if (this.compare()) {
+      this._auth.registerUser(this.register)
+        .subscribe(
+          response => {
+            this._auth.registerplayer(this.playerRegistration1.value,sessionStorage.getItem('email'))
+              .subscribe(
+                response => {
+                  this.router.navigate(['/player']);
+                  localStorage.removeItem('userType')
+                  sessionStorage.removeItem('email')
+                },
+                error => {
+                  console.error('Error!', error)
+                }
+              )
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        );
+    } else {
+      alert('Secter code is wrong')
+    }
+
   }
 
 }

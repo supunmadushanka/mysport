@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
+import { Role } from './_models/role';
+
 import { CreateteamComponent } from './adminpanel/createteam/createteam.component';
 import { HomeComponent } from './home/home.component';
 import { SelectTeamComponent } from './select-team/select-team.component';
-import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
 import { Player1Component } from './signup/player1/player1.component';
 import { SelectionComponent } from './signup/selection/selection.component';
 import { SignupComponent } from './signup/signup.component';
-import { Player2Component } from './signup/player2/player2.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './signup/admin/admin.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
@@ -21,67 +21,145 @@ import { CreatetournamentComponent } from './adminpanel/createtournament/createt
 import { TournamentComponent } from './adminpanel/tournament/tournament.component';
 import { SelectedtourComponent } from './adminpanel/tournament/selectedtour/selectedtour.component';
 import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/createfixture/createfixture.component';
+import { SelectedfixtureComponent } from './adminpanel/tournament/selectedtour/selectedfixture/selectedfixture.component';
+import { OngoingtourComponent } from './adminpanel/tournament/ongoingtour/ongoingtour.component';
+import { OngoingfixtureComponent } from './adminpanel/tournament/ongoingtour/ongoingfixture/ongoingfixture.component';
+import { FinishedtourComponent } from './adminpanel/tournament/finishedtour/finishedtour.component';
+import { PlayerprofileComponent } from './player/playerprofile/playerprofile.component';
+import { PlayerComponent } from './player/player.component';
+import { InstitutecoachComponent } from './institutecoach/institutecoach.component';
+import { ParentprofileComponent } from './parentprofile/parentprofile.component';
+import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'select',
     component: SelectionComponent
-    //canActivate: [AuthGuard]
   },
-  { path: 'player2', component: Player2Component },
-  { path: 'coach', component: CoachComponent },
-  { path: 'parent', component: ParentComponent },
-  {path : 'admin',component:AdminComponent},
+  {
+    path: 'parent',
+    component: ParentComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
+  },
   {
     path: 'player1',
     component: Player1Component
   },
   {
     path: 'adminpanel',
-    component: AdminpanelComponent
+    component: AdminpanelComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'player',
+    component: PlayerComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Player] }
+  },
+  {
+    path: 'institutecoach',
+    component: InstitutecoachComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Coach] }
+  },
+  {
+    path: 'parentprofile',
+    component: ParentprofileComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Parent] }
   },
   {
     path: 'createteam',
-    component: CreateteamComponent
+    component: CreateteamComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: 'createcoach',
-    component: CreatecoachComponent
+    component: CreatecoachComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: 'createplayer',
-    component: CreateplayerComponent
+    component: CreateplayerComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: 'createtourn',
-    component: CreatetournamentComponent
+    component: CreatetournamentComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
   },
   {
     path: 'tournament',
-    component: TournamentComponent
+    component: TournamentComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'selectTeam',
     component: SelectTeamComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Coach] }
   },
   {
     path: 'adminteam/:teamid',
     component: AdminteamComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'selectedtour/:tournamentId',
     component: SelectedtourComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ongoingtour/:tournamentId',
+    component: OngoingtourComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'finished/:tournamentId',
+    component: FinishedtourComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ongoing/:fixtureId',
+    component: OngoingfixtureComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'createfixture/:tournamentId',
-    component: CreatefixtureComponent
+    component: CreatefixtureComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'selectedfixture/:fixtureId',
+    component: SelectedfixtureComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'playerProfile/:playerId',
+    component: PlayerprofileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'coachProfile/:coachId',
+    component: CoachprofileComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

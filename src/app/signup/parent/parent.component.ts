@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators} from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
+import { AuthService } from './../../auth.service';
 
 @Component({
   selector: 'app-parent',
@@ -10,38 +11,56 @@ import {Router} from '@angular/router'
 })
 export class ParentComponent implements OnInit {
 
-  constructor(private fbParent:FormBuilder,private _registrationService:RegistrationService,private router : Router) { }
+  constructor(private _auth: AuthService, private fbParent: FormBuilder, private _registrationService: RegistrationService, private router: Router) { }
 
-  get firstNameParent(){
+  get firstNameParent() {
     return this.parentRegistration.get('firstNameParent');
   }
-  get secondNameParent(){
+  get secondNameParent() {
     return this.parentRegistration.get('secondNameParent');
   }
-  get teleNoParent(){
+  get teleNoParent() {
     return this.parentRegistration.get('teleNoParent');
+  }
+
+  register = {
+    "userEmail": sessionStorage.getItem('email'),
+    "userType": localStorage.getItem('userType')
   }
 
   ngOnInit(): void {
   }
 
-  parentRegistration=this.fbParent.group({
-    firstNameParent:['',[Validators.required,Validators.minLength(3)]],
-    secondNameParent:['',[Validators.required,Validators.minLength(3)]],
-    parentSelect:['',[Validators.required]],
-    AddressParent:['',[Validators.required]],
-    teleNoParent:['',[Validators.required,Validators.pattern('(07)[0-9]{8}')]]
+  parentRegistration = this.fbParent.group({
+    firstNameParent: ['', [Validators.required, Validators.minLength(3)]],
+    secondNameParent: ['', [Validators.required, Validators.minLength(3)]],
+    parentSelect: ['', [Validators.required]],
+    AddressParent: ['', [Validators.required]],
+    teleNoParent: ['', [Validators.required, Validators.pattern('(07)[0-9]{8}')]]
   })
 
-  parentSubmit(){
+  parentSubmit() {
     console.log(this.parentRegistration.value);
 
-    this._registrationService.parentregister(this.parentRegistration.value)
+    this._auth.registerUser(this.register)
       .subscribe(
-        response=> console.log('success',response),
-        error => console.error('Error!', error)  
+        response => {
+          this._auth.ParentRegister(this.parentRegistration.value)
+            .subscribe(
+              response => {
+                console.log('success', response)
+                localStorage.removeItem('userType')
+                sessionStorage.removeItem('email')
+                this.router.navigate(['/parentprofile']);
+              },
+              error => console.error('Error!', error)
+            );
+        },
+        error => {
+          console.error('Error!', error)
+        }
       );
-      this.router.navigate(['/parentHome']);
+
   }
 
 }

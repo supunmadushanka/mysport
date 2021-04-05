@@ -73,7 +73,6 @@ export class CreateteamComponent implements OnInit {
     this._adminservice.registerteam(this.CreateTeam.value)
       .subscribe(
         response => {
-          this._auth.setvalue(true)
           this.router.navigate(['/adminpanel']);
         },
         error => {

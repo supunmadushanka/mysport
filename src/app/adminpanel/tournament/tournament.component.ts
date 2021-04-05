@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import {Router} from '@angular/router'
-import {AdminService} from '../../admin.service';
+import { Router } from '@angular/router'
+import { AdminService } from '../../admin.service';
+
+import { Role } from '../../_models/role';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-tournament',
@@ -10,56 +13,91 @@ import {AdminService} from '../../admin.service';
 })
 export class TournamentComponent implements OnInit {
 
-  constructor(private _adminservice: AdminService,private router : Router) { }
+  constructor(private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
-  public CreatedTournaments=[];
-  public StartedTournaments=[];
-  public FinishedTournaments=[];
+  currentUser = this._authService.currentUserValue;
+
+  public CreatedTournaments = [];
+  public StartedTournaments = [];
+  public FinishedTournaments = [];
+  public NewTournaments = [];
 
   ngOnInit(): void {
 
     this._adminservice.getCreatedTournament()
-    .subscribe((data)=>{
-      this.CreatedTournaments=data;
-    },
-    err =>{
-      if(err instanceof HttpErrorResponse){
-        if(err.status === 401){
-          this.router.navigate(['/home'])
+      .subscribe((data) => {
+        this.CreatedTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
         }
-      }
-    }
-    );
+      );
 
     this._adminservice.getStartedTournament()
-    .subscribe((data)=>{
-      this.StartedTournaments=data;
-    },
-    err =>{
-      if(err instanceof HttpErrorResponse){
-        if(err.status === 401){
-          this.router.navigate(['/home'])
+      .subscribe((data) => {
+        this.StartedTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
         }
-      }
-    }
-    );
+      );
 
     this._adminservice.getFinishedTournament()
-    .subscribe((data)=>{
-      this.FinishedTournaments=data;
-    },
-    err =>{
-      if(err instanceof HttpErrorResponse){
-        if(err.status === 401){
-          this.router.navigate(['/home'])
+      .subscribe((data) => {
+        this.FinishedTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
         }
-      }
-    }
-    );
-    
+      );
+
+
+    this._adminservice.getNewTour()
+      .subscribe((data) => {
+        this.NewTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
   }
 
-  starttour(tournementId){
+  back(){
+    if (this.currentUser.RoleId == Role.Admin) {
+      this.router.navigate(['/adminpanel'])
+    } else if(this.currentUser.RoleId == Role.Coach){
+      this.router.navigate(['/institutecoach'])
+    }else if(this.currentUser.RoleId == Role.Player){
+      this.router.navigate(['/player'])
+    }
+  }
+
+  show() {
+    if (this.currentUser.RoleId == Role.Admin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  starttour(tournementId) {
     this._adminservice.starttournament(tournementId)
       .subscribe(
         response => {
@@ -70,7 +108,7 @@ export class TournamentComponent implements OnInit {
       );
   }
 
-  finishtour(tournementId){
+  finishtour(tournementId) {
     this._adminservice.finishtournament(tournementId)
       .subscribe(
         response => {
@@ -81,7 +119,7 @@ export class TournamentComponent implements OnInit {
       );
   }
 
-  postponetour(tournementId){
+  postponetour(tournementId) {
     this._adminservice.postponetournament(tournementId)
       .subscribe(
         response => {
@@ -90,4 +128,16 @@ export class TournamentComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-  }}
+  }
+
+  joinTour(tournementId) {
+    this._adminservice.JoinTournament(this.CreatedTournaments,tournementId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+}

@@ -1,0 +1,152 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <div class="Team">
+            {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
+        </div>
+        <div class="menu" style="padding-top: 2em;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
+                        <h5>{{FixtureDetails[0]?.teamName}}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
+                        <h5>{{FixtureDetails[1]?.teamName}}</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
+                <div style="height: 500px; overflow: auto;">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of firstTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" data-toggle="modal" data-target="#team1model" class="pointer">
+                                <td>{{p.playerFName}} {{p.playerLName}}</td>
+                                <td>{{p.fixtureAvaial}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div><br>
+
+            </div>
+
+            <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
+
+                <div style="height: 500px; overflow: auto;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of secondTeamPlayers" (click)="currentPlayer(p.userId)" data-toggle="modal" data-target="#team2model" class="pointer">
+                                <td>{{p.playerFName}} {{p.playerLName}}</td>
+                                <td>{{p.fixtureAvaial}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><br>
+
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    <div class="Right">
+        <br>
+        <div class="menu" *ngIf="addremoveshow() && show()">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
+                Player</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
+                Player</button>
+        </div><br>
+
+        <div class="menu" *ngIf="startfixtureshow() && showadmin()">
+            <button (click)="startfixture()" type="button" class="btn btn-warning">Start Fixture</button>
+        </div><br>
+
+        <div class="details">
+            <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+            <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,8)}}</p>
+            <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+            <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+            <p><span class="title">Captain : </span></p>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of AddFixturePlayers">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade removeplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of RemoveFixturePlayers">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.playerGender}}</td>
+                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="RemovePlayer(p.userId)" type="button" class="btn btn-danger">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>

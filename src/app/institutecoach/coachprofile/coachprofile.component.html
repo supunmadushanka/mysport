@@ -1,0 +1,170 @@
+<div style="width: 100%; overflow: hidden;">
+
+    <div class="Left"><br>
+        <a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+        <div class="aaa" style="font-size: 2em;font-weight: 700;">Teams</div><br>
+        <div style="height: 500px; overflow: auto;">
+            <table class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr style="height: 1em;">
+                        <th scope="col">Name</th>
+                        <th scope="col" class="Sport">Sport</th>
+                        <th scope="col">Structure</th>
+                        <th scope="col" class="wins">Wins</th>
+                        <th scope="col" class="Losses">Losses</th>
+                    </tr>
+                </thead>
+                <tbody class="body">
+                    <tr *ngFor="let e of CoachTeams" [routerLink]="['/adminteam',e.teamId]" class="pointer">
+                        <td>{{e.teamName}}</td>
+                        <td>{{e.sportName}}</td>
+                        <td>{{e.strutureName}}</td>
+                        <td>{{e.teamWins}}</td>
+                        <td>{{e.teamLoss}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+        </div>
+
+    </div>
+
+    <div class="Right">
+        <br>
+
+        <div class="menu">
+            <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target=".bd-example-modal-lg">Edit
+                Profile</button><br>
+            <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
+                Password</button><br>
+        </div><br>
+
+        <div class="details">
+            <p><span class="title">Name : </span>{{CoachProfile[0]?.coachFName}} {{CoachProfile[0]?.coachLName}}</p>
+            <p><span class="title">Address : </span>{{CoachProfile[0]?.coachAddress}}</p>
+            <p><span class="title">Telephone No : </span>{{CoachProfile[0]?.coachNumber}}</p>
+            <p><span class="title">Date of Birth : </span>{{CoachProfile[0]?.coachDOB | date:'mediumDate'}}</p>
+            <p><span class="title">Gender : </span>{{CoachProfile[0]?.coachGender}}</p>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-page">
+                    <div class="form">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group">
+                                <label for="signupPassword1">Enter new password</label>
+                                <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
+
+                                <div *ngIf="password.invalid && password.touched;else elseBlock2">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                    <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+                                        be 8-20 characters long<br></small>
+                                    <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces,
+                                        special characters, or
+                                        emoji</small>
+                                </div>
+
+                                <ng-template #elseBlock2>
+                                    <small id="passwordHelpsignup" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and
+                                        must not contain spaces,
+                                        special characters, or emoji.
+                                    </small>
+                                </ng-template>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword2">Re-enter Password</label>
+                                <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
+
+                                <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
+                                    match</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="CoachRegistration" (ngSubmit)="coachSubmit()">
+                            <h3>Enter Coach details</h3><br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="firstNameCoach">First Name</label>
+                                    <input [class.is-invalid]="firstNameCoach.invalid && firstNameCoach.touched" formControlName="firstNameCoach" type="text" class="form-control form-control-lg" id="firstNameCoach" placeholder="{{CoachProfile[0]?.coachFName}}">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="secondNameAdmin">Last Name</label>
+                                    <input [class.is-invalid]="lastNameCoach.invalid && lastNameCoach.touched" formControlName="lastNameCoach" type="text" class="form-control form-control-lg" id="secondNameAdmin" placeholder="{{CoachProfile[0]?.coachLName}}">
+                                </div>
+
+                                <div *ngIf="(firstNameCoach.touched && firstNameCoach.invalid) || lastNameCoach.invalid && lastNameCoach.touched">
+                                    <small class="text-danger">First name and last name reuired and must contain more
+                                        than 3
+                                        charactors<br></small>
+                                </div>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="curAddressAdmin">Current Address</label>
+                                <input [class.is-invalid]="CoachRegistration.get('addressAdmin').invalid && CoachRegistration.get('addressAdmin').touched" formControlName="addressAdmin" type="text" class="form-control form-control-lg" id="curAddressAdmin" placeholder="{{CoachProfile[0]?.coachAddress}}">
+
+                                <small [class.d-none]="CoachRegistration.get('addressAdmin').valid || CoachRegistration.get('addressAdmin').untouched" class="text-danger">Address is required</small>
+                            </div><br>
+
+
+                            <div class="form-group">
+                                <label for="teleNoCoach">Telephone Number</label>
+                                <input [class.is-invalid]="teleNoCoach.invalid && teleNoCoach.touched" formControlName="teleNoCoach" type="tel" class="form-control form-control-lg" id="teleNoCoach" placeholder="{{CoachProfile[0]?.coachNumber}}">
+
+                                <div *ngIf="teleNoCoach.invalid && teleNoCoach.touched">
+                                    <small *ngIf="teleNoCoach.errors?.required" class="text-danger">Telephone number
+                                        required</small>
+                                    <small *ngIf="teleNoCoach.errors?.pattern" class="text-danger">Invalid telephone
+                                        number</small>
+                                </div>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close()" type="submit" class="btn btn-primary">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

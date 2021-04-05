@@ -5,6 +5,9 @@ import { Router } from '@angular/router'
 import { AdminService } from '../../../admin.service';
 import { ViewChild } from '@angular/core';
 
+import { Role } from '../../../_models/role';
+import { AuthService } from '../../../auth.service';
+
 @Component({
   selector: 'app-selectedtour',
   templateUrl: './selectedtour.component.html',
@@ -15,7 +18,9 @@ export class SelectedtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,private _authService: AuthService) { }
+
+  currentUser = this._authService.currentUserValue;
 
   public Tournament = [];
   public UpcomingFixtures = [];
@@ -58,6 +63,14 @@ export class SelectedtourComponent implements OnInit {
 
   closeModel(){
     this.modalClose.nativeElement.click();
+  }
+
+  show() {
+    if (this.currentUser.RoleId == Role.Admin) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

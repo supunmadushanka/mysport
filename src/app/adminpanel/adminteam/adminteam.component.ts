@@ -6,6 +6,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 
+import { Role } from '../../_models/role';
+import { AuthService } from '../../auth.service';
+
 
 @Component({
   selector: 'app-adminteam',
@@ -19,12 +22,19 @@ export class AdminteamComponent implements OnInit {
   private sub: any;
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
-    private fbAdmin: FormBuilder) { }
+    private fbAdmin: FormBuilder,private _authService: AuthService) { }
+
+  currentUser = this._authService.currentUserValue;
 
   public TeamPlayers = [];
   public TeamDetails = [];
   public Achievements = [];
   public addplayers = [];
+
+  model = {
+    teamId: '',
+
+  }
 
 
   ngOnInit(): void {
@@ -109,7 +119,7 @@ export class AdminteamComponent implements OnInit {
   }
 
   AddPlayer(playerId) {
-    this._adminservice.addplayerteam(this.achieve.value,this.teamid, playerId)
+    this._adminservice.addplayerteam(this.achieve.value, this.teamid, playerId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -120,7 +130,7 @@ export class AdminteamComponent implements OnInit {
   }
 
   RemovePlayer(playerId) {
-    this._adminservice.removeplayerteam(this.achieve.value,this.teamid, playerId)
+    this._adminservice.removeplayerteam(this.achieve.value, this.teamid, playerId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -128,5 +138,13 @@ export class AdminteamComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  show() {
+    if (this.currentUser.RoleId == Role.Admin || this.currentUser.RoleId == Role.Coach) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

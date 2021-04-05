@@ -1,80 +1,39 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
+        <br>
+        <a routerLink="/tournament" class="previous round">&#8249; Back</a>
         <div class="name"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
             <img class="rotate30" src="\assets\ball.png" width="60" height="60">
         </div>
     </div>
     <div class="Right">
-        <div class="summery"><button type="button" class="btn btn-warning">Tournament<br>summery</button><br><br>
-            <button type="button" class="btn btn-info btn-outline-dark" [routerLink]="['/createfixture',tournamentId]">Create Fixture</button>
+        <div class="summery">
+            <button *ngIf="show()" type="button" class="btn btn-info btn-outline-dark" [routerLink]="['/createfixture',tournamentId]">Create Fixture</button>
         </div>
     </div>
 </div>
 
-<div class="aaa" style="padding-top: 2em;">
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="Created-tab" data-toggle="pill" href="#Created" role="tab" aria-controls="Created" aria-selected="true">
-                <h5>Upcoming Fixtures</h5>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="Ongoing-tab" data-toggle="pill" href="#Ongoing" role="tab" aria-controls="Ongoing" aria-selected="false">
-                <h5>Finished Fixtures</h5>
-            </a>
-        </li>
-    </ul>
-</div>
+<h4 class="aaa topic">Created Fixtures</h4><br>
 
-<div class="tab-content" id="pills-tabContent">
-
-    <div class="tab-pane fade show active" id="Created" role="tabpanel" aria-labelledby="Created-tab">
-
-        <div style="height: 350px; overflow: auto;">
-            <table class="table table-hover table-bordered">
-                <thead class="thead-dark">
-                    <tr style="height: 1em;">
-                        <th scope="col">Institutes</th>
-                        <th scope="col">Structure</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Venue</th>
-                    </tr>
-                </thead>
-                <tbody class="body">
-                    <tr *ngFor="let p of UpcomingFixtures">
-                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
-                        <td>{{p.strutureName}}</td>
-                        <td>{{p.fixtureTime.substring(0,8)}}</td>
-                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
-                        <td>{{p.venue}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-    <div class="tab-pane fade" id="Ongoing" role="tabpanel" aria-labelledby="Ongoing-tab">
-
-        <div style="height: 350px; overflow: auto;">
-            <table class="table table-hover table-bordered">
-                <thead class="thead-dark">
-                    <tr style="height: 1em;">
-                        <th scope="col">Match No</th>
-                        <th scope="col">Institutes</th>
-                        <th scope="col">Structure</th>
-                        <th scope="col">Win</th>
-                    </tr>
-                </thead>
-                <tbody class="body">
-                    <tr *ngFor="" class="pointer">
-                        <!--*let p of StartedTournaments-->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
+<div style="height: 350px; overflow: auto;">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr style="height: 1em;">
+                <th scope="col">Institutes</th>
+                <th scope="col">Structure</th>
+                <th scope="col">Time</th>
+                <th scope="col">Date</th>
+                <th scope="col">Venue</th>
+            </tr>
+        </thead>
+        <tbody class="body">
+            <tr *ngFor="let p of UpcomingFixtures" [routerLink]="['/selectedfixture',p.fixtureId]" class="pointer">
+                <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                <td>{{p.strutureName}}</td>
+                <td>{{p.fixtureTime.substring(0,8)}}</td>
+                <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                <td>{{p.venue}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -9,19 +9,19 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" routerLink="/adminpanel">Institute</a>
-                <a class="nav-item nav-link" routerLink="/selectTeam">Coach</a>
-                <a class="nav-item nav-link" href="#">Player</a>
-                <a class="nav-item nav-link" href="#">Parent</a>
+                <a class="nav-item nav-link" routerLink="/institutecoach">Coach</a>
+                <a class="nav-item nav-link" routerLink="/player">Player</a>
+                <a class="nav-item nav-link" routerLink="/parentprofile">Parent</a>
             </div>
             <div class="navbar-nav ml-auto">
                 <a class="nav-link " href="#about">About Us</a>
                 <a class="nav-link" routerLink="/login">
-                    <button type="button" *ngIf="!_auth.loggedIn()" class="btn btn-primary">Log
+                    <button type="button" *ngIf="!_auth.currentUserValue" class="btn btn-primary">Log
             in</button></a>
                 <a class="nav-link" routerLink="/signup">
-                    <button *ngIf="!_auth.loggedIn()" type="button" class="btn btn-success">
+                    <button *ngIf="!_auth.currentUserValue" type="button" class="btn btn-success">
             Sign up</button></a>
-                <a class="nav-link " style="cursor:pointer" *ngIf="_auth.loggedIn()" (click)="_auth.logoutUser()">Log out</a>
+                <a class="nav-link " style="cursor:pointer" *ngIf="_auth.currentUserValue" (click)="_auth.logoutUser()">Log out</a>
             </div>
         </div>
     </nav>

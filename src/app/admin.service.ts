@@ -51,6 +51,21 @@ export class AdminService {
     return this.http.get<any>(_url1);
   }
 
+  getInstituteTeamCount() {
+    let _url1 = "http://localhost:3000/api/getinstituteteamcount";
+    return this.http.get<any>(_url1);
+  }
+
+  getInstituteCoachCount() {
+    let _url1 = "http://localhost:3000/api/getinstitutecoachcount";
+    return this.http.get<any>(_url1);
+  }
+
+  getInstitutePlayerCount() {
+    let _url1 = "http://localhost:3000/api/getinstituteplayercount";
+    return this.http.get<any>(_url1);
+  }
+
   getSports() {
     let _url1 = "http://localhost:3000/api/sports";
     return this.http.get<any>(_url1);
@@ -58,6 +73,11 @@ export class AdminService {
 
   getStructure() {
     let _url1 = "http://localhost:3000/api/structure";
+    return this.http.get<any>(_url1);
+  }
+
+  getInstitutes() {
+    let _url1 = "http://localhost:3000/api/institutes";
     return this.http.get<any>(_url1);
   }
 
@@ -104,6 +124,87 @@ export class AdminService {
     return this.http.get<any>(_url1, { params });
   }
 
+  getOngoingFixture(tournementId) {
+
+    let params = new HttpParams()
+      .set('tournementId', tournementId)
+
+    let _url1 = "http://localhost:3000/api/getongoingfixture";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getFinishedFixture(tournementId) {
+
+    let params = new HttpParams()
+      .set('tournementId', tournementId)
+
+    let _url1 = "http://localhost:3000/api/getfinishedfixture";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  UpcomingFixtureDetails(fixtureId) {
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+
+    let _url1 = "http://localhost:3000/api/upcomingfixturedetails";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getFixtureTeamPlayers(fixtureId, tournamentTeamId) {
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('tournamentTeamId', tournamentTeamId)
+
+    let _url1 = "http://localhost:3000/api/getfixtureteamplayers";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getAddFixturePlayers(fixtureId) {
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+
+    let _url1 = "http://localhost:3000/api/getaddfixtureplayers";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getRemoveFixturePlayers(fixtureId) {
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+
+    let _url1 = "http://localhost:3000/api/getremovefixtureplayers";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getTotal(fixtureId, tournamentTeamId) {
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('tournamentTeamId', tournamentTeamId)
+
+    let _url1 = "http://localhost:3000/api/getTotal";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getSummery(tournamentId) {
+    let params = new HttpParams()
+      .set('tournamentId', tournamentId)
+
+    let _url1 = "http://localhost:3000/api/getsummery";
+    return this.http.get<any>(_url1, { params });
+  }
+
+  getNewTour() {
+    let _url1 = "http://localhost:3000/api/getnewtournament";
+    return this.http.get<any>(_url1);
+  }
+
+  getInstituteProfile() {
+    let _url1 = "http://localhost:3000/api/getinstituteprofile";
+    return this.http.get<any>(_url1);
+  }
+
+
   /////////////////////////////////////////////////////////////////////////
 
   private _teamregister = "http://localhost:3000/api/teamregister";
@@ -115,6 +216,12 @@ export class AdminService {
   private Postponetournament = "http://localhost:3000/api/postponetournament";
   private Finishtournament = "http://localhost:3000/api/finishtournament";
   private createFixture = "http://localhost:3000/api/registerfixture";
+  private addFixturePlayer = "http://localhost:3000/api/addfixtureplayer";
+  private removeFixturePlayer = "http://localhost:3000/api/removefixtureplayer";
+  private startfixture = "http://localhost:3000/api/startfixture";
+
+  private _coachregister = "http://localhost:3000/api/coachregister";
+  private _createplayer = "http://localhost:3000/api/createplayer";
 
   registerteam(user) {
     return this.http.post<any>(this._teamregister, user)
@@ -173,5 +280,86 @@ export class AdminService {
     return this.http.post<any>(this.createFixture, user, { params })
   }
 
+  addPlayerFixture(user, fixtureId, userId) {
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('userId', userId)
+
+    return this.http.post<any>(this.addFixturePlayer, user, { params })
+  }
+
+  removePlayerFixture(user, fixtureId, userId) {
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('userId', userId)
+
+    return this.http.post<any>(this.removeFixturePlayer, user, { params })
+  }
+
+  startFixture(user, fixtureId) {
+
+    console.log("fixtureId= " + fixtureId);
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+
+    return this.http.post<any>(this.startfixture, user, { params })
+  }
+
+  PostponeFixture(user, fixtureId) {
+
+    let _url1 = "http://localhost:3000/api/postponefixture";
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+
+    return this.http.post<any>(_url1, user, { params })
+  }
+
+  finishFixture(user, fixtureId, wonteam, wonscore, lossteam, lossscore) {
+    let _url1 = "http://localhost:3000/api/finishfixture";
+    console.log("fixtureId= " + fixtureId);
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('wonteam', wonteam)
+      .set('wonscore', wonscore)
+      .set('lossteam', lossteam)
+      .set('lossscore', lossscore)
+
+    return this.http.post<any>(_url1, user, { params })
+  }
+
+  changePlayerScore(user, fixtureId, currentUserId, score, tournamentTeamId) {
+
+    let _url1 = "http://localhost:3000/api/addplayerscore";
+
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+      .set('currentUserId', currentUserId)
+      .set('score', score)
+      .set('tournamentTeamId', tournamentTeamId)
+
+    return this.http.post<any>(_url1, user, { params })
+  }
+
+  JoinTournament(user, tournementId) {
+
+    let _url1 = "http://localhost:3000/api/jointournament";
+
+    let params = new HttpParams()
+      .set('tournementId', tournementId)
+
+    return this.http.post<any>(_url1, user, { params })
+  }
+
+  coachregister(user) {
+    return this.http.post<any>(this._coachregister, user)
+  }
+  createplayer(user) {
+    return this.http.post<any>(this._createplayer, user)
+  }
 
 }

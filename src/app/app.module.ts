@@ -8,9 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { SelectionComponent } from './signup/selection/selection.component';
-import { CoachComponent } from './signup/coach/coach.component';
 import { ParentComponent } from './signup/parent/parent.component';
-import { Player2Component } from './signup/player2/player2.component';
 import { CreateteamComponent } from './adminpanel/createteam/createteam.component';
 import { SelectTeamComponent } from './select-team/select-team.component';
 
@@ -30,6 +28,15 @@ import { CreatetournamentComponent } from './adminpanel/createtournament/createt
 import { TournamentComponent } from './adminpanel/tournament/tournament.component';
 import { SelectedtourComponent } from './adminpanel/tournament/selectedtour/selectedtour.component';
 import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/createfixture/createfixture.component';
+import { SelectedfixtureComponent } from './adminpanel/tournament/selectedtour/selectedfixture/selectedfixture.component';
+import { OngoingtourComponent } from './adminpanel/tournament/ongoingtour/ongoingtour.component';
+import { OngoingfixtureComponent } from './adminpanel/tournament/ongoingtour/ongoingfixture/ongoingfixture.component';
+import { FinishedtourComponent } from './adminpanel/tournament/finishedtour/finishedtour.component';
+import { PlayerComponent } from './player/player.component';
+import { PlayerprofileComponent } from './player/playerprofile/playerprofile.component';
+import { InstitutecoachComponent } from './institutecoach/institutecoach.component';
+import { ParentprofileComponent } from './parentprofile/parentprofile.component';
+import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +44,7 @@ import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/cre
     HomeComponent,
     SignupComponent,
     SelectionComponent,
-    CoachComponent,
     ParentComponent,
-    Player2Component,
     CreateteamComponent,
     SelectTeamComponent,
     Player1Component,
@@ -53,6 +58,15 @@ import { CreatefixtureComponent } from './adminpanel/tournament/selectedtour/cre
     TournamentComponent,
     SelectedtourComponent,
     CreatefixtureComponent,
+    SelectedfixtureComponent,
+    OngoingtourComponent,
+    OngoingfixtureComponent,
+    FinishedtourComponent,
+    PlayerComponent,
+    PlayerprofileComponent,
+    InstitutecoachComponent,
+    ParentprofileComponent,
+    CoachprofileComponent,
   ],
   imports: [
     BrowserModule,

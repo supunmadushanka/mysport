@@ -1,0 +1,131 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <div class="Team">
+            {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
+        </div>
+        <div class="menu" style="padding-top: 2em;">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
+                        <h5>{{FixtureDetails[0]?.teamName}}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
+                        <h5>{{FixtureDetails[1]?.teamName}}</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
+                <div style="height: 500px; overflow: auto;">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of firstTeamPlayers" (click)="currentPlayer(p.userId)" data-toggle="modal" data-target="#team1model" class="pointer">
+                                <td>{{p.playerFName}} {{p.playerLName}}</td>
+                                <td>{{p.playerScore}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div><br>
+
+                <div class="points">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total1[0]?.sumScore}}
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
+
+                <div style="height: 500px; overflow: auto;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of secondTeamPlayers" (click)="currentPlayer(p.userId)" data-toggle="modal" data-target="#team2model" class="pointer">
+                                <td>{{p.playerFName}} {{p.playerLName}}</td>
+                                <td>{{p.playerScore}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><br>
+
+                <div class="points">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total2[0]?.sumScore}}
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    <div class="Right">
+        <br>
+        <div class="details">
+            <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+            <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,8)}}</p>
+            <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+            <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+            <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[0]?.teamName}} Score: </span>{{this.Total1[0]?.sumScore}}</p>
+            <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[1]?.teamName}} Score: </span>{{this.Total2[0]?.sumScore}}</p>
+            <p *ngIf="showwhenfinished()"><span class="title">Won: </span>{{wonteamname}}</p>
+            <br>
+        </div>
+        <div class="menu" *ngIf="finished() && show()">
+            <button class="btn btn-danger middle" (click)="postponefixture()">Postpone Fixture</button><br><br>
+            <button class="btn btn-warning middle" (click)="finishfixture()">Finish Fixture</button>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div *ngIf="finished()" class="modal fade" id="team1model" tabindex="-1" role="dialog" aria-labelledby="team1modelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=score> &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-success" (click)="submitPlayerScore()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="finished()" class="modal fade" id="team2model" tabindex="-1" role="dialog" aria-labelledby="team2modelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Score</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=score> &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-success" (click)="submitPlayerScore1()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

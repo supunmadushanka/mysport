@@ -1,6 +1,8 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
-        <div class="menu" style="padding-top: 2em;">
+        <br>
+        <a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+        <div class="menu" style="padding-top: 0em;">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
@@ -10,11 +12,6 @@
                 <li class="nav-item">
                     <a class="nav-link" id="Achievement-tab" data-toggle="pill" href="#Achievement" role="tab" #achievetab aria-controls="Achievement" aria-selected="false">
                         <h5>Team Achievements</h5>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="Player-tab" data-toggle="pill" href="#Player" role="tab" aria-controls="Player" aria-selected="false">
-                        <h5>Tournamet</h5>
                     </a>
                 </li>
             </ul>
@@ -34,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody class="body">
-                            <tr *ngFor="let p of TeamPlayers">
+                            <tr *ngFor="let p of TeamPlayers" [routerLink]="['/playerProfile',p.userId]" class="pointer">
                                 <td>{{p.playerFName}} {{p.playerLName}}</td>
                                 <td>{{p.playerGender}}</td>
                                 <td>{{p.playerDOB | date:'mediumDate' }}</td>
@@ -49,7 +46,7 @@
 
             <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
 
-                <div class="menu">
+                <div class="menu" *ngIf="show()">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Add
                         Achievement</button>
                 </div>
@@ -72,18 +69,6 @@
 
             </div>
 
-            <div class="tab-pane fade" id="Player" role="tabpanel" aria-labelledby="Player-tab">
-
-                <div class="menu">
-                    <button type="button" class="btn btn-success" routerLink="/createplayer">Create Player</button>
-                </div>
-
-            </div>
-
-            <div class="tab-pane fade" id="Tournamet" role="tabpanel" aria-labelledby="Tournamet-tab">
-                Tournamet
-            </div>
-
         </div>
 
     </div>
@@ -93,9 +78,11 @@
             <p>{{TeamDetails[0]?.teamName}}</p>
         </div>
 
-        <div class="menu">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add Player</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove Player</button>
+        <div class="menu" *ngIf="show()">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
+                Player</button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
+                Player</button>
         </div><br>
 
         <div class="menu">
@@ -108,9 +95,8 @@
             <p><span class="title">Sport : </span>{{TeamDetails[0]?.sportName}}</p>
             <p><span class="title">Struture : </span>{{TeamDetails[0]?.strutureName}}</p>
             <p><span class="title">No of Players : </span>{{TeamDetails[0]?.Players}}</p>
-            <p><span class="title">Wins : </span></p>
-            <p><span class="title">Lossess : </span></p>
-            <p><span class="title">Win streak : </span></p>
+            <p><span class="title">Wins : </span>{{TeamDetails[0]?.teamWins}}</p>
+            <p><span class="title">Lossess : </span>{{TeamDetails[0]?.teamLoss}}</p>
             <br>
         </div>
     </div>
@@ -167,7 +153,8 @@
                             <td>{{p.playerGender}}</td>
                             <td>{{p.playerDOB}}</td>
                             <td>{{p.playerteleNum}}</td>
-                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button></td>
+                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -181,7 +168,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div style="height: 500px; overflow: auto;">
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered pad">
                     <thead class="thead-dark">
                         <tr style="height: 1em;">
                             <th scope="col">Name</th>

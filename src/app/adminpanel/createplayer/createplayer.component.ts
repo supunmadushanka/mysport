@@ -56,10 +56,9 @@ export class CreateplayerComponent implements OnInit {
   })
 
   playerSubmit() {
-    this._auth.createplayer(this.createPlayer.value)
+    this._adminservice.createplayer(this.createPlayer.value)
       .subscribe(
         response => {
-          this._auth.setvalue(true)
           this.router.navigate(['/adminpanel']);
         },
         error => {

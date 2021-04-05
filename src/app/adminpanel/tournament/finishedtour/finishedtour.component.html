@@ -1,0 +1,77 @@
+<div style="width: 100%; overflow: hidden;">
+    <div class="Left">
+        <br>
+        <a routerLink="/tournament" class="previous round">&#8249; Back</a>
+        <div class="name"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
+            <img class="rotate30" src="\assets\ball.png" width="60" height="60">
+        </div>
+    </div>
+    <div class="Right">
+        <div class="summery"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#summery">Tournament<br>summery</button><br>
+        </div>
+    </div>
+</div>
+<br>
+<h4 class="aaa topic">Finished Fixtures</h4><br>
+
+<div style="height: 350px; overflow: auto;">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr style="height: 1em;">
+                <th scope="col">Institutes</th>
+                <th scope="col">Structure</th>
+                <th scope="col">Time</th>
+                <th scope="col">Date</th>
+                <th scope="col">Venue</th>
+            </tr>
+        </thead>
+        <tbody class="body">
+            <tr *ngFor="let p of FinishedFixtures" [routerLink]="['/ongoing',p.fixtureId]" class="pointer">
+                <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                <td>{{p.strutureName}}</td>
+                <td>{{p.fixtureTime.substring(0,8)}}</td>
+                <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                <td>{{p.venue}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<br>
+<div class="points">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{wininstitute}} Won
+</div>
+
+
+
+<div class="modal fade" id="summery" tabindex="-1" role="dialog" aria-labelledby="summeryTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Summery</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div style="height: 350px; overflow: auto;">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Institute</th>
+                                <th scope="col">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Summery">
+                                <td>{{p.instituteName}}</td>
+                                <td>{{p.point}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
