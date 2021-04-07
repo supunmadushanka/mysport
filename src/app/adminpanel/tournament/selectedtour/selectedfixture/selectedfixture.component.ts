@@ -24,6 +24,9 @@ export class SelectedfixtureComponent implements OnInit {
   public Tournament = [];
   public sample = [];
 
+  firsttournamentTeamId
+  secondtournamentTeamId
+
   currentUser = this._authService.currentUserValue;
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
@@ -37,8 +40,10 @@ export class SelectedfixtureComponent implements OnInit {
     this._adminservice.UpcomingFixtureDetails(this.fixtureId)
       .subscribe((data) => {
         this.FixtureDetails = data;
+        this.firsttournamentTeamId = this.FixtureDetails[0].tournamentTeamId
+        this.secondtournamentTeamId = this.FixtureDetails[1].tournamentTeamId
 
-        this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
+        this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.firsttournamentTeamId)
           .subscribe((data) => {
             this.firstTeamPlayers = data;
           },
@@ -51,7 +56,7 @@ export class SelectedfixtureComponent implements OnInit {
             }
           );
 
-        this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+        this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.secondtournamentTeamId)
           .subscribe((data) => {
             this.secondTeamPlayers = data;
           },
@@ -117,7 +122,7 @@ export class SelectedfixtureComponent implements OnInit {
 
   }
 
-  ReasonAlert(Reason){
+  ReasonAlert(Reason) {
     alert(Reason);
   }
 
@@ -140,26 +145,25 @@ export class SelectedfixtureComponent implements OnInit {
 
 
   AddPlayer(userId) {
-    alert(userId+" "+this.fixtureId)
     this._adminservice.addPlayerFixture(this.sample, this.fixtureId, userId)
       .subscribe(
         response => {
-          this.ngOnInit();
           console.log('success', response)
         },
         error => console.error('Error!', error)
       );
+    this.ngOnInit();
   }
 
   RemovePlayer(userId) {
     this._adminservice.removePlayerFixture(this.sample, this.fixtureId, userId)
       .subscribe(
         response => {
-          this.ngOnInit();
           console.log('success', response)
         },
         error => console.error('Error!', error)
       );
+    this.ngOnInit();
   }
 
   startfixtureshow() {

@@ -51,9 +51,22 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset()
         }
       );
+  }
 
+  onSubmitt() {
+    console.log(this.loginForm.value);
 
-
+    this._auth.sendMail(this.loginForm.value)
+      .subscribe(
+        response => {
+          console.log('Success!', response)
+        },
+        error => {
+          console.error('Error!', error)
+          alert("Invalid login")
+          this.loginForm.reset()
+        }
+      );
   }
 
 }

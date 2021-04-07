@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
 
 
 
-  onSubmit() {
+  onSubmitt() {
     console.log(this.registrationForm.value);
 
     this._auth.chechuser(this.registrationForm.value)
@@ -67,8 +67,46 @@ export class SignupComponent implements OnInit {
           this.registrationForm.reset()
         }
       );
+  }
+
+  onSubmit() {
+    console.log(this.registrationForm.value);
+
+    this._auth.chechuser(this.registrationForm.value)
+      .subscribe(
+        response => {
+          console.log('Success!', response)
+
+          this._auth.tempregister(this.registrationForm.value)
+            .subscribe(
+              response => {
+                console.log('Success!', response)
+                this._auth.sendMail(this.registrationForm.value)
+                  .subscribe(
+                    response => {
+                      console.log('Success!', response)
+                    },
+                    error => {
+                      console.error('Error!', error)
+                      console.log('Hi error!')
+                    }
+                  )
+              },
+              error => {
+                console.error('Error!', error)
+                console.log('Hi error!')
+              }
+            )
+        },
+        error => {
+          console.error('Error!', error)
+          alert("Already have an account")
+          this.registrationForm.reset()
+        }
+      );
 
 
+    this.router.navigate(['/home']);
   }
 
 }

@@ -31,11 +31,6 @@ export class AdminteamComponent implements OnInit {
   public Achievements = [];
   public addplayers = [];
 
-  model = {
-    teamId: '',
-
-  }
-
 
   ngOnInit(): void {
 

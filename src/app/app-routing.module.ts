@@ -30,6 +30,8 @@ import { PlayerComponent } from './player/player.component';
 import { InstitutecoachComponent } from './institutecoach/institutecoach.component';
 import { ParentprofileComponent } from './parentprofile/parentprofile.component';
 import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
+import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
+import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.component';
 
 
 const routes: Routes = [
@@ -39,6 +41,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   { path: 'signup', component: SignupComponent },
+  { path: 'confirmemail', component: ConfirmemailComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'select',
@@ -118,6 +121,11 @@ const routes: Routes = [
   {
     path: 'adminteam/:teamid',
     component: AdminteamComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'chat',
+    component: ChatboxComponent,
     canActivate: [AuthGuard]
   },
   {

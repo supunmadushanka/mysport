@@ -37,6 +37,8 @@ import { PlayerprofileComponent } from './player/playerprofile/playerprofile.com
 import { InstitutecoachComponent } from './institutecoach/institutecoach.component';
 import { ParentprofileComponent } from './parentprofile/parentprofile.component';
 import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
+import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
+import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofil
     InstitutecoachComponent,
     ParentprofileComponent,
     CoachprofileComponent,
+    ConfirmemailComponent,
+    ChatboxComponent,
   ],
   imports: [
     BrowserModule,

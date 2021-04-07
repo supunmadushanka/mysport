@@ -108,7 +108,7 @@
                         <tr *ngFor="let p of AddFixturePlayers">
                             <td>{{p.playerFName}} {{p.playerLName}}</td>
                             <td>{{p.playerGender}}</td>
-                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
                             <td>{{p.playerteleNum}}</td>
                             <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button>
                             </td>
@@ -139,7 +139,7 @@
                         <tr *ngFor="let p of RemoveFixturePlayers">
                             <td>{{p.playerFName}} {{p.playerLName}}</td>
                             <td>{{p.playerGender}}</td>
-                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
                             <td>{{p.playerteleNum}}</td>
                             <td><button (click)="RemovePlayer(p.userId)" type="button" class="btn btn-danger">Remove</button></td>
                         </tr>

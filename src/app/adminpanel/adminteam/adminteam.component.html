@@ -86,7 +86,7 @@
         </div><br>
 
         <div class="menu">
-            <button type="button" class="btn btn-warning">Message</button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#message">Message</button>
         </div><br>
 
         <div class="details">
@@ -101,6 +101,22 @@
         </div>
     </div>
 
+</div>
+
+<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="messageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Chat Box</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-chatbox></app-chatbox>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -136,7 +152,7 @@
 <div class="modal fade addplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div style="height: 500px; overflow: auto;">
+            <div style="height: 500px; overflow: auto; padding-top: 1em;">
                 <table class="table table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr style="height: 1em;">
@@ -151,7 +167,7 @@
                         <tr *ngFor="let p of addplayers">
                             <td>{{p.playerFname}} {{p.playerLName}}</td>
                             <td>{{p.playerGender}}</td>
-                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
                             <td>{{p.playerteleNum}}</td>
                             <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button>
                             </td>
@@ -167,7 +183,7 @@
 <div class="modal fade removeplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div style="height: 500px; overflow: auto;">
+            <div style="height: 500px; overflow: auto; padding-top: 1em;">
                 <table class="table table-hover table-bordered pad">
                     <thead class="thead-dark">
                         <tr style="height: 1em;">
@@ -182,7 +198,7 @@
                         <tr *ngFor="let p of TeamPlayers">
                             <td>{{p.playerFname}} {{p.playerLName}}</td>
                             <td>{{p.playerGender}}</td>
-                            <td>{{p.playerDOB}}</td>
+                            <td>{{p.playerDOB | date:'mediumDate'}}</td>
                             <td>{{p.playerteleNum}}</td>
                             <td><button (click)="RemovePlayer(p.userId)" type="button" class="btn btn-danger">Remove</button></td>
                         </tr>
