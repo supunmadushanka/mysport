@@ -14,7 +14,8 @@ import { AuthService } from '../auth.service';
 })
 export class InstitutecoachComponent implements OnInit {
 
-  constructor(private _authService: AuthService,private fbAdmin: FormBuilder, private fb2: FormBuilder, private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
+  constructor(private _authService: AuthService,private fbAdmin: FormBuilder, private fb2: FormBuilder, 
+    private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
 
   currentUser
   userId:number

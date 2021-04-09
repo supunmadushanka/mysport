@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
+import { AuthService } from '../../auth.service';
+import { Role } from '../../_models/role';
 
 @Component({
   selector: 'app-playerprofile',
@@ -16,15 +18,25 @@ export class PlayerprofileComponent implements OnInit {
   userId: number
   private sub: any;
 
-  constructor(private fbAdmin:FormBuilder,private fb2: FormBuilder, private _playerservice: PlayerService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
+  currentUser
+
+  constructor(private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
+    private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService) { }
 
   public PlayerTeams = [];
   public PlayerProfile = [];
   public Achievements = [];
+  public Fixtures = [];
 
-  instituteId : number
+  instituteId: number
+
+  
+  fixtureId: number
+  tournamentTeamId : number
 
   ngOnInit(): void {
+
+    this.currentUser = this._authService.currentUserValue;
 
     this.sub = this.route.params.subscribe(params => {
       this.userId = +params['playerId'];
@@ -69,6 +81,70 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
+    this._playerservice.getPlayerFixtures(this.userId)
+      .subscribe((data) => {
+        this.Fixtures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+  }
+
+  changeavailability(fixtureId,tournamentTeamId) {
+
+    this.fixtureId=fixtureId[0]
+    this.tournamentTeamId=tournamentTeamId
+
+    this._playerservice.ConfirmAvailability(this.PlayerTeams,this.userId,this.fixtureId,this.tournamentTeamId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+
+
+  navigateTeam(teamId) {
+    if (this.currentUser.RoleId == Role.Parent) {
+
+    } else {
+      this.router.navigate(['/adminteam', teamId]);
+    }
+  }
+
+  back() {
+    if (this.currentUser.RoleId == Role.Admin) {
+      this.router.navigate(['/adminpanel']);
+    } else if (this.currentUser.RoleId == Role.Parent) {
+      this.router.navigate(['/parentprofile']);
+    } else {
+      this.router.navigate(['/institutecoach']);
+    }
+  }
+
+  achiveshow() {
+    if (this.currentUser.RoleId == Role.Parent) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  confirm(){
+    if (this.currentUser.RoleId == Role.Parent) {
+      return true
+    } else {
+      return false
+    }
   }
 
   achieve = this.fbAdmin.group({

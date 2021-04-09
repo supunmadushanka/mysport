@@ -88,4 +88,16 @@ export class PlayerService {
 
     return this.http.post<any>(_url1, user, { params })
   }
+
+  ConfirmAvailability(user, userId,fixtureId,tournamentTeamId) {
+
+    let _url1 = "http://localhost:3000/api/confirmavailability";
+
+    let params = new HttpParams()
+      .set('userId', userId)
+      .set('fixtureId', fixtureId)
+      .set('tournamentTeamId', tournamentTeamId)
+
+    return this.http.post<any>(_url1, user, { params })
+  }
 }

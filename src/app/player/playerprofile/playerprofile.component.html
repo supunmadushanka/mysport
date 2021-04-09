@@ -1,7 +1,7 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
         <br>
-        <a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
         <div class="aaa" style="padding-top: 0em;">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -12,6 +12,11 @@
                 <li class="nav-item">
                     <a class="nav-link" id="Coach-tab" data-toggle="pill" href="#Coach" role="tab" aria-controls="Coach" aria-selected="false">
                         <h5>Achievements</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="fixture-tab" data-toggle="pill" href="#fixture" role="tab" aria-controls="fixture" aria-selected="false">
+                        <h5>Fixtures</h5>
                     </a>
                 </li>
             </ul>
@@ -34,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody class="body">
-                            <tr *ngFor="let e of PlayerTeams" [routerLink]="['/adminteam',e.teamId]" class="pointer">
+                            <tr *ngFor="let e of PlayerTeams" (click)="navigateTeam(e.teamId)" class="pointer">
                                 <td>{{e.teamName}}</td>
                                 <td>{{e.coachFName}} {{e.coachLName}}</td>
                                 <td>{{e.sportName}}</td>
@@ -51,7 +56,7 @@
 
             <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
 
-                <div class="aaa">
+                <div class="aaa" *ngIf="achiveshow()">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#achieve">Add
                         Achievements</button>
                 </div>
@@ -66,6 +71,39 @@
                         <tbody class="body">
                             <tr *ngFor="let p of Achievements">
                                 <td>{{p.playerAchievements}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="fixture" role="tabpanel" aria-labelledby="fixture-tab">
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Tournament</th>
+                                <th scope="col">Match</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Venue</th>
+                                <th scope="col">Availability</th>
+                                <th scope="col">Confirmed</th>
+                                <th *ngIf="confirm()"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Fixtures">
+                                <td>{{p.tournamentName}}</td>
+                                <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                <td>{{p.fixtureTime}}</td>
+                                <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                <td>{{p.venue}}</td>
+                                <td>{{p.fixtureAvaial}}</td>
+                                <td>{{p.Confirm}}</td>
+                                <td *ngIf="confirm()"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
                             </tr>
                         </tbody>
                     </table>

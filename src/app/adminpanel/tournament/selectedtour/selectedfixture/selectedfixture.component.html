@@ -27,12 +27,14 @@
                             <tr style="height: 1em;">
                                 <th scope="col">Name</th>
                                 <th>Availability</th>
+                                <th>Confirmed</th>
                             </tr>
                         </thead>
                         <tbody class="body">
                             <tr *ngFor="let p of firstTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" data-toggle="modal" data-target="#team1model" class="pointer">
                                 <td>{{p.playerFName}} {{p.playerLName}}</td>
                                 <td>{{p.fixtureAvaial}}</td>
+                                <td>{{p.Confirm}}</td>
                             </tr>
                         </tbody>
                     </table>
