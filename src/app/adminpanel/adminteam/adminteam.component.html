@@ -20,6 +20,8 @@
         <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
+
+                <!--
                 <div style="height: 500px; overflow: auto;">
                     <table class="table table-hover table-bordered">
                         <thead class="thead-dark">
@@ -40,6 +42,23 @@
                         </tbody>
                     </table>
                     <br>
+                </div>-->
+
+                <div style="height: 500px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of TeamPlayers" [routerLink]="['/playerProfile',p.userId]" class="pointer" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
+                            <div class="Left1">
+                                <div class="cricketname">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right1">
+                                <div class="playerdetails">
+                                    <div>▫ {{p.playerGender}}</div>
+                                    <div>▫ {{p.playerDOB | date:'mediumDate' }}</div>
+                                    <div>▫ {{p.playerteleNum}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -49,9 +68,9 @@
                 <div class="menu" *ngIf="show()">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Add
                         Achievement</button>
-                </div>
+                </div><br>
 
-                <div style="height: 500px; overflow: auto;">
+                <!--<div style="height: 500px; overflow: auto;">
                     <table class="table table-hover table-bordered ">
                         <thead class="thead-dark">
                             <tr style="height: 1em;">
@@ -65,6 +84,18 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>-->
+
+                <div style="height: 500px; overflow: auto;">
+                    <div style="padding-bottom: 2em;">
+                        <div *ngFor="let p of Achievements">
+                            <div class="achievement">
+                                <div class="content">
+                                    <div>{{p.teamAchievements}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -76,7 +107,7 @@
     <div class="Right">
         <div class="Team">
             <p>{{TeamDetails[0]?.teamName}}</p>
-        </div>
+        </div><br>
 
         <div class="menu" *ngIf="show()">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add

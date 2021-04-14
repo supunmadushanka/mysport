@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParentService } from '../_services/parent.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../shared/password.validator';
 import { AuthService } from '../auth.service';
@@ -16,7 +16,6 @@ export class ParentprofileComponent implements OnInit {
 
   constructor(private _authService: AuthService, private fbParent: FormBuilder, private fb2: FormBuilder, private _parentservice: ParentService,
     private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
-
 
   currentUser
   userId: number
@@ -89,8 +88,6 @@ export class ParentprofileComponent implements OnInit {
       )
   }
 
-  /////////////////////////////////////
-
   get firstNameParent() {
     return this.parentRegistration.get('firstNameParent');
   }
@@ -109,8 +106,6 @@ export class ParentprofileComponent implements OnInit {
   })
 
   parentSubmit() {
-    console.log(this.parentRegistration.value);
-
     this._parentservice.changeParentProfile(this.parentRegistration.value, this.userId)
       .subscribe(
         response => {
@@ -119,7 +114,6 @@ export class ParentprofileComponent implements OnInit {
         error => console.error('Error!', error)
       );
     this.ngOnInit();
-
   }
 
 }

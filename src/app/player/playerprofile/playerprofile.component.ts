@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../_services/player.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
@@ -29,8 +29,6 @@ export class PlayerprofileComponent implements OnInit {
   public Fixtures = [];
 
   instituteId: number
-
-  
   fixtureId: number
   tournamentTeamId : number
 
@@ -97,10 +95,8 @@ export class PlayerprofileComponent implements OnInit {
   }
 
   changeavailability(fixtureId,tournamentTeamId) {
-
     this.fixtureId=fixtureId[0]
     this.tournamentTeamId=tournamentTeamId
-
     this._playerservice.ConfirmAvailability(this.PlayerTeams,this.userId,this.fixtureId,this.tournamentTeamId)
       .subscribe(
         response => {
@@ -110,8 +106,6 @@ export class PlayerprofileComponent implements OnInit {
         error => console.error('Error!', error)
       );
   }
-
-
 
   navigateTeam(teamId) {
     if (this.currentUser.RoleId == Role.Parent) {
@@ -154,9 +148,7 @@ export class PlayerprofileComponent implements OnInit {
   @ViewChild('myModalClose2') modalClose2;
 
   achieveSubmit() {
-
     this.modalClose2.nativeElement.click();
-
     this._playerservice.addAchievPlayer(this.achieve.value, this.userId)
       .subscribe(
         response => {
@@ -165,8 +157,6 @@ export class PlayerprofileComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
-
   }
 
   get firstNamePlayer() {

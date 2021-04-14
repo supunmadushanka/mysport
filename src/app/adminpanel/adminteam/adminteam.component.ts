@@ -5,7 +5,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
-
 import { Role } from '../../_models/role';
 import { AuthService } from '../../auth.service';
 
@@ -98,9 +97,7 @@ export class AdminteamComponent implements OnInit {
   @ViewChild('myModalClose') modalClose;
 
   achieveSubmit() {
-
     this.modalClose.nativeElement.click();
-
     this._adminservice.addAchieve(this.achieve.value, this.teamid)
       .subscribe(
         response => {
@@ -109,8 +106,6 @@ export class AdminteamComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
-
   }
 
   AddPlayer(playerId) {
@@ -140,6 +135,30 @@ export class AdminteamComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  checkcricket() {
+    if (this.TeamDetails[0]?.sportName == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe() {
+    if (this.TeamDetails[0]?.sportName == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby() {
+    if (this.TeamDetails[0]?.sportName == 'Rugby') {
+      return true
+    } else {
+      false
     }
   }
 }

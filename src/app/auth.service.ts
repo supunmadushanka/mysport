@@ -3,7 +3,7 @@ import { HttpClient,HttpParams } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import {environment} from '../environments/environment'
 import { User } from './_models/user';
 
 @Injectable({
@@ -14,14 +14,14 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  private _registerUrl = "http://localhost:3000/api/register";
-  private _loginUrl = "http://localhost:3000/api/login";
-  private _checkuserUrl = "http://localhost:3000/api/checkuser";
-  private _tempregiUrl = "http://localhost:3000/api/tempregister";
-  private _playerregister = "http://localhost:3000/api/playerregister";
-  private _parentregister = "http://localhost:3000/api/parentregister";
-  private _adminregister = "http://localhost:3000/api/adminregister";
-  private _sendemail = "http://localhost:3000/api/sendmail";
+  private _registerUrl = environment.baseURL+"register";
+  private _loginUrl = environment.baseURL+"login";
+  private _checkuserUrl = environment.baseURL+"checkuser";
+  private _tempregiUrl = environment.baseURL+"tempregister";
+  private _playerregister = environment.baseURL+"playerregister";
+  private _parentregister = environment.baseURL+"parentregister";
+  private _adminregister = environment.baseURL+"adminregister";
+  private _sendemail = environment.baseURL+"sendmail";
 
   constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser')));
@@ -62,21 +62,10 @@ export class AuthService {
     return this.currentUserValue.userEmail
   }
 
-
   logoutUser() {
-
     sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-
-    localStorage.removeItem('email')
-    localStorage.removeItem('userType')
     this.router.navigate(['/home'])
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////
-
-  userEmail = {
-    "userEmail": localStorage.getItem('email')
   }
 
   chechuser(user) {

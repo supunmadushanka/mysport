@@ -40,8 +40,6 @@ export class ParentComponent implements OnInit {
   })
 
   parentSubmit() {
-    console.log(this.parentRegistration.value);
-
     this._auth.registerUser(this.register)
       .subscribe(
         response => {
@@ -60,7 +58,6 @@ export class ParentComponent implements OnInit {
           console.error('Error!', error)
         }
       );
-
   }
 
 }

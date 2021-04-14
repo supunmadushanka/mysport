@@ -4,7 +4,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../../../admin.service';
 import { ViewChild } from '@angular/core';
-
 import { Role } from '../../../_models/role';
 import { AuthService } from '../../../auth.service';
 
@@ -21,7 +20,6 @@ export class SelectedtourComponent implements OnInit {
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
-
   public Tournament = [];
   public UpcomingFixtures = [];
 

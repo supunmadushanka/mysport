@@ -16,7 +16,6 @@ export class TournamentComponent implements OnInit {
   constructor(private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
-
   public CreatedTournaments = [];
   public StartedTournaments = [];
   public FinishedTournaments = [];
@@ -139,5 +138,29 @@ export class TournamentComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  checkcricket(sport) {
+    if (sport == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe(sport) {
+    if (sport == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby(sport) {
+    if (sport == 'Rugby') {
+      return true
+    } else {
+      false
+    }
   }
 }

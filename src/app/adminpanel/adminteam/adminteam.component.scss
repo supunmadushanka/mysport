@@ -4,8 +4,9 @@
     margin-left: auto;
     margin-top: 20px;
     font-weight: 800;
-    font-size: 30px;
+    font-size: 60px;
     color: rgb(255, 255, 255);
+    text-shadow: 4px 4px #000000;
 }
 
 .Left {
@@ -17,6 +18,7 @@
     width: 25%;
     float: right;
     height: 100%;
+    background-image: url('../../../assets/bluesky.jpg');
     background-color: rgb(82, 109, 226);
 }
 
@@ -63,14 +65,18 @@ td {
 }
 
 .details {
+    font-weight: 700;
     margin-left: 10%;
     font-size: 20px;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px #000000;
 }
 
 .title {
     color: black;
     font-weight: 800;
+    font-size: 1.2em;
+    text-shadow: 1px 1px #ffffff;
 }
 
 a {
@@ -89,4 +95,104 @@ a:hover {
 .previous {
     background-color: #f1f1f1;
     color: black;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+.achievement {
+    height: 5em;
+    width: 80%;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    padding-left: 1em;
+    padding-top: 0.3em;
+    font-size: 2em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px #000000;
+}
+
+/////////////////////////////////////////////////
+.cricketplayer {
+    background-image: url('../../../assets/cricketplayer.jpg');
+    height: 5em;
+    width: 80%;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.footballplayer {
+    background-image: url('../../../assets/footballplayer.jpg');
+    height: 5em;
+    width: 80%;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.rugbyplayer {
+    background-image: url('../../../assets/rugbyplayer.jpg');
+    height: 5em;
+    width: 80%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.Left1 {
+    width: 40%;
+    float: left;
+}
+
+.Right1 {
+    width: 60%;
+    float: right;
+}
+
+.cricketname {
+    padding-left: 1em;
+    padding-top: 0.1em;
+    font-size: 3em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px #000000;
+}
+
+.playerdetails {
+    font-weight: 800;
+    color: rgb(250, 250, 250);
+    padding-top: 1.5em;
+    font-size: 1.3em;
+    padding-left: 50%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }

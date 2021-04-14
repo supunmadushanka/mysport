@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import {AdminService} from '../../admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -69,7 +69,6 @@ export class CreatetournamentComponent implements OnInit {
     under19male: [''],
     under19female: [''],
   })
-
   
   TournamentSubmit() {
     this._adminservice.addtournament(this.CreateTournament.value)

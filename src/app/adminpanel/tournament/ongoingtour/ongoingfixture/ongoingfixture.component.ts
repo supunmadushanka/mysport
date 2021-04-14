@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../../admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ViewChild } from '@angular/core';
-
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
 
@@ -16,24 +15,20 @@ export class OngoingfixtureComponent implements OnInit {
 
   fixtureId: number;
   private sub: any;
-
   score: number;
   currentUserId: number;
 
   public FixtureDetails = [];
   public firstTeamPlayers = [];
   public secondTeamPlayers = [];
-
   public Tournament = [];
   public Total1 = [];
   public Total2 = [];
 
   wonteam: number
   wonscore: number
-
   lossteam: number
   lossscore: number
-
   wonteamname: string
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }

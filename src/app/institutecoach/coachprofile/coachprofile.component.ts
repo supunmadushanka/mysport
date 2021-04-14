@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoachService } from '../../_services/coach.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
@@ -90,8 +90,6 @@ export class CoachprofileComponent implements OnInit {
       )
   }
 
-  /////////////////////////////////////
-
   get firstNameCoach() {
     return this.CoachRegistration.get('firstNameCoach');
   }
@@ -110,8 +108,6 @@ export class CoachprofileComponent implements OnInit {
   });
 
   coachSubmit() {
-    console.log(this.CoachRegistration.value);
-
     this._coachservice.changeCoachProfile(this.CoachRegistration.value, this.userId)
       .subscribe(
         response => {
@@ -120,7 +116,6 @@ export class CoachprofileComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
   }
 
 }

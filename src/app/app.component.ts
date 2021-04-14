@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators }  from '@angular/forms';
 import {Router} from '@angular/router'
 import { AuthService } from './auth.service';
-import { User} from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,6 @@ import { User} from './_models/user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
 
   constructor( private fb1 : FormBuilder,private router : Router,public _auth : AuthService){
   }
@@ -21,9 +19,6 @@ export class AppComponent {
   })
 
   onSubmit(){
-
-    console.log(this.loginForm.value);
-
     this._auth.loginUser(this.loginForm.value)
       .subscribe(
         response =>{
@@ -37,8 +32,5 @@ export class AppComponent {
           this.loginForm.reset()
       }
       );
-
-
-    //
   }
 }

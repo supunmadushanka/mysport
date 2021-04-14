@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../../../admin.service';
-
 import { Role } from '../../../_models/role';
 import { AuthService } from '../../../auth.service';
 
@@ -24,7 +23,6 @@ export class OngoingtourComponent implements OnInit {
   public StartedFixtures = [];
   public FinishedFixtures = [];
   public Summery = [];
-
   currentUser = this._authService.currentUserValue;
 
   ngOnInit(): void {

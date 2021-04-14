@@ -81,3 +81,70 @@ a:hover {
     background-color: #f1f1f1;
     color: black;
 }
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+/////////////////////////////////////////////////////////////
+.crickettour {
+    background-image: url('../../../assets/crickettour.webp');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.footballtour {
+    background-image: url('../../../assets/footballtour.png');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.rugbytour {
+    background-image: url('../../../assets/rugbytour.jpg');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left1 {
+    width: 40%;
+    float: left;
+}
+
+.Right1 {
+    width: 60%;
+    float: right;
+}
+
+.cricketname {
+    padding-left: 25%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 2em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}

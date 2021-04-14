@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-
 import { FormBuilder, Validators } from '@angular/forms';
-import { RegistrationService } from './../../registration.service';
 import { AuthService } from './../../auth.service';
-
 
 @Component({
   selector: 'app-admin',
@@ -44,8 +41,6 @@ export class AdminComponent implements OnInit {
   });
 
   adminSubmit() {
-    console.log(this.AdminRegistration.value);
-
     this._auth.registerUser(this.register)
       .subscribe(
         response => {
@@ -63,7 +58,6 @@ export class AdminComponent implements OnInit {
           console.error('Error!', error)
         }
       );
-
   }
 
 }

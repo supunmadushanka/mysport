@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from '../../registration.service'
-import {ActivatedRoute, Router} from '@angular/router'
-
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-selection',
@@ -10,7 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router'
 })
 export class SelectionComponent implements OnInit {
 
-  constructor(private _registrationService : RegistrationService , private router : Router,private route :ActivatedRoute) { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }

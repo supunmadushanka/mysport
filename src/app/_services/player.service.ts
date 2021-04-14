@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
+import {environment} from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -9,95 +10,74 @@ export class PlayerService {
   constructor(private http: HttpClient) { }
 
   getPlayerId() {
-    let _url1 = "http://localhost:3000/api/getplayerId";
-    return this.http.get<any>(_url1);
+    let _url = environment.baseURL+"getplayerId";
+    return this.http.get<any>(_url);
   }
 
   getPlayerTeams(userId) {
     let params = new HttpParams()
       .set('userId', userId)
-
-    let _url1 = "http://localhost:3000/api/getplayerteams";
-    return this.http.get<any>(_url1, { params });
+    let _url = environment.baseURL+"getplayerteams";
+    return this.http.get<any>(_url, { params });
   }
 
   getProfile(userId) {
     let params = new HttpParams()
       .set('userId', userId)
-
-    let _url1 = "http://localhost:3000/api/getplayerprofile";
-    return this.http.get<any>(_url1, { params });
+    let _url = environment.baseURL+"getplayerprofile";
+    return this.http.get<any>(_url, { params });
   }
 
   getPlayerAchiev(userId) {
     let params = new HttpParams()
       .set('userId', userId)
-
-    let _url1 = "http://localhost:3000/api/getplayerachiev";
-    return this.http.get<any>(_url1, { params });
+    let _url = environment.baseURL+"getplayerachiev";
+    return this.http.get<any>(_url, { params });
   }
 
   getPlayerFixtures(userId) {
     let params = new HttpParams()
       .set('userId', userId)
-
-    let _url1 = "http://localhost:3000/api/getplayerfixtures";
-    return this.http.get<any>(_url1, { params });
+    let _url = environment.baseURL+"getplayerfixtures";
+    return this.http.get<any>(_url, { params });
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
-
   changeProfile(user, userId) {
-
-    let _url1 = "http://localhost:3000/api/changeprofileplayer";
-
+    let _url = environment.baseURL+"changeprofileplayer";
     let params = new HttpParams()
       .set('userId', userId)
-
-    return this.http.post<any>(_url1, user, { params })
+    return this.http.post<any>(_url, user, { params })
   }
 
   changePassword(user, userId) {
-
-    let _url1 = "http://localhost:3000/api/changePassword";
-
+    let _url = environment.baseURL+"changePassword";
     let params = new HttpParams()
       .set('userId', userId)
-
-    return this.http.post<any>(_url1, user, { params })
+    return this.http.post<any>(_url, user, { params })
   }
 
   addAchievPlayer(user, userId) {
-
-    let _url1 = "http://localhost:3000/api/addachievplayer";
-
+    let _url = environment.baseURL+"addachievplayer";
     let params = new HttpParams()
       .set('userId', userId)
-
-    return this.http.post<any>(_url1, user, { params })
+    return this.http.post<any>(_url, user, { params })
   }
 
   ChangeAvailability(user, userId,fixtureId,tournamentTeamId) {
-
-    let _url1 = "http://localhost:3000/api/changeavailability";
-
+    let _url = environment.baseURL+"changeavailability";
     let params = new HttpParams()
       .set('userId', userId)
       .set('fixtureId', fixtureId)
       .set('tournamentTeamId', tournamentTeamId)
-
-    return this.http.post<any>(_url1, user, { params })
+    return this.http.post<any>(_url, user, { params })
   }
 
   ConfirmAvailability(user, userId,fixtureId,tournamentTeamId) {
-
-    let _url1 = "http://localhost:3000/api/confirmavailability";
-
+    let _url = environment.baseURL+"confirmavailability";
     let params = new HttpParams()
       .set('userId', userId)
       .set('fixtureId', fixtureId)
       .set('tournamentTeamId', tournamentTeamId)
-
-    return this.http.post<any>(_url1, user, { params })
+    return this.http.post<any>(_url, user, { params })
   }
 }

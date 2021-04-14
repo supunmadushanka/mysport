@@ -9,6 +9,11 @@
     background-color: white;
 }
 
+.title {
+    color: black;
+    font-weight: 600;
+}
+
 .body {
     height: 1em;
     overflow: auto;
@@ -52,6 +57,7 @@ td {
     width: 25%;
     float: right;
     height: 100%;
+    background-image: url('../../assets/bluesky.jpg');
     background-color: rgb(82, 109, 226);
 }
 
@@ -61,8 +67,7 @@ td {
     margin-left: auto;
 }
 
-.details {
-    margin-left: 10%;
+.detail {
     font-size: 20px;
     color: aliceblue;
 }
@@ -93,4 +98,229 @@ a:hover {
 .previous {
     background-color: #f1f1f1;
     color: black;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+//teamtable
+/////////////////////////////////////////////
+.Team1 {
+    background-image: url('../../assets/cricket.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Team2 {
+    background-image: url('../../assets/football1.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Team3 {
+    background-image: url('../../assets/rugby.jpg');
+    height: 11em;
+    width: 80%;
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -350px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left1 {
+    width: 50%;
+    float: left;
+}
+
+.Right1 {
+    width: 50%;
+    float: right;
+}
+
+.cricketname {
+    padding-left: 2em;
+    padding-top: 1em;
+    font-size: 3em;
+    font-weight: 700;
+    color: rgb(12, 72, 114);
+    text-shadow: 2px 2px #fcfcfc;
+}
+
+.footballname {
+    padding-left: 2em;
+    padding-top: 1em;
+    font-size: 3em;
+    font-weight: 700;
+    color: white;
+    text-shadow: 5px 5px #000000;
+}
+
+.Details {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 0.1em;
+    font-size: 1.2em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+//numbers
+////////////////////////////////////////////////////////////////
+.large_numbering {
+    padding: 0.2em;
+    font-size: 80px;
+    font-weight: bold;
+    vertical-align: middle;
+    color: aliceblue;
+}
+
+.some_heading {
+    color: #ffffff;
+    font-size: 28px;
+    margin-left: 20px;
+    text-shadow: 2px 2px #000000;
+}
+
+.holder {
+    height: 90px;
+    line-height: 50px;
+    background-color: rgb(7, 7, 102);
+}
+
+//coach
+////////////////////////////////////////////////////////////////
+.cricketcoach {
+    background-image: url('../../assets/cricketcoache.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.footballcoach {
+    background-image: url('../../assets/footballcoach.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 80% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.rugbycoach {
+    background-image: url('../../assets/rugbycoach.webp');
+    height: 4em;
+    width: 80%;
+    background-size: 80% 120%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -400px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left2 {
+    width: 50%;
+    float: left;
+}
+
+.Right2 {
+    width: 50%;
+    float: right;
+}
+
+.coachdetails {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 1em;
+    font-size: 1.2em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
+}
+
+.coachname {
+    padding-left: 2em;
+    padding-top: 0.5em;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+//player
+////////////////////////////////////////////////////////////////
+.player {
+    background-image: url('../../assets/allplayer.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left3 {
+    width: 40%;
+    float: left;
+}
+
+.Right3 {
+    width: 60%;
+    float: right;
+}
+
+.playername {
+    padding-left: 1em;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+.playerdetails {
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+    padding-top: 0.5em;
+    font-size: 1.3em;
+    padding-left: 40%;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px #000000;
 }

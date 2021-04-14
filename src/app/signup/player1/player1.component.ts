@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '../../auth.service'
@@ -17,7 +17,6 @@ export class Player1Component implements OnInit {
 
   public Structures = [];
   public Institutes = [];
-
   secretcode: string
 
   ngOnInit(): void {

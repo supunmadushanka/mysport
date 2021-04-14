@@ -17,7 +17,6 @@ export class CreatecoachComponent implements OnInit {
   public Sports=[];
 
   ngOnInit(): void {
-
     this._adminservice.getSports()
     .subscribe((data)=>{
       this.Sports=data;
@@ -30,7 +29,6 @@ export class CreatecoachComponent implements OnInit {
       }
     }
     );
-
   }
 
   get firstNameCoach(){
@@ -56,8 +54,6 @@ export class CreatecoachComponent implements OnInit {
   });
 
   coachSubmit(){
-    console.log(this.CoachRegistration.value);
-
     this._adminservice.coachregister(this.CoachRegistration.value)
       .subscribe(
         response=> {
@@ -66,7 +62,6 @@ export class CreatecoachComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-    
   }
 
 }

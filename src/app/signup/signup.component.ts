@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-
 import { FormBuilder, Validators } from '@angular/forms';
 import { PasswordValidator } from '../shared/password.validator';
 import { AuthService } from '../auth.service';
 import { RegistrationService } from '../registration.service'
-
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +21,6 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/select']);
   }
 
-
   get userEmail() {
     return this.registrationForm.get('userEmail');
   }
@@ -31,18 +28,13 @@ export class SignupComponent implements OnInit {
     return this.registrationForm.get('password');
   }
 
-
   registrationForm = this.fb2.group({
     userEmail: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.maxLength, Validators.pattern('[a-zA-Z1-9]*')]],
     confirmPassword: ['']
   }, { validator: PasswordValidator });
 
-
-
-  onSubmitt() {
-    console.log(this.registrationForm.value);
-
+  onSubmit() {
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response => {
@@ -69,9 +61,7 @@ export class SignupComponent implements OnInit {
       );
   }
 
-  onSubmit() {
-    console.log(this.registrationForm.value);
-
+  onSubmitt() {
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response => {
@@ -110,14 +100,3 @@ export class SignupComponent implements OnInit {
   }
 
 }
-
-// this._auth.sendMail(this.registrationForm.value)
-//   .subscribe(
-//     response => {
-//       console.log('Success!', response)
-//     },
-//     error => {
-//       console.error('Error!', error)
-//       console.log('Hi error!')
-//     }
-//   )

@@ -21,7 +21,7 @@
         <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
-                <div style="height: 500px; overflow: auto;">
+                <!--<div style="height: 500px; overflow: auto;">
                     <table class="table table-hover table-bordered">
                         <thead class="thead-dark">
                             <tr style="height: 1em;">
@@ -39,13 +39,29 @@
                         </tbody>
                     </table>
                     <br>
-                </div><br>
+                </div><br>-->
+
+                <div style="height: 500px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of firstTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                            <div class="Left3">
+                                <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails">
+                                    <div>▫Availability: {{p.fixtureAvaial}}</div>
+                                    <div>▫Confirm: {{p.Confirm}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
             <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
 
-                <div style="height: 500px; overflow: auto;">
+                <!--<div style="height: 500px; overflow: auto;">
                     <table class="table table-hover table-bordered ">
                         <thead class="thead-dark">
                             <tr style="height: 1em;">
@@ -60,7 +76,23 @@
                             </tr>
                         </tbody>
                     </table>
-                </div><br>
+                </div><br>-->
+
+                <div style="height: 500px; overflow: auto;">
+                    <div style="padding-bottom: 1em;">
+                        <div *ngFor="let p of secondTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                            <div class="Left3">
+                                <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
+                            </div>
+                            <div class="Right3">
+                                <div class="playerdetails">
+                                    <div>▫Availability: {{p.fixtureAvaial}}</div>
+                                    <div>▫Confirm: {{p.Confirm}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

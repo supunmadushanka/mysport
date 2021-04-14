@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../../admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
-
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
 
@@ -15,7 +14,6 @@ export class SelectedfixtureComponent implements OnInit {
 
   fixtureId: number;
   private sub: any;
-
   public FixtureDetails = [];
   public firstTeamPlayers = [];
   public secondTeamPlayers = [];
@@ -26,7 +24,6 @@ export class SelectedfixtureComponent implements OnInit {
 
   firsttournamentTeamId
   secondtournamentTeamId
-
   currentUser = this._authService.currentUserValue;
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
@@ -180,7 +177,6 @@ export class SelectedfixtureComponent implements OnInit {
       return false;
     }
   }
-
 
   startfixture() {
     this._adminservice.startFixture(this.FixtureDetails, this.fixtureId)

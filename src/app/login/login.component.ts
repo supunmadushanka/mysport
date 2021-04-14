@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
-
     this._auth.loginUser(this.loginForm.value)
       .subscribe(
         response => {
@@ -54,8 +52,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitt() {
-    console.log(this.loginForm.value);
-
     this._auth.sendMail(this.loginForm.value)
       .subscribe(
         response => {

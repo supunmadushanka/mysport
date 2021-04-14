@@ -69,8 +69,6 @@ export class CreatefixtureComponent implements OnInit {
   });
 
   FixtureSubmit() {
-    console.log(this.CreateFixture.value);
-
     this._adminservice.registerFixture(this.CreateFixture.value,this.tournamentId)
       .subscribe(
         response => {
@@ -79,7 +77,6 @@ export class CreatefixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
   }
 
 

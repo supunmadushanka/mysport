@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../_services/player.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder,Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../shared/password.validator';
 
@@ -14,7 +14,6 @@ import { PasswordValidator } from '../shared/password.validator';
 export class PlayerComponent implements OnInit {
 
   userId: number
-  userId1: number
 
   constructor(private fbReason: FormBuilder,private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
 
@@ -104,9 +103,7 @@ export class PlayerComponent implements OnInit {
   @ViewChild('myModalClose2') modalClose2;
 
   achieveSubmit() {
-
     this.modalClose2.nativeElement.click();
-
     this._playerservice.addAchievPlayer(this.achieve.value, this.userId)
       .subscribe(
         response => {
@@ -115,8 +112,6 @@ export class PlayerComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
-
   }
 
   get firstNamePlayer() {
@@ -198,9 +193,7 @@ export class PlayerComponent implements OnInit {
   @ViewChild('myModalClose4') modalClose4;
 
   changeavailability() {
-
     this.modalClose2.nativeElement.click();
-
     this._playerservice.ChangeAvailability(this.Reason.value, this.userId,this.fixtureId,this.tournamentTeamId)
       .subscribe(
         response => {
@@ -209,8 +202,6 @@ export class PlayerComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
-
-
   }
 
 }
