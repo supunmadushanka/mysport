@@ -23,6 +23,8 @@ export class SelectedtourComponent implements OnInit {
   public Tournament = [];
   public UpcomingFixtures = [];
 
+  serachFixture;
+
   ngOnInit(): void {
 
     this.sub = this.route.params.subscribe(params => {

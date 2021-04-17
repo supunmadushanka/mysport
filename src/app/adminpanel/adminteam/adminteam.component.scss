@@ -28,6 +28,12 @@
     margin-left: auto;
 }
 
+.aaa {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .table {
     width: 90%;
     margin-left: auto;
@@ -70,6 +76,15 @@ td {
     font-size: 20px;
     color: rgb(255, 255, 255);
     text-shadow: 1px 1px #000000;
+}
+
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
 }
 
 .title {

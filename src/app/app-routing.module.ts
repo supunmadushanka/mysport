@@ -124,7 +124,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'chat',
+    path: 'chat/:teamid',
     component: ChatboxComponent,
     canActivate: [AuthGuard]
   },

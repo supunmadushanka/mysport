@@ -117,17 +117,26 @@ a:hover {
     /* Optional: just make scrollbar invisible */
 }
 
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+}
+
 /////////////////////////////////////////////////////////
 .fixture {
     background-image: url('../../../../assets/1Vs1.jpg');
-    height: 5em;
-    width: 75%;
+    height: 4em;
+    width: 70%;
     background-size: 40% 100%;
     background-repeat: no-repeat;
     margin-left: auto;
     margin-right: auto;
     display: table;
-    margin-top: 2em;
+    margin-top: 1em;
     box-shadow: inset -800px 0 50px 0px rgb(32, 68, 167);
 }
 
@@ -146,8 +155,8 @@ a:hover {
     color: rgb(250, 250, 250);
     padding-top: 2%;
     padding-bottom: 2%;
-    font-size: 1.5em;
-    padding-left: 40%;
+    font-size: 1.3em;
+    padding-left: 20%;
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -156,7 +165,7 @@ a:hover {
     padding-left: 40%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    font-size: 2.5em;
+    font-size: 2.3em;
     font-weight: 700;
     color: rgb(255, 255, 255);
     text-shadow: 2px 2px #000000;

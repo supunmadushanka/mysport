@@ -25,6 +25,8 @@ export class OngoingtourComponent implements OnInit {
   public Summery = [];
   currentUser = this._authService.currentUserValue;
 
+  serachFixture;
+
   ngOnInit(): void {
 
     this.sub = this.route.params.subscribe(params => {

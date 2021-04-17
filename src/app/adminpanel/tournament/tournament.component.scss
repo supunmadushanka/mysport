@@ -16,7 +16,7 @@
 
 th,
 td {
-    padding: 25px;
+    padding: 10px;
     border-width: 0.1em;
     border-color: rgb(10, 10, 104);
 }
@@ -143,8 +143,47 @@ a:hover {
     padding-left: 25%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    font-size: 2em;
+    font-size: 1.4em;
     font-weight: 700;
     color: rgb(255, 255, 255);
     text-shadow: 2px 2px #000000;
+}
+
+.structurname {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+}
+
+.structurname1 {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 2px #fdfdfd;
+}
+
+.structur {
+    font-size: 1.1em;
+    font-weight: 600;
+    text-shadow: 1px 1px #ffffff;
+}
+
+.pad {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.Left2 {
+    width: 80%;
+    float: left;
+}
+
+.Right2 {
+    width: 20%;
+    float: right;
 }

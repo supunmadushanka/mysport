@@ -21,6 +21,7 @@ export class FinishedtourComponent implements OnInit {
   public Summery = [];
 
   wininstitute: string
+  serachFixture
 
   ngOnInit(): void {
 

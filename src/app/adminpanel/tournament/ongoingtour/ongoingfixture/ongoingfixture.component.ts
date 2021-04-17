@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ViewChild } from '@angular/core';
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
+import { Sport } from '../../../../_models/sport'
 
 @Component({
   selector: 'app-ongoingfixture',
@@ -15,7 +16,6 @@ export class OngoingfixtureComponent implements OnInit {
 
   fixtureId: number;
   private sub: any;
-  score: number;
   currentUserId: number;
 
   public FixtureDetails = [];
@@ -24,12 +24,32 @@ export class OngoingfixtureComponent implements OnInit {
   public Tournament = [];
   public Total1 = [];
   public Total2 = [];
+  public Wicket1 = [];
+  public Wicket2 = [];
+  public Institute = [];
 
   wonteam: number
   wonscore: number
   lossteam: number
   lossscore: number
   wonteamname: string
+  firstplayer
+  secondplayer
+  sportId: string
+  extras1:number=0
+  extras2:number=0
+  realextra1:number
+  realextra2:number
+  description1:string
+  description2:string
+
+  scoreModel = {
+    playerScore: null,
+    overs: null,
+    givescore: null,
+    wickets: null,
+    status: null
+  }
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
@@ -44,6 +64,11 @@ export class OngoingfixtureComponent implements OnInit {
     this._adminservice.UpcomingFixtureDetails(this.fixtureId)
       .subscribe((data) => {
         this.FixtureDetails = data;
+        this.realextra1=this.FixtureDetails[0]?.extras
+        this.realextra2=this.FixtureDetails[1]?.extras
+
+        this.description1=this.FixtureDetails[0]?.description
+        this.description2=this.FixtureDetails[1]?.description
 
         this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
           .subscribe((data) => {
@@ -74,6 +99,7 @@ export class OngoingfixtureComponent implements OnInit {
         this._adminservice.getSelectededTournament(this.FixtureDetails[1].tournementId)
           .subscribe((data) => {
             this.Tournament = data;
+            this.sportId = this.Tournament[0].sportId[0]
           },
             err => {
               if (err instanceof HttpErrorResponse) {
@@ -87,6 +113,27 @@ export class OngoingfixtureComponent implements OnInit {
         this._adminservice.getTotal(this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
           .subscribe((data) => {
             this.Total1 = data;
+
+            this._adminservice.getTotal(this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+              .subscribe((data) => {
+                this.Total2 = data;
+
+                if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
+                  this.wonteamname = this.FixtureDetails[0]?.teamName
+                } else {
+                  this.wonteamname = this.FixtureDetails[1]?.teamName
+                }
+
+              },
+                err => {
+                  if (err instanceof HttpErrorResponse) {
+                    if (err.status === 401) {
+                      this.router.navigate(['/home'])
+                    }
+                  }
+                }
+              );
+
           },
             err => {
               if (err instanceof HttpErrorResponse) {
@@ -97,9 +144,30 @@ export class OngoingfixtureComponent implements OnInit {
             }
           );
 
-        this._adminservice.getTotal(this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+        this._adminservice.getWickets(this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
           .subscribe((data) => {
-            this.Total2 = data;
+            this.Wicket1 = data;
+
+            this._adminservice.getWickets(this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+              .subscribe((data) => {
+                this.Wicket2 = data;
+
+                if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
+                  this.wonteamname = this.FixtureDetails[0]?.teamName
+                } else {
+                  this.wonteamname = this.FixtureDetails[1]?.teamName
+                }
+
+              },
+                err => {
+                  if (err instanceof HttpErrorResponse) {
+                    if (err.status === 401) {
+                      this.router.navigate(['/home'])
+                    }
+                  }
+                }
+              );
+
           },
             err => {
               if (err instanceof HttpErrorResponse) {
@@ -109,12 +177,6 @@ export class OngoingfixtureComponent implements OnInit {
               }
             }
           );
-
-        if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
-          this.wonteamname = this.FixtureDetails[0]?.teamName
-        } else {
-          this.wonteamname = this.FixtureDetails[1]?.teamName
-        }
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -125,8 +187,58 @@ export class OngoingfixtureComponent implements OnInit {
         }
       );
 
+    this._adminservice.getInstituteId(this.currentUser.userEmail)
+      .subscribe((data) => {
+        this.Institute = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
 
+  }
 
+  navigateplayer1(playerId) {
+    if (this.Institute[0]?.instituteId == this.firstTeamPlayers[0].instituteId[0]) {
+      this.router.navigate(['/playerProfile', playerId]);
+    }
+    else {
+    }
+  }
+
+  navigateplayer2(playerId) {
+    if (this.Institute[0]?.instituteId == this.secondTeamPlayers[0].instituteId[0]) {
+      this.router.navigate(['/playerProfile', playerId]);
+    } else {
+    }
+  }
+
+  instituteView1(){
+    if (this.Institute[0]?.instituteId == this.firstTeamPlayers[0]?.instituteId[0]) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  instituteView2(){
+    if (this.Institute[0]?.instituteId == this.secondTeamPlayers[0]?.instituteId[0]) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  isCricket() {
+    if (this.sportId == Sport.Cricket) {
+      return true
+    } else {
+      return false
+    }
   }
 
   show() {
@@ -149,7 +261,7 @@ export class OngoingfixtureComponent implements OnInit {
   }
 
   submitPlayerScore() {
-    this._adminservice.changePlayerScore(this.firstTeamPlayers, this.fixtureId, this.currentUserId, this.score, this.FixtureDetails[0].tournamentTeamId)
+    this._adminservice.changePlayerScore(this.scoreModel, this.fixtureId, this.currentUserId, this.FixtureDetails[0].tournamentTeamId)
       .subscribe(
         response => {
           this.modalClose1.nativeElement.click();
@@ -158,10 +270,16 @@ export class OngoingfixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+
+    this.scoreModel.playerScore = null
+    this.scoreModel.overs = null
+    this.scoreModel.givescore = null
+    this.scoreModel.wickets = null
+    this.scoreModel.status = null
   }
 
   submitPlayerScore1() {
-    this._adminservice.changePlayerScore(this.secondTeamPlayers, this.fixtureId, this.currentUserId, this.score, this.FixtureDetails[1].tournamentTeamId)
+    this._adminservice.changePlayerScore(this.scoreModel, this.fixtureId, this.currentUserId, this.FixtureDetails[1].tournamentTeamId)
       .subscribe(
         response => {
           this.modalClose2.nativeElement.click();
@@ -170,6 +288,12 @@ export class OngoingfixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+
+    this.scoreModel.playerScore = null
+    this.scoreModel.overs = null
+    this.scoreModel.givescore = null
+    this.scoreModel.wickets = null
+    this.scoreModel.status = null
   }
 
   postponefixture() {
@@ -195,7 +319,7 @@ export class OngoingfixtureComponent implements OnInit {
       this.wonscore = this.Total1[0]?.sumScore
       this.lossscore = this.Total2[0]?.sumScore
 
-      this.wonteamname = this.FixtureDetails[0].teamName
+      this.wonteamname = this.FixtureDetails[0]?.teamName
 
     } else {
 
@@ -204,7 +328,7 @@ export class OngoingfixtureComponent implements OnInit {
       this.wonscore = this.Total2[0]?.sumScore
       this.lossscore = this.Total1[0]?.sumScore
 
-      this.wonteamname = this.FixtureDetails[1].teamName
+      this.wonteamname = this.FixtureDetails[1]?.teamName
 
     }
 
@@ -235,4 +359,52 @@ export class OngoingfixtureComponent implements OnInit {
     }
   }
 
+  @ViewChild('myModalClose3') modalClose3;
+  @ViewChild('myModalClose4') modalClose4;
+
+  submitExtra1(){
+    this._adminservice.updateExtra(this.scoreModel,this.extras1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
+      .subscribe(
+        response => {
+          this.modalClose3.nativeElement.click();
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+  submitExtra2(){
+    this._adminservice.updateExtra(this.scoreModel,this.extras2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+      .subscribe(
+        response => {
+          this.modalClose4.nativeElement.click();
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+  submitDescrip1(){
+    this._adminservice.updateDescript(this.scoreModel,this.description1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+  submitDescrip2(){
+    this._adminservice.updateDescript(this.scoreModel,this.description2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
 }

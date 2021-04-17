@@ -39,6 +39,8 @@ import { ParentprofileComponent } from './parentprofile/parentprofile.component'
 import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
 import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
 import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ChatService } from './_services/chat.service';
 
 @NgModule({
   declarations: [
@@ -79,8 +81,9 @@ import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.compone
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    Ng2SearchPipeModule
     ],
-  providers: [AuthService,AuthGuard,PlayerService,SelectedtourComponent,
+  providers: [ChatService,AuthService,AuthGuard,PlayerService,SelectedtourComponent,
   {
     provide:HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

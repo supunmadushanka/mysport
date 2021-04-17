@@ -4,6 +4,7 @@ import { AdminService } from '../../../../admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-selectedfixture',
@@ -13,6 +14,7 @@ import { AuthService } from '../../../../auth.service';
 export class SelectedfixtureComponent implements OnInit {
 
   fixtureId: number;
+  tournementId: number;
   private sub: any;
   public FixtureDetails = [];
   public firstTeamPlayers = [];
@@ -25,8 +27,10 @@ export class SelectedfixtureComponent implements OnInit {
   firsttournamentTeamId
   secondtournamentTeamId
   currentUser = this._authService.currentUserValue;
+  firstplayer
+  secondplayer
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -39,6 +43,7 @@ export class SelectedfixtureComponent implements OnInit {
         this.FixtureDetails = data;
         this.firsttournamentTeamId = this.FixtureDetails[0].tournamentTeamId
         this.secondtournamentTeamId = this.FixtureDetails[1].tournamentTeamId
+        this.tournementId=this.FixtureDetails[1].tournementId
 
         this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.firsttournamentTeamId)
           .subscribe((data) => {
@@ -188,6 +193,18 @@ export class SelectedfixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  deleteFixture() {
+    this._adminservice.deleteFixture(this.sample, this.fixtureId)
+      .subscribe(
+        response => {
+          console.log('success', response)
+          this.location.back()
+        },
+        error => console.error('Error!', error)
+      );
+    this.ngOnInit();
   }
 
 

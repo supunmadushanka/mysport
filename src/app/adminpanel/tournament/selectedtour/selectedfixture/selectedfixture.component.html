@@ -41,9 +41,18 @@
                     <br>
                 </div><br>-->
 
-                <div style="height: 500px; overflow: auto;">
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="firstplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="firstplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
+                <div style="height: 450px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
-                        <div *ngFor="let p of firstTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
                             <div class="Left3">
                                 <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>
@@ -78,9 +87,18 @@
                     </table>
                 </div><br>-->
 
+                <div class="aaa">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="secondplayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="secondplayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
                 <div style="height: 500px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
-                        <div *ngFor="let p of secondTeamPlayers" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
                             <div class="Left3">
                                 <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>
@@ -121,6 +139,10 @@
             <p><span class="title">Captain : </span></p>
             <br>
         </div>
+
+        <div class="menu" *ngIf="addremoveshow() && show()">
+            <button type="button" class="btn btn-danger" (click)="deleteFixture()">Delete Fixture</button>
+        </div><br>
     </div>
 </div>
 

@@ -20,7 +20,9 @@ export class AdminpanelComponent implements OnInit {
   public PlayerCount = [];
   public InstituteProfile = [];
 
-  searchText;
+  searchTeam;
+  searchCoach;
+  searchPlayer;
 
   ngOnInit(): void {
 

@@ -26,15 +26,18 @@
 
             <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
                 <div class="aaa">
-                    <div class="search-hero">
-                        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search team">
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchTeam" autocomplete="off" placeholder="Search any">
                     </div>
-                    <button type="button" class="btn btn-success" routerLink="/createteam">Create Team</button>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchTeam=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button type="button" class="btn btn-success" routerLink="/createteam">Create Team</button>
+                    </div>
                 </div><br>
 
-                <div style="height: 500px; overflow: auto;padding-bottom: 1em;">
+                <div style="height: 450px; overflow: auto;padding-bottom: 1em;">
                     <div style="padding-bottom: 2em;">
-                        <div *ngFor="let e of Teams  | filter:searchText" [routerLink]="['/adminteam',e.teamId]" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
+                        <div *ngFor="let e of Teams  | filter:searchTeam" [routerLink]="['/adminteam',e.teamId]" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
                             <div class="Left1">
                                 <div [class.cricketname]="checkcricket(e.sportName)" [class.footballname]="checkfootballe(e.sportName)" [class.footballname]="checkrugby(e.sportName)">{{e.teamName}}
                                 </div>
@@ -86,7 +89,13 @@
             <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
 
                 <div class="aaa">
-                    <button type="button" class="btn btn-success" routerLink="/createcoach">Create Coach</button>
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchCoach" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchCoach=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button type="button" class="btn btn-success" routerLink="/createcoach">Create Coach</button>
+                    </div>
                 </div><br>
 
                 <!--<div style="height: 500px; overflow: auto;padding-top: 1.5em;">
@@ -111,9 +120,9 @@
                     </table>
                 </div>-->
 
-                <div style="height: 500px; overflow: auto;">
+                <div style="height: 450px; overflow: auto;">
                     <div style="padding-bottom: 2em;">
-                        <div *ngFor="let e of Coaches" [routerLink]="['/coachProfile',e.userId]" [class.cricketcoach]="checkcricket(e.sportName)" class="pointer" [class.footballcoach]="checkfootballe(e.sportName)" [class.rugbycoach]="checkrugby(e.sportName)">
+                        <div *ngFor="let e of Coaches| filter:searchCoach" [routerLink]="['/coachProfile',e.userId]" [class.cricketcoach]="checkcricket(e.sportName)" class="pointer" [class.footballcoach]="checkfootballe(e.sportName)" [class.rugbycoach]="checkrugby(e.sportName)">
                             <div class="Left2">
                                 <div class="coachname">{{e.coachFName}}<br> {{e.coachLName}}</div>
                             </div>
@@ -133,7 +142,13 @@
             <div class="tab-pane fade" id="Player" role="tabpanel" aria-labelledby="Player-tab">
 
                 <div class="aaa">
-                    <button type="button" class="btn btn-success" routerLink="/createplayer">Create Player</button>
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchPlayer" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchPlayer=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button type="button" class="btn btn-success" routerLink="/createplayer">Create Player</button>
+                    </div>
                 </div><br>
 
                 <!--<div style="height: 500px; overflow: auto;padding-top: 1.5em;">
@@ -160,9 +175,9 @@
                     </table>
                 </div>-->
 
-                <div style="height: 500px; overflow: auto;">
+                <div style="height: 450px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
-                        <div *ngFor="let p of Players" [routerLink]="['/playerProfile',p.userId]" class="player pointer">
+                        <div *ngFor="let p of Players| filter:searchPlayer" [routerLink]="['/playerProfile',p.userId]" class="player pointer">
                             <div class="Left3">
                                 <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>

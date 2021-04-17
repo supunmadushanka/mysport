@@ -7,6 +7,7 @@ import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
 import { Role } from '../../_models/role';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-playerprofile',
@@ -21,7 +22,7 @@ export class PlayerprofileComponent implements OnInit {
   currentUser
 
   constructor(private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
-    private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService) { }
+    private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService,private location: Location) { }
 
   public PlayerTeams = [];
   public PlayerProfile = [];
@@ -116,13 +117,7 @@ export class PlayerprofileComponent implements OnInit {
   }
 
   back() {
-    if (this.currentUser.RoleId == Role.Admin) {
-      this.router.navigate(['/adminpanel']);
-    } else if (this.currentUser.RoleId == Role.Parent) {
-      this.router.navigate(['/parentprofile']);
-    } else {
-      this.router.navigate(['/institutecoach']);
-    }
+    this.location.back()
   }
 
   achiveshow() {

@@ -58,7 +58,6 @@ td {
     float: right;
     height: 100%;
     background-image: url('../../assets/bluesky.jpg');
-    background-color: rgb(82, 109, 226);
 }
 
 .menu {
@@ -107,8 +106,15 @@ a:hover {
     /* Optional: just make scrollbar invisible */
 }
 
-//teamtable
-/////////////////////////////////////////////
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+}
+
 .Team1 {
     background-image: url('../../assets/cricket.jpg');
     height: 11em;

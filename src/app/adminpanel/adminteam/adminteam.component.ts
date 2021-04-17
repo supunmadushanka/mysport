@@ -8,6 +8,8 @@ import { ChangeDetectionStrategy } from '@angular/core'
 import { Role } from '../../_models/role';
 import { AuthService } from '../../auth.service';
 
+import { ChatboxComponent } from './chatbox/chatbox.component'
+
 
 @Component({
   selector: 'app-adminteam',
@@ -17,11 +19,13 @@ import { AuthService } from '../../auth.service';
 })
 export class AdminteamComponent implements OnInit {
 
+  @ViewChild(ChatboxComponent) child: ChatboxComponent;
+
   teamid: number;
   private sub: any;
 
   constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
-    private fbAdmin: FormBuilder,private _authService: AuthService) { }
+    private fbAdmin: FormBuilder, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
 
@@ -30,6 +34,7 @@ export class AdminteamComponent implements OnInit {
   public Achievements = [];
   public addplayers = [];
 
+  searchPlayer;
 
   ngOnInit(): void {
 

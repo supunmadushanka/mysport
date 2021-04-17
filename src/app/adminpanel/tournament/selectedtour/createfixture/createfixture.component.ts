@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './../../../../auth.service';
 import { SelectedtourComponent } from '../../selectedtour/selectedtour.component'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-createfixture',
@@ -14,7 +15,7 @@ import { SelectedtourComponent } from '../../selectedtour/selectedtour.component
 export class CreatefixtureComponent implements OnInit {
 
   constructor(private router: Router, private fbAdmin: FormBuilder, private _adminservice: AdminService,
-    private _auth: AuthService, private tournament: SelectedtourComponent, private route: ActivatedRoute, private zone: NgZone) { }
+    private _auth: AuthService, private tournament: SelectedtourComponent, private route: ActivatedRoute, private zone: NgZone,private location: Location) { }
 
   public Structures = [];
   public FirstTeams = [];
@@ -73,7 +74,7 @@ export class CreatefixtureComponent implements OnInit {
       .subscribe(
         response => {
           console.log('success', response),
-            this.router.navigate(['/tournament']);
+          this.location.back()
         },
         error => console.error('Error!', error)
       );

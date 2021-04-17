@@ -93,6 +93,21 @@ td {
     /* Optional: just make scrollbar invisible */
 }
 
+.search {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.teambutton {
+    display: inline-block;
+}
+
+.aaa {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 //////////////////////////////////////////////////////
 .player {
     background-image: url('../../../../../assets/cricketplayer.jpg');
@@ -103,7 +118,7 @@ td {
     margin-left: auto;
     margin-right: auto;
     display: table;
-    margin-top: 2em;
+    margin-top: 1em;
     box-shadow: inset -550px 0 50px 0px rgb(32, 68, 167);
 }
 

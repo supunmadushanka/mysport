@@ -13,9 +13,9 @@
     <img class="rotate30" src="\assets\ball.png" width="60" height="60">
 </div>
 <br>
-<h4 class="aaa topic">Finished Fixtures</h4>
+<!--<h4 class="aaa topic">Finished Fixtures</h4>
 
-<!--<div style="height: 350px; overflow: auto;">
+<div style="height: 350px; overflow: auto;">
     <table class="table table-hover table-bordered">
         <thead class="thead-dark">
             <tr style="height: 1em;">
@@ -39,9 +39,18 @@
 
 </div>-->
 
+<div class="aaa">
+    <div class="search">
+        <input class="form-control" type="text" name="search" [(ngModel)]="serachFixture" autocomplete="off" placeholder="Search any">
+    </div>
+    <div class="teambutton">
+        <button type="button" (click)="serachFixture=''" class="btn btn-warning">Clear</button>&nbsp;
+    </div>
+</div>
+
 <div style="height: 350px; overflow: auto;">
     <div style="padding-bottom: 1em;">
-        <div *ngFor="let p of FinishedFixtures" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
+        <div *ngFor="let p of FinishedFixtures | filter:serachFixture" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
             <div class="Left1">
                 <div class="fixtureTitle">
                     {{p.instituteone}} vs<br> {{p.institutetwo}}

@@ -20,6 +20,8 @@ export class TournamentComponent implements OnInit {
   public StartedTournaments = [];
   public FinishedTournaments = [];
   public NewTournaments = [];
+  public Tourstructures = [];
+  public Tourstructures1 = [];
 
   ngOnInit(): void {
 
@@ -76,6 +78,52 @@ export class TournamentComponent implements OnInit {
         }
       );
 
+  }
+
+  hasStructures(){
+    if(this.Tourstructures[0]?.strutureName==null){
+      return false
+    }else{
+      return true
+    }
+  }
+
+  hasStructures1(){
+    if(this.Tourstructures1[0]?.strutureName==null){
+      return false
+    }else{
+      return true
+    }
+  }
+
+  getstructures(tournementId){
+    this._adminservice.getStructures(tournementId)
+      .subscribe((data) => {
+        this.Tourstructures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+  }
+
+  getstructures1(tournementId){
+    this._adminservice.getStructures(tournementId)
+      .subscribe((data) => {
+        this.Tourstructures1 = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
   }
 
   back(){
