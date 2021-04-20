@@ -28,6 +28,13 @@ export class PlayerService {
     return this.http.get<any>(_url, { params });
   }
 
+  getPlayerCode(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayercode";
+    return this.http.get<any>(_url, { params });
+  }
+
   getPlayerAchiev(userId) {
     let params = new HttpParams()
       .set('userId', userId)
@@ -35,10 +42,31 @@ export class PlayerService {
     return this.http.get<any>(_url, { params });
   }
 
+  getPlayerStrengths(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerstrengths";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getPlayerWeaknesses(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerweaknesses";
+    return this.http.get<any>(_url, { params });
+  }
+
   getPlayerFixtures(userId) {
     let params = new HttpParams()
       .set('userId', userId)
     let _url = environment.baseURL+"getplayerfixtures";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getPlayerParents(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerparents";
     return this.http.get<any>(_url, { params });
   }
 
@@ -63,6 +91,20 @@ export class PlayerService {
     return this.http.post<any>(_url, user, { params })
   }
 
+  addStrengthPlayer(user, userId) {
+    let _url = environment.baseURL+"addstrengthplayer";
+    let params = new HttpParams()
+      .set('userId', userId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  addWeaknessesPlayer(user, userId) {
+    let _url = environment.baseURL+"addweaknessesplayer";
+    let params = new HttpParams()
+      .set('userId', userId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
   ChangeAvailability(user, userId,fixtureId,tournamentTeamId) {
     let _url = environment.baseURL+"changeavailability";
     let params = new HttpParams()
@@ -79,5 +121,20 @@ export class PlayerService {
       .set('fixtureId', fixtureId)
       .set('tournamentTeamId', tournamentTeamId)
     return this.http.post<any>(_url, user, { params })
+  }
+
+  deletePlayerAchieve(playerAchieveId){
+    let _url = environment.baseURL+"deleteplayerachieve/";
+    return this.http.delete<any>(_url + playerAchieveId )
+  }
+
+  deletePlayerStrength(strengthId){
+    let _url = environment.baseURL+"deleteplayerstrength/";
+    return this.http.delete<any>(_url + strengthId )
+  }
+
+  deletePlayerWeakness(weaknessesId){
+    let _url = environment.baseURL+"deleteplayerweakness/";
+    return this.http.delete<any>(_url + weaknessesId )
   }
 }

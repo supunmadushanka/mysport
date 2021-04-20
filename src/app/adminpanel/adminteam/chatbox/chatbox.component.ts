@@ -10,7 +10,7 @@ import { Role } from '../../../_models/role';
   templateUrl: './chatbox.component.html',
   styleUrls: ['./chatbox.component.scss']
 })
-export class ChatboxComponent implements OnInit,AfterViewChecked {
+export class ChatboxComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -23,7 +23,9 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
   messageList: string[] = [];
   name: string
   public userInfo = [];
-  test:number
+  test: number
+  public institute = [];
+  instituteId: number
 
   currentUser
 
@@ -32,6 +34,7 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
     messageDateTime: '',
     teamId: 0,
     userId: 0,
+    instituteId:0,
     userName: '',
     RoleId: ''
   }
@@ -77,7 +80,20 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
         }
       );
 
-      this.scrollToBottom();
+    this.scrollToBottom();
+
+    this.adminService.getInstituteId(this.currentUser.userEmail)
+      .subscribe((data) => {
+        this.institute = data;
+        this.instituteId=this.institute[0]?.instituteId
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+            }
+          }
+        }
+      );
 
   }
 
@@ -86,7 +102,7 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
   }
 
   scrollToBottom(): void {
-    this.test=0
+    this.test = 0
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) { }
@@ -100,6 +116,7 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
     this.saveArray.messageContent = this.newMessage
     this.saveArray.messageDateTime = new Date().toJSON("yyyy/MM/dd HH:mm");
     this.saveArray.RoleId = this.currentUser.RoleId
+    this.saveArray.instituteId = this.instituteId
 
     this.chatService.sendMessage(this.saveArray);
     this.newMessage = '';
@@ -125,6 +142,30 @@ export class ChatboxComponent implements OnInit,AfterViewChecked {
     if (id == this.currentUser.userId) {
       return true
     } else {
+      return false
+    }
+  }
+
+  ismyteam(teamId,instituteId) {
+    if ((this.teamId == teamId ||teamId == null) && this.instituteId==instituteId) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  IsAdmin(RoleId){
+    if(RoleId==Role.Admin || RoleId==Role.Admin){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  isAnnouncment(teamId){
+    if(teamId==null){
+      return true
+    }else{
       return false
     }
   }

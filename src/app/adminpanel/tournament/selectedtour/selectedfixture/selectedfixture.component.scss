@@ -108,7 +108,6 @@ td {
     margin-left: auto;
 }
 
-//////////////////////////////////////////////////////
 .player {
     background-image: url('../../../../../assets/cricketplayer.jpg');
     height: 4em;
@@ -149,4 +148,31 @@ td {
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px #000000;
+}
+
+.login-page {
+    padding: 6% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 45px;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body {
+    background-image: linear-gradient(rgb(41, 189, 194), rgb(50, 48, 206));
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+select option {
+    font-size: 1.5em;
+    margin: 2em;
 }

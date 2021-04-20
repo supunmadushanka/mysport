@@ -6,6 +6,7 @@ import { ViewChild } from '@angular/core';
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
 import { Sport } from '../../../../_models/sport'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-ongoingfixture',
@@ -51,7 +52,7 @@ export class OngoingfixtureComponent implements OnInit {
     status: null
   }
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
 
@@ -66,7 +67,6 @@ export class OngoingfixtureComponent implements OnInit {
         this.FixtureDetails = data;
         this.realextra1=this.FixtureDetails[0]?.extras
         this.realextra2=this.FixtureDetails[1]?.extras
-
         this.description1=this.FixtureDetails[0]?.description
         this.description2=this.FixtureDetails[1]?.description
 
@@ -200,6 +200,10 @@ export class OngoingfixtureComponent implements OnInit {
         }
       );
 
+  }
+
+  back(){
+    this.location.back()
   }
 
   navigateplayer1(playerId) {

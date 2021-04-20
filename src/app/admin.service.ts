@@ -265,10 +265,22 @@ export class AdminService {
     return this.http.post<any>(this._teamregister, user)
   }
 
+  editTeam(user,teamid) {
+    let _url = environment.baseURL + "editteam";
+    let params = new HttpParams()
+      .set('teamid', teamid)
+    return this.http.post<any>(_url, user, { params })
+  }
+
   addAchieve(user, teamId) {
     let params = new HttpParams()
       .set('teamId', teamId)
     return this.http.post<any>(this.addAchievement, user, { params })
+  }
+
+  deleteAchieve(achieveId) {
+    let _url = environment.baseURL + "deleteachieve/";
+    return this.http.delete<any>(_url + achieveId )
   }
 
   addplayerteam(user, teamId, playerId) {
@@ -313,6 +325,13 @@ export class AdminService {
     return this.http.post<any>(this.createFixture, user, { params })
   }
 
+  editFixture(user, fixtureId) {
+    let _url = environment.baseURL + "editfixture";
+    let params = new HttpParams()
+      .set('fixtureId', fixtureId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
   addPlayerFixture(user, fixtureId, userId) {
     let params = new HttpParams()
       .set('fixtureId', fixtureId)
@@ -340,11 +359,9 @@ export class AdminService {
     return this.http.post<any>(_url1, user, { params })
   }
 
-  deleteFixture(user, fixtureId) {
-    let _url1 = environment.baseURL + "deletefixture";
-    let params = new HttpParams()
-      .set('fixtureId', fixtureId)
-    return this.http.post<any>(_url1, user, { params })
+  deleteFixture(fixtureId) {
+    let _url = environment.baseURL + "deletefixture/";
+    return this.http.delete<any>(_url + fixtureId )
   }
 
   finishFixture(user, fixtureId, wonteam, wonscore, lossteam, lossscore) {

@@ -114,7 +114,6 @@ td {
     margin-left: auto;
 }
 
-/////////////////////////////////////////////////////////////
 .player {
     background-image: url('../../../../../assets/cricketplayer.jpg');
     height: 4em;
@@ -155,4 +154,29 @@ td {
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px #000000;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    margin-left: 1em;
+    font-weight: 600;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+.wonteam {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: rgb(47, 8, 153);
+    text-shadow: 2px 2px rgb(255, 255, 255);
 }

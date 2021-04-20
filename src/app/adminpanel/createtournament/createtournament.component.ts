@@ -81,4 +81,11 @@ export class CreatetournamentComponent implements OnInit {
       );
   }
 
+  isFill(){
+    if(this.CreateTournament.value.under15male=='' && this.CreateTournament.value.under15female=='' && this.CreateTournament.value.under17male==''
+    && this.CreateTournament.value.under17female=='' && this.CreateTournament.value.under19male=='' && this.CreateTournament.value.under19female==''){
+      return true
+    }
+  }
+
 }

@@ -1,12 +1,12 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
         <br>
-        <a (click)="back()" class="previous round pointer">&#8249; Back</a>
-        <div class="aaa" style="padding-top: 0em;">
+        <a (click)="back()" class="previous round pointer">&#8249; Back</a><br><br>
+        <div class="aaa" style="padding-right: 0.3em;padding-top: 0.4em; background-color: rgb(255, 255, 255);">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team" aria-selected="true">
-                        <h5>Teams</h5>
+                        <h5 class="navtitle">Teams</h5>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -15,8 +15,23 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" id="Strengths-tab" data-toggle="pill" href="#Strengths" role="tab" aria-controls="Strengths" aria-selected="false">
+                        <h5>Strengths</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="weaknesses-tab" data-toggle="pill" href="#weaknesses" role="tab" aria-controls="weaknesses" aria-selected="false">
+                        <h5>Weaknesses</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="fixture-tab" data-toggle="pill" href="#fixture" role="tab" aria-controls="fixture" aria-selected="false">
                         <h5>Fixtures</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Parents-tab" data-toggle="pill" href="#Parents" role="tab" aria-controls="Parents" aria-selected="false">
+                        <h5>Parents</h5>
                     </a>
                 </li>
             </ul>
@@ -55,7 +70,6 @@
             </div>
 
             <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
-
                 <div class="aaa" *ngIf="achiveshow()">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#achieve">Add
                         Achievements</button>
@@ -70,16 +84,64 @@
                         </thead>
                         <tbody class="body">
                             <tr *ngFor="let p of Achievements">
-                                <td>{{p.playerAchievements}}</td>
+                                <td>{{p.playerAchievements}}&nbsp;&nbsp;
+                                    <i (click)="deleteAchieve(p.playerAchieveId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
 
+            <div class="tab-pane fade" id="Strengths" role="tabpanel" aria-labelledby="Strengths-tab">
+                <div class="aaa" *ngIf="achiveshow()">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#strengths">Add
+                        Strengths</button>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Strengths</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Strengths">
+                                <td>{{p.playerStrengths}}&nbsp;&nbsp;
+                                    <i (click)="deleteStrengths(p.strengthId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="weaknesses" role="tabpanel" aria-labelledby="weaknesses-tab">
+                <div class="aaa" *ngIf="achiveshow()">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#weaknes">Add
+                        Weaknesses</button>
+                </div>
+
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Weaknesses</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Weaknesses">
+                                <td>{{p.playerWeaknesses}}&nbsp;&nbsp;
+                                    <i (click)="deleteWeakness(p.weaknessesId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="fixture" role="tabpanel" aria-labelledby="fixture-tab">
-
                 <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
                     <table class="table table-hover table-bordered ">
                         <thead class="thead-dark">
@@ -108,7 +170,29 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
 
+            <div class="tab-pane fade" id="Parents" role="tabpanel" aria-labelledby="Parents-tab">
+                <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
+                    <table class="table table-hover table-bordered ">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Tele No</th>
+                                <th scope="col">Type</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of Parents">
+                                <td>{{p.parentFName}} {{p.parentLName}}</td>
+                                <td>{{p.parentAddress}}</td>
+                                <td>{{p.ParentteleNum}}</td>
+                                <td>{{p.Parenttype}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -121,21 +205,20 @@
         </div>
 
         <div class="menu">
-            <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target=".bd-example-modal-lg">Edit
-                Profile</button><br>
             <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
                 Password</button><br>
-        </div><br>
+        </div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i><br>
 
         <div class="details">
-            <p><span class="title">Name : </span>{{PlayerProfile[0]?.playerFName}} {{PlayerProfile[0]?.playerLName}}</p>
-            <p><span class="title">Address : </span>{{PlayerProfile[0]?.playerAddress}}</p>
-            <p><span class="title">Telephone No : </span>{{PlayerProfile[0]?.playerteleNum}}</p>
-            <p><span class="title">Date of Birth : </span>{{PlayerProfile[0]?.playerDOB | date:'mediumDate'}}</p>
-            <p><span class="title">Gender : </span>{{PlayerProfile[0]?.playerGender}}</p>
-            <p><span class="title">Height : </span>{{PlayerProfile[0]?.playerWeight}}</p>
-            <p><span class="title">Weight : </span>{{PlayerProfile[0]?.playerHeight}}</p>
-            <p><span class="title">Blood Group : </span>{{PlayerProfile[0]?.playerBloodGroup}}</p>
+            <p><span class="title">Name : </span><span class="teamvalue">{{PlayerProfile[0]?.playerFName}} {{PlayerProfile[0]?.playerLName}}</span></p>
+            <p><span class="title">Address : </span><span class="teamvalue">{{PlayerProfile[0]?.playerAddress}}</span></p>
+            <p><span class="title">Telephone No : </span><span class="teamvalue">{{PlayerProfile[0]?.playerteleNum}}</span></p>
+            <p><span class="title">Date of Birth : </span><span class="teamvalue">{{PlayerProfile[0]?.playerDOB | date:'mediumDate'}}</span></p>
+            <p><span class="title">Gender : </span><span class="teamvalue">{{PlayerProfile[0]?.playerGender}}</span></p>
+            <p><span class="title">Height : </span><span class="teamvalue">{{PlayerProfile[0]?.playerHeight}}</span></p>
+            <p><span class="title">Weight : </span><span class="teamvalue">{{PlayerProfile[0]?.playerWeight}}</span></p>
+            <p><span class="title">Blood Group : </span><span class="teamvalue">{{PlayerProfile[0]?.playerBloodGroup}}</span></p>
             <br>
         </div>
     </div>
@@ -145,26 +228,68 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Achievement</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form [formGroup]="achieve" (ngSubmit)="achieveSubmit()">
-
-
                     <div class="form-group">
                         <textarea [class.is-invalid]="achieve.get('achievecontent').invalid && achieve.get('achievecontent').touched" formControlName="achievecontent" class="form-control form-control-lg" id="curachievecontent" rows="4" cols="50"></textarea>
-
                         <small [class.d-none]="achieve.get('achievecontent').valid || achieve.get('achievecontent').untouched" class="text-danger">Achievement is required</small>
-
                     </div><br>
-
                     <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
                     <button [disabled]="achieve.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="strengths" tabindex="-1" role="dialog" aria-labelledby="strengthsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Strengths</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose4>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="strength" (ngSubmit)="strengthsSubmit()">
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="strength.get('playerStrengths').invalid && strength.get('playerStrengths').touched" formControlName="playerStrengths" class="form-control form-control-lg" id="playerStrengths" rows="4" cols="50"></textarea>
+                        <small [class.d-none]="strength.get('playerStrengths').valid || strength.get('playerStrengths').untouched" class="text-danger">Achievement is required</small>
+                    </div><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="strength.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="weaknes" tabindex="-1" role="dialog" aria-labelledby="weaknesTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Weaknesses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose5>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="weaknesses" (ngSubmit)="weaknessesSubmit()">
+                    <div class="form-group">
+                        <textarea [class.is-invalid]="weaknesses.get('playerWeaknesses').invalid && weaknesses.get('playerWeaknesses').touched" formControlName="playerWeaknesses" class="form-control form-control-lg" id="playerWeaknesses" rows="4" cols="50"></textarea>
+                        <small [class.d-none]="weaknesses.get('playerWeaknesses').valid || weaknesses.get('playerWeaknesses').untouched" class="text-danger">Achievement is required</small>
+                    </div><br>
+                    <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                    <button [disabled]="weaknesses.invalid" type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #myModalClose>Close</button>
                 </form>
             </div>
         </div>
@@ -184,7 +309,6 @@
                 <div class="login-page">
                     <div class="form">
                         <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-
                             <div class="form-group">
                                 <label for="signupPassword1">Enter new password</label>
                                 <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
@@ -198,7 +322,6 @@
                                         special characters, or
                                         emoji</small>
                                 </div>
-
                                 <ng-template #elseBlock2>
                                     <small id="passwordHelpsignup" class="form-text text-muted">
                                         Your password must be 8-20 characters long, contain letters and numbers, and
@@ -207,7 +330,6 @@
                                     </small>
                                 </ng-template>
                             </div>
-
                             <div class="form-group">
                                 <label for="signupPassword2">Re-enter Password</label>
                                 <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
@@ -215,7 +337,6 @@
                                 <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
                                     match</small>
                             </div><br>
-
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
                             <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
                         </form>
@@ -246,24 +367,20 @@
                                     <label for="firstNamePlayer">First Name</label>
                                     <input [class.is-invalid]="firstNamePlayer.touched && firstNamePlayer.invalid" formControlName="firstNamePlayer" type="text" class="form-control form-control-lg" id="firstNamePlayer" placeholder="{{PlayerProfile[0]?.playerFName}}">
                                 </div>
-
                                 <div class="form-group col-md-6">
                                     <label for="secondNamePlayer">Last Name</label>
                                     <input [class.is-invalid]="secondNamePlayer.touched && secondNamePlayer.invalid" formControlName="secondNamePlayer" type="text" class="form-control form-control-lg" id="secondNamePlayer" placeholder="{{PlayerProfile[0]?.playerLName}}">
                                 </div>
-
                                 <div *ngIf="(firstNamePlayer.touched && firstNamePlayer.invalid) || secondNamePlayer.invalid && secondNamePlayer.touched">
                                     <small class="text-danger">First name and last name reuired and must contain more
                                         than 3 charactors<br></small>
                                 </div>
                             </div><br>
-
                             <div class="form-group">
                                 <label for="perAddressPlayer">Address</label>
                                 <input [class.is-invalid]="playerRegistration1.get('perAddressPlayer').invalid && playerRegistration1.get('perAddressPlayer').touched" formControlName="perAddressPlayer" type="text" class="form-control form-control-lg" id="perAddressPlayer" placeholder="{{PlayerProfile[0]?.playerAddress}}">
                                 <small [class.d-none]="playerRegistration1.get('perAddressPlayer').valid || playerRegistration1.get('perAddressPlayer').untouched" class="text-danger">Permenent address required</small>
                             </div><br>
-
                             <div class="form-group">
                                 <label for="teleNoPlayer">Telephone Number</label>
                                 <input [class.is-invalid]="teleNoPlayer.invalid && teleNoPlayer.touched" formControlName="teleNoPlayer" type="tel" class="form-control form-control-lg" id="teleNoPlayer" placeholder="{{PlayerProfile[0]?.playerteleNum}}">
@@ -274,9 +391,7 @@
                                     <small *ngIf="teleNoPlayer.errors?.pattern" class="text-danger">Invalid telephone
                                         number</small>
                                 </div>
-
                             </div><br>
-
                             <div class="form-group">
                                 <label for="bloodSelect">Blood Group</label>
                                 <select [class.is-invalid]="playerRegistration1.get('bloodSelect').invalid && playerRegistration1.get('bloodSelect').touched" formControlName="bloodSelect" class="form-control" id="bloodSelect">
@@ -291,7 +406,6 @@
                                 </select>
                                 <small [class.d-none]="playerRegistration1.get('bloodSelect').valid || playerRegistration1.get('bloodSelect').untouched" class="text-danger">Required blood group</small>
                             </div><br>
-
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="heightPlayer">
                                     Height</label>&nbsp;&nbsp;
@@ -299,7 +413,6 @@
                             </div>
                             <small [class.d-none]="playerRegistration1.get('heightPlayer').valid || playerRegistration1.get('heightPlayer').untouched" class="text-danger"><br>Height required</small>
                             <br><br>
-
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="weightPlayer">
                                     Weight</label>&nbsp;&nbsp;
@@ -307,8 +420,6 @@
                             </div>
                             <small [class.d-none]="playerRegistration1.get('weightPlayer').valid || playerRegistration1.get('weightPlayer').untouched" class="text-danger"><br>Weight required</small>
                             <br><br><br>
-
-
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
                             <button (click)="close()" type="submit" class="btn btn-primary">Submit</button>
                         </form>

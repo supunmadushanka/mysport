@@ -52,7 +52,14 @@ td {
     width: 25%;
     float: right;
     height: 100%;
+    background-image: url('../../assets/bluesky.jpg');
     background-color: rgb(82, 109, 226);
+    padding-bottom: 15em;
+}
+
+.teamvalue {
+    font-size: 1em;
+    text-shadow: 2px 1px black;
 }
 
 .menu {
@@ -82,7 +89,6 @@ td {
     font-weight: 800;
 }
 
-//////////////////////////////////////////////////
 .login-page {
     padding: 6% 0 0;
     margin: auto;

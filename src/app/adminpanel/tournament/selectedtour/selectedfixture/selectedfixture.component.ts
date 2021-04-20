@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../../../admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Role } from '../../../../_models/role';
 import { AuthService } from '../../../../auth.service';
 import { Location } from '@angular/common'
+import { Sport } from '../../../../_models/sport';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-selectedfixture',
@@ -29,8 +31,9 @@ export class SelectedfixtureComponent implements OnInit {
   currentUser = this._authService.currentUserValue;
   firstplayer
   secondplayer
+  noofplayers
 
-  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private fbAdmin: FormBuilder,private location: Location, private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -43,7 +46,7 @@ export class SelectedfixtureComponent implements OnInit {
         this.FixtureDetails = data;
         this.firsttournamentTeamId = this.FixtureDetails[0].tournamentTeamId
         this.secondtournamentTeamId = this.FixtureDetails[1].tournamentTeamId
-        this.tournementId=this.FixtureDetails[1].tournementId
+        this.tournementId = this.FixtureDetails[1].tournementId
 
         this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.firsttournamentTeamId)
           .subscribe((data) => {
@@ -74,6 +77,13 @@ export class SelectedfixtureComponent implements OnInit {
         this._adminservice.getSelectededTournament(this.FixtureDetails[1].tournementId)
           .subscribe((data) => {
             this.Tournament = data;
+            if (this.Tournament[0]?.sportId[0] == Sport.Cricket) {
+              this.noofplayers = 11
+            } else if (this.Tournament[0]?.sportId[0] == Sport.Football) {
+              this.noofplayers = 11
+            } else if (this.Tournament[0]?.sportId[0] == Sport.Rugby) {
+              this.noofplayers = 15
+            }
           },
             err => {
               if (err instanceof HttpErrorResponse) {
@@ -144,6 +154,13 @@ export class SelectedfixtureComponent implements OnInit {
     }
   }
 
+  disablestart() {
+    if(this.firstTeamPlayers.length==this.noofplayers && this.secondTeamPlayers.length==this.noofplayers){
+      return true
+    }else{
+      return false
+    }
+  }
 
 
   AddPlayer(userId) {
@@ -184,7 +201,8 @@ export class SelectedfixtureComponent implements OnInit {
   }
 
   startfixture() {
-    this._adminservice.startFixture(this.FixtureDetails, this.fixtureId)
+    if(this.disablestart()){
+      this._adminservice.startFixture(this.FixtureDetails, this.fixtureId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -193,10 +211,14 @@ export class SelectedfixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+    }else{
+      alert('Fill '+this.noofplayers+' players')
+    }
+    
   }
 
   deleteFixture() {
-    this._adminservice.deleteFixture(this.sample, this.fixtureId)
+    this._adminservice.deleteFixture(this.fixtureId)
       .subscribe(
         response => {
           console.log('success', response)
@@ -205,6 +227,26 @@ export class SelectedfixtureComponent implements OnInit {
         error => console.error('Error!', error)
       );
     this.ngOnInit();
+  }
+
+  EditFixture = this.fbAdmin.group({
+    fixtureVenue: [''],
+    fixtureDate: ['2000-01-01T00:00:00.000Z'],
+    fixtureTime: ['']
+  });
+
+  @ViewChild('myModalClose2') modalClose2;
+
+  FixtureSubmit() {
+    this.modalClose2.nativeElement.click();
+    this._adminservice.editFixture(this.EditFixture.value,this.fixtureId)
+      .subscribe(
+        response => {
+          console.log('success', response),
+          this.ngOnInit();
+        },
+        error => console.error('Error!', error)
+      );
   }
 
 

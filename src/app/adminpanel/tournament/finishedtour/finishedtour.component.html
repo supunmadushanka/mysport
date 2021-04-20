@@ -2,7 +2,6 @@
     <div class="Left">
         <br>
         <a routerLink="/tournament" class="previous round">&#8249; Back</a>
-
     </div>
     <div class="Right">
         <div class="summery"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#summery">Tournament<br>summery</button><br>
@@ -12,34 +11,10 @@
 <div class="name aaa"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
     <img class="rotate30" src="\assets\ball.png" width="60" height="60">
 </div>
+
 <br>
-<!--<h4 class="aaa topic">Finished Fixtures</h4>
-
-<div style="height: 350px; overflow: auto;">
-    <table class="table table-hover table-bordered">
-        <thead class="thead-dark">
-            <tr style="height: 1em;">
-                <th scope="col">Institutes</th>
-                <th scope="col">Structure</th>
-                <th scope="col">Time</th>
-                <th scope="col">Date</th>
-                <th scope="col">Venue</th>
-            </tr>
-        </thead>
-        <tbody class="body">
-            <tr *ngFor="let p of FinishedFixtures" [routerLink]="['/ongoing',p.fixtureId]" class="pointer">
-                <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
-                <td>{{p.strutureName}}</td>
-                <td>{{p.fixtureTime.substring(0,8)}}</td>
-                <td>{{p.fixtureDate | date:'mediumDate'}}</td>
-                <td>{{p.venue}}</td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>-->
-
 <div class="aaa">
+    <i class="fa fa-search" style="color: rgb(32, 41, 158);font-size: 1.5em;"></i>&nbsp;&nbsp;
     <div class="search">
         <input class="form-control" type="text" name="search" [(ngModel)]="serachFixture" autocomplete="off" placeholder="Search any">
     </div>

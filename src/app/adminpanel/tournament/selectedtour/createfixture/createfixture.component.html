@@ -9,24 +9,24 @@
                     <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}
                     </option>
                 </select>
-                <small [class.d-none]="CreateFixture.get('FixtureStructure').valid || CreateFixture.get('FixtureStructure').untouched" class="text-danger">Required</small>
+                <small [class.d-none]="CreateFixture.get('FixtureStructure').valid || CreateFixture.get('FixtureStructure').untouched" class="text-danger">Structure Required</small>
             </div><br>
             <div class="form-row">
 
                 <div class="form-group col-md-6">
                     <label for="FirstTeam">Team 1</label>
                     <select [class.is-invalid]="CreateFixture.get('FirstTeam').invalid && CreateFixture.get('FirstTeam').touched" formControlName="FirstTeam" class="form-control" id="exampleFormControlSelect1">
-                        <option class="option" *ngFor="let s of FirstTeams" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
+                        <option class="option" *ngFor="let s of FirstTeams | filter:CreateFixture.value.FixtureStructure" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
                     </select>
-                    <small [class.d-none]="CreateFixture.get('FirstTeam').valid || CreateFixture.get('FirstTeam').untouched" class="text-danger">Structure Required</small>
+                    <small [class.d-none]="CreateFixture.get('FirstTeam').valid || CreateFixture.get('FirstTeam').untouched" class="text-danger">Team 1 Required</small>
                 </div><br>
 
                 <div class="form-group col-md-6">
                     <label for="SecondTeam">Team 2</label>
                     <select [class.is-invalid]="CreateFixture.get('SecondTeam').invalid && CreateFixture.get('SecondTeam').touched" formControlName="SecondTeam" class="form-control" id="exampleFormControlSelect1">
-                        <option class="option" *ngFor="let s of FirstTeams" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
+                        <option class="option" *ngFor="let s of FirstTeams | filter:CreateFixture.value.FixtureStructure" [value]=s.tournamentTeamId>{{s.teamName}} ({{s.strutureName}}) from {{s.instituteName}}</option>
                     </select>
-                    <small [class.d-none]="CreateFixture.get('SecondTeam').valid || CreateFixture.get('SecondTeam').untouched" class="text-danger">Structure Required</small>
+                    <small [class.d-none]="CreateFixture.get('SecondTeam').valid || CreateFixture.get('SecondTeam').untouched" class="text-danger">Team 2 Required</small>
                 </div><br>
 
             </div>

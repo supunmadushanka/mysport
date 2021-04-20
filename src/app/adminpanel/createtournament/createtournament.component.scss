@@ -1,23 +1,26 @@
-.login-page {
-  width: 760px;
-  padding: 6% 0 0;
-  margin: auto;
+.tour-page {
+    width: 760px;
+    padding: 6% 0 0;
+    margin: auto;
 }
 
 .form {
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
-  width: 660px;
-  margin: 5% auto 100px;
-  padding: 45px;
-  text-align: left;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    width: 660px;
+    margin: 5% auto 100px;
+    padding: 45px;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 select option {
-  font-size: 1.5em;
-  margin: 2em;
+    font-size: 1.5em;
+    margin: 2em;
 }
 
-.big-checkbox {width: 17px; height: 17px;}
+.big-checkbox {
+    width: 17px;
+    height: 17px;
+}

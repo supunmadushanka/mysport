@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { RegistrationService } from '../../registration.service'
 import { Router } from '@angular/router'
 import { AuthService } from '../../auth.service'
@@ -17,8 +17,12 @@ export class CreateplayerComponent implements OnInit {
     private router: Router, private _adminservice: AdminService) { }
 
   public Structures = [];
+  number
 
   ngOnInit(): void {
+
+    this.number=Math.random().toString(36).substr(2, 9);
+
     this._adminservice.getStructure()
       .subscribe((data) => {
         this.Structures = data;
@@ -51,19 +55,36 @@ export class CreateplayerComponent implements OnInit {
     dobpPlayer: ['', [Validators.required]],
     MFplayer: ['', [Validators.required]],
     emailAddress: ['', [Validators.required]],
-    password: ['playerpass'],
+    password: [''],
     PlayerStructure: ['', [Validators.required]]
   })
 
+  chechusermodel = {
+    userEmail: ''
+  }
+
   playerSubmit() {
-    this._adminservice.createplayer(this.createPlayer.value)
+    this.chechusermodel.userEmail = this.createPlayer.value.emailAddress
+    this._auth.chechuser(this.chechusermodel)
       .subscribe(
         response => {
-          this.router.navigate(['/adminpanel']);
+          console.log('Success!', response)
+          this.createPlayer.value.password=this.number
+          this._adminservice.createplayer(this.createPlayer.value)
+            .subscribe(
+              response => {
+                this.router.navigate(['/adminpanel']);
+              },
+              error => {
+                console.error('Error!', error)
+              }
+            )
         },
         error => {
           console.error('Error!', error)
+          alert("Already have an account")
+          this.createPlayer.reset()
         }
-      )
+      );
   }
 }

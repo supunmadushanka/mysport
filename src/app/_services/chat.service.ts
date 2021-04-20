@@ -22,9 +22,7 @@ export class ChatService {
   }
 
   getMessage() {
-
     this.socket = io(environment.SOCKET_ENDPOINT);
-
     return Observable.create((observer) => {
       this.socket.on('my broadcast', (message) => {
         observer.next(message);

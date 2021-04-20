@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../_services/player.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder,Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../shared/password.validator';
 
@@ -15,16 +15,20 @@ export class PlayerComponent implements OnInit {
 
   userId: number
 
-  constructor(private fbReason: FormBuilder,private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
+  constructor(private fbReason: FormBuilder, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
 
   public PlayerTeams = [];
   public PlayerProfile = [];
   public Achievements = [];
   public Fixtures = [];
+  public Strengths = [];
+  public Weaknesses = [];
+  public Parents = [];
+  public PlayerCode = [];
 
   instituteId: number
   fixtureId: number
-  tournamentTeamId : number
+  tournamentTeamId: number
 
   ngOnInit(): void {
 
@@ -48,6 +52,19 @@ export class PlayerComponent implements OnInit {
         this._playerservice.getProfile(this.userId)
           .subscribe((data) => {
             this.PlayerProfile = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.router.navigate(['/home'])
+                }
+              }
+            }
+          );
+
+        this._playerservice.getPlayerCode(this.userId)
+          .subscribe((data) => {
+            this.PlayerCode = data;
           },
             err => {
               if (err instanceof HttpErrorResponse) {
@@ -83,6 +100,45 @@ export class PlayerComponent implements OnInit {
               }
             }
           );
+
+        this._playerservice.getPlayerStrengths(this.userId)
+          .subscribe((data) => {
+            this.Strengths = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.router.navigate(['/home'])
+                }
+              }
+            }
+          );
+
+        this._playerservice.getPlayerWeaknesses(this.userId)
+          .subscribe((data) => {
+            this.Weaknesses = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.router.navigate(['/home'])
+                }
+              }
+            }
+          );
+
+        this._playerservice.getPlayerParents(this.userId)
+          .subscribe((data) => {
+            this.Parents = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.router.navigate(['/home'])
+                }
+              }
+            }
+          );
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -96,23 +152,7 @@ export class PlayerComponent implements OnInit {
 
   }
 
-  achieve = this.fbAdmin.group({
-    achievecontent: ['', [Validators.required, Validators.minLength(3)]],
-  });
-
   @ViewChild('myModalClose2') modalClose2;
-
-  achieveSubmit() {
-    this.modalClose2.nativeElement.click();
-    this._playerservice.addAchievPlayer(this.achieve.value, this.userId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-        },
-        error => console.error('Error!', error)
-      );
-  }
 
   get firstNamePlayer() {
     return this.playerRegistration1.get('firstNamePlayer');
@@ -181,9 +221,9 @@ export class PlayerComponent implements OnInit {
       )
   }
 
-  set(fixtureId,tournamentTeamId){
-    this.fixtureId=fixtureId[0]
-    this.tournamentTeamId=tournamentTeamId
+  set(fixtureId, tournamentTeamId) {
+    this.fixtureId = fixtureId[0]
+    this.tournamentTeamId = tournamentTeamId
   }
 
   Reason = this.fbReason.group({
@@ -194,7 +234,7 @@ export class PlayerComponent implements OnInit {
 
   changeavailability() {
     this.modalClose2.nativeElement.click();
-    this._playerservice.ChangeAvailability(this.Reason.value, this.userId,this.fixtureId,this.tournamentTeamId)
+    this._playerservice.ChangeAvailability(this.Reason.value, this.userId, this.fixtureId, this.tournamentTeamId)
       .subscribe(
         response => {
           this.ngOnInit();

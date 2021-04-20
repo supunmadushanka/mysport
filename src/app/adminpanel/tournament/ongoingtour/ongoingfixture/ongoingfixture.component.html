@@ -1,5 +1,7 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
+        <br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
         <div class="Team">
             {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
         </div>
@@ -21,24 +23,6 @@
         <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="Players" role="tabpanel" aria-labelledby="Players-tab">
-                <!--<div style="height: 500px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Name</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of firstTeamPlayers" (click)="currentPlayer(p.userId)" data-toggle="modal" data-target="#team1model" class="pointer">
-                                <td>{{p.playerFName}} {{p.playerLName}}</td>
-                                <td>{{p.playerScore}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                </div><br>-->
-
                 <div class="aaa">
                     <div class="search">
                         <input class="form-control" type="text" name="search" [(ngModel)]="firstplayer" autocomplete="off" placeholder="Search any">
@@ -48,7 +32,7 @@
                     </div>
                 </div>
 
-                <div style="height: 390px; overflow: auto;">
+                <div style="height: 330px; overflow: auto;">
                     <div style="padding-bottom: 0em;">
                         <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="currentPlayer(p.userId)" class="player">
                             <div class="Left3">
@@ -65,34 +49,14 @@
                         </div>
                     </div>
                 </div><br>
-
                 <div class="points">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total1[0]?.sumScore+realextra1}}
-                    <span *ngIf="isCricket()">-{{Wicket1[0]?.wickets}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span *ngIf="isCricket()">-{{Wicket1[0]?.wickets}}({{Total1[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span data-toggle="modal" data-target="#extra1" class="pointer">Extras={{FixtureDetails[0]?.extras}}</span>
                 </div>
-
             </div>
 
             <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
-
-                <!--<div style="height: 500px; overflow: auto;">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Name</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of secondTeamPlayers" (click)="currentPlayer(p.userId)" data-toggle="modal" data-target="#team2model" class="pointer">
-                                <td>{{p.playerFName}} {{p.playerLName}}</td>
-                                <td>{{p.playerScore}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><br>-->
-
                 <div class="aaa">
                     <div class="search">
                         <input class="form-control" type="text" name="search" [(ngModel)]="secondplayer" autocomplete="off" placeholder="Search any">
@@ -102,7 +66,7 @@
                     </div>
                 </div>
 
-                <div style="height: 390px; overflow: auto;">
+                <div style="height: 330px; overflow: auto;">
                     <div style="padding-bottom: 0em;">
                         <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="currentPlayer(p.userId)" class="player">
                             <div class="Left3">
@@ -122,10 +86,9 @@
 
                 <div class="points">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total2[0]?.sumScore+realextra2}}
-                    <span *ngIf="isCricket()">-{{Wicket2[0]?.wickets}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span *ngIf="isCricket()">-{{Wicket2[0]?.wickets}}({{Total2[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span data-toggle="modal" data-target="#extra2" class="pointer">Extras={{FixtureDetails[1]?.extras}}</span>
                 </div>
-
             </div>
 
         </div>
@@ -143,20 +106,22 @@
                 </span>{{this.Total1[0]?.sumScore}}</p>
             <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[1]?.teamName}} Score:
                 </span>{{this.Total2[0]?.sumScore}}</p>
-            <p *ngIf="showwhenfinished()"><span class="title">Won: </span>{{wonteamname}}</p>
+
             <br>
         </div>
         <div class="menu" *ngIf="finished() && show()">
             <button class="btn btn-danger middle" (click)="postponefixture()">Postpone Fixture</button><br>
-            <button class="btn btn-warning middle" (click)="finishfixture()">Finish Fixture</button><br>
+            <button class="btn btn-success middle" (click)="finishfixture()">Finish Fixture</button><br>
         </div>
         <div>
             <div *ngIf="instituteView1()">
-                <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description</button>
+                <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description
+                    <i class='far fa-question-circle' style='font-size:26px'></i></button>
             </div><br>
             <div *ngIf="instituteView2()">
                 <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description</button>
             </div>
+            <p *ngIf="showwhenfinished()"><span class="wonteam aaa">{{wonteamname}} Won</span></p>
         </div>
     </div>
 </div>
@@ -256,7 +221,7 @@
 <div class="modal fade bd-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <textarea id="w3review" name="w3review" rows="25" cols="10" [(ngModel)]="description1">
+            <textarea id="w3review" name="w3review" rows="25" cols="10" [(ngModel)]="description1" style="font-size: 1.5em;">
             </textarea>
             <button *ngIf="show()" class="btn btn-success" (click)="submitDescrip1()">Submit</button>
         </div>

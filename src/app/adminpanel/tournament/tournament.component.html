@@ -29,29 +29,6 @@
         <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="Created" role="tabpanel" aria-labelledby="Created-tab">
-
-                <!--<div style="height: 350px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Tournament Name</th>
-                                <th scope="col">Sport</th>
-                                <th *ngIf="show()"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of CreatedTournaments">
-                                <td [routerLink]="['/selectedtour',p.tournementId[0]]" class="pointer">
-                                    {{p.tournamentName}}
-                                </td>
-                                <td [routerLink]="['/selectedtour',p.tournementId[0]]" class="pointer">{{p.sportName}}
-                                </td>
-                                <td *ngIf="show()"><button type="button" class="btn btn-success" (click)="starttour(p.tournementId)">Start Tournamet</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>-->
-
                 <div style="height: 430px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of CreatedTournaments" [class.crickettour]="checkcricket(p.sportName)" [class.footballtour]="checkfootballe(p.sportName)" [class.rugbytour]="checkrugby(p.sportName)">
@@ -60,14 +37,16 @@
                                     {{p.tournamentName}}-{{p.sportName}}<br>
                                 </div>
                                 <div class="aaa">
+
                                     <td *ngIf="show()"><button type="button" class="btn btn-success aaa" (click)="starttour(p.tournementId)">Start Tournamet</button></td>
                                     <td><button type="button" class="btn btn-primary aaa pad" (click)="getstructures(p.tournementId[0])">
                                             Info
                                         </button></td>
+
                                 </div>
                             </div>
                             <div class="Left1">
-                                <br><br>
+                                <i (click)="getstructures(p.tournementId[0])" class='far fa-question-circle pointer' style='font-size:36px;color: rgb(32, 68, 167)'></i><br><br>
                                 <br><br>
                                 <br><br>
                                 <br>
@@ -75,35 +54,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="tab-pane fade" id="Ongoing" role="tabpanel" aria-labelledby="Ongoing-tab">
-
-                <!--<div style="height: 350px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Tournament Name</th>
-                                <th scope="col">Sport</th>
-                                <th *ngIf="show()"></th>
-                                <th *ngIf="show()"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of StartedTournaments" class="pointer">
-                                <td [routerLink]="['/ongoingtour',p.tournementId[0]]" class="pointer">
-                                    {{p.tournamentName}}
-                                </td>
-                                <td [routerLink]="['/ongoingtour',p.tournementId[0]]" class="pointer">{{p.sportName}}
-                                </td>
-                                <td *ngIf="show()"><button type="button" class="btn btn-info" (click)="finishtour(p.tournementId)">Finish Tournamet</button></td>
-                                <td *ngIf="show()"><button type="button" class="btn btn-danger" (click)="postponetour(p.tournementId)">Postpone Tournamet</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>-->
-
                 <div style="height: 430px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of StartedTournaments" [class.crickettour]="checkcricket(p.sportName)" [class.footballtour]="checkfootballe(p.sportName)" [class.rugbytour]="checkrugby(p.sportName)">
@@ -120,6 +73,7 @@
                                 </div>
                             </div>
                             <div class="Left1">
+                                <i (click)="getstructures(p.tournementId[0])" class='far fa-question-circle pointer' style='font-size:36px;color: rgb(32, 68, 167)'></i>
                                 <br><br>
                                 <br><br>
                                 <br><br>
@@ -128,28 +82,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="tab-pane fade" id="Finished" role="tabpanel" aria-labelledby="Finished-tab">
-
-                <!--<div style="height: 350px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Tournament Name</th>
-                                <th scope="col">Sport</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of FinishedTournaments" class="pointer" [routerLink]="['/finished',p.tournementId[0]]" class="pointer">
-                                <td>{{p.tournamentName}}</td>
-                                <td>{{p.sportName}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>-->
-
                 <div style="height: 430px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of FinishedTournaments" [class.crickettour]="checkcricket(p.sportName)" [class.footballtour]="checkfootballe(p.sportName)" [class.rugbytour]="checkrugby(p.sportName)">
@@ -164,6 +99,7 @@
                                 </div>
                             </div>
                             <div class="Left1">
+                                <i (click)="getstructures(p.tournementId[0])" class='far fa-question-circle pointer' style='font-size:36px;color: rgb(32, 68, 167)'></i>
                                 <br><br>
                                 <br><br>
                                 <br><br>
@@ -172,10 +108,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
     <div class="Right">
         <div *ngIf="show()" style="padding-top: 2em;padding-right: 1em;">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".addplayer">Join
@@ -194,26 +130,6 @@
 <div class="modal fade addplayer" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <!--<div style="height: 500px; overflow: auto;">
-                <table class="table table-hover table-bordered pad">
-                    <thead class="thead-dark">
-                        <tr style="height: 1em;">
-                            <th scope="col">Name</th>
-                            <th scope="col">Sport</th>
-                            <th class="Add"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="body">
-                        <tr *ngFor="let p of NewTournaments">
-                            <td>{{p.tournamentName}}</td>
-                            <td>{{p.sportName}}</td>
-                            <td><button type="button" (click)="joinTour(p.tournementId)" class="btn btn-primary">Join</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>-->
-
             <div style="height: 430px; overflow: auto;">
                 <div style="padding-bottom: 1em;">
                     <div class="Left2">
@@ -244,7 +160,6 @@
                     </div>
                 </div>
             </div>
-
             <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
         </div>
     </div>

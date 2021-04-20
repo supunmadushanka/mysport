@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../admin.service';
+import { AuthService } from '../auth.service';
+import { Role } from '../_models/role';
+import { ChatService } from '../_services/chat.service';
 
 @Component({
   selector: 'app-adminpanel',
@@ -10,7 +13,8 @@ import { AdminService } from '../admin.service';
 })
 export class AdminpanelComponent implements OnInit {
 
-  constructor(private _adminservice: AdminService, private router: Router) { }
+  constructor(private chatService: ChatService,private _adminservice: AdminService, 
+    private router: Router, private _authService: AuthService) { }
 
   public Teams = [];
   public Coaches = [];
@@ -19,12 +23,30 @@ export class AdminpanelComponent implements OnInit {
   public CoachCount = [];
   public PlayerCount = [];
   public InstituteProfile = [];
+  public userInfo = [];
+  public institute = [];
 
   searchTeam;
   searchCoach;
   searchPlayer;
+  Announcement: string
+  currentUser
+  name;
+  instituteId: number
+
+  saveArray = {
+    messageContent: '',
+    messageDateTime: '',
+    teamId: null,
+    userId: 0,
+    instituteId: 0,
+    userName: '',
+    RoleId: ''
+  }
 
   ngOnInit(): void {
+
+    this.currentUser = this._authService.currentUserValue;
 
     this._adminservice.getInstituteProfile()
       .subscribe((data) => {
@@ -117,6 +139,38 @@ export class AdminpanelComponent implements OnInit {
         }
       );
 
+    this._adminservice.getUserInfo(this.currentUser.userId, this.currentUser.RoleId)
+      .subscribe((data) => {
+        this.userInfo = data;
+        if (this.currentUser.RoleId == Role.Admin) {
+          this.name = this.userInfo[0].adminFName
+        } else if (this.currentUser.RoleId == Role.Player) {
+          this.name = this.userInfo[0].playerFName
+        } else if (this.currentUser.RoleId == Role.Coach) {
+          this.name = this.userInfo[0].coachFName
+        }
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+            }
+          }
+        }
+      );
+
+    this._adminservice.getInstituteId(this.currentUser.userEmail)
+      .subscribe((data) => {
+        this.institute = data;
+        this.instituteId = this.institute[0]?.instituteId
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+            }
+          }
+        }
+      );
+
   }
 
   checkcricket(sport) {
@@ -141,6 +195,29 @@ export class AdminpanelComponent implements OnInit {
     } else {
       false
     }
+  }
+
+  @ViewChild('myModalClose') modalClose;
+
+  sendAnnouncement() {
+    this.saveArray.userId = this.currentUser.userId
+    this.saveArray.userName = this.name
+    this.saveArray.messageContent = this.Announcement
+    this.saveArray.messageDateTime = new Date().toJSON("yyyy/MM/dd HH:mm");
+    this.saveArray.RoleId = this.currentUser.RoleId
+    this.saveArray.instituteId = this.instituteId
+
+    this.chatService.sendMessage(this.saveArray);
+    this.Announcement = '';
+
+    this._adminservice.saveMessage(this.saveArray)
+      .subscribe(
+        response => {
+          this.modalClose.nativeElement.click();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
   }
 
 }

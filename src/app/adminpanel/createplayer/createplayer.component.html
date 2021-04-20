@@ -1,6 +1,6 @@
 <br>
 <a routerLink="/adminpanel" class="previous round">&#8249; Back</a>
-<div id="login-page">
+<div id="player-page">
     <div class="form">
         <form [formGroup]="createPlayer" (ngSubmit)="playerSubmit()">
             <h3>Enter player details</h3><br>
@@ -41,7 +41,7 @@
                 <label for="emailAddress">Email Address</label>
                 <input [class.is-invalid]="createPlayer.get('emailAddress').invalid && createPlayer.get('emailAddress').touched" formControlName="emailAddress" type="text" class="form-control form-control-lg" id="emailAddress" required placeholder="ABC@gmail.com">
 
-                <small [class.d-none]="createPlayer.get('emailAddress').valid || createPlayer.get('emailAddress').untouched" class="text-danger">Address is required</small>
+                <small [class.d-none]="createPlayer.get('emailAddress').valid || createPlayer.get('emailAddress').untouched" class="text-danger">Email address is required</small>
             </div><br>
 
             <div class="form-group">

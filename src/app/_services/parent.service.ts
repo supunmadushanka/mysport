@@ -36,4 +36,12 @@ export class ParentService {
       .set('userId', userId)
     return this.http.post<any>(_url, user, { params })
   }
+
+  addPlayer(user,userId,usercode) {
+    let _url = environment.baseURL+"addplayerparent";
+    let params = new HttpParams()
+      .set('userId', userId)
+      .set('usercode', usercode)
+    return this.http.post<any>(_url, user, { params })
+  }
 }

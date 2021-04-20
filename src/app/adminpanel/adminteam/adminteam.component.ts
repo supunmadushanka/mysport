@@ -7,7 +7,7 @@ import { ViewChild } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Role } from '../../_models/role';
 import { AuthService } from '../../auth.service';
-
+import { Location } from '@angular/common'
 import { ChatboxComponent } from './chatbox/chatbox.component'
 
 
@@ -24,8 +24,8 @@ export class AdminteamComponent implements OnInit {
   teamid: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
-    private fbAdmin: FormBuilder, private _authService: AuthService) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
+    private fbAdmin: FormBuilder, private _authService: AuthService, private fbteam: FormBuilder) { }
 
   currentUser = this._authService.currentUserValue;
 
@@ -33,8 +33,10 @@ export class AdminteamComponent implements OnInit {
   public TeamDetails = [];
   public Achievements = [];
   public addplayers = [];
+  public Coaches = [];
 
   searchPlayer;
+  sportName;
 
   ngOnInit(): void {
 
@@ -58,6 +60,7 @@ export class AdminteamComponent implements OnInit {
     this._adminservice.getTeamDetails(this.teamid)
       .subscribe((data) => {
         this.TeamDetails = data;
+        this.sportName = this.TeamDetails[0]?.sportName
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -93,6 +96,23 @@ export class AdminteamComponent implements OnInit {
           }
         }
       );
+
+    this._adminservice.getCoaches()
+      .subscribe((data) => {
+        this.Coaches = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+  }
+
+  back(){
+    this.location.back()
   }
 
   achieve = this.fbAdmin.group({
@@ -165,5 +185,37 @@ export class AdminteamComponent implements OnInit {
     } else {
       false
     }
+  }
+
+  EditTeam = this.fbteam.group({
+    TeamName: [''],
+    Coach: ['']
+  })
+
+  @ViewChild('myModalClose2') modalClose2;
+
+  TeamSubmit() {
+    this.modalClose2.nativeElement.click();
+    this._adminservice.editTeam(this.EditTeam.value, this.teamid)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  deleteAchieve(achieveId) {
+    this._adminservice.deleteAchieve(achieveId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
   }
 }

@@ -19,6 +19,7 @@ export class ParentprofileComponent implements OnInit {
 
   currentUser
   userId: number
+  usercode : string
 
   public Players = [];
   public ParentProfile = [];
@@ -52,6 +53,20 @@ export class ParentprofileComponent implements OnInit {
           }
         }
       );
+  }
+
+  addPlayer(){
+    this._parentservice.addPlayer(this.registrationForm.value, this.userId,this.usercode)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success');
+        },
+        error => {
+          alert("Invalid Code")
+          console.error('Error!', error)
+        }
+      )
   }
 
   @ViewChild('myModalClose1') modalClose1;

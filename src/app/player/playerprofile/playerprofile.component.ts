@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../_services/player.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder,Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
@@ -22,16 +22,19 @@ export class PlayerprofileComponent implements OnInit {
   currentUser
 
   constructor(private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
-    private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService,private location: Location) { }
+    private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService, private location: Location) { }
 
   public PlayerTeams = [];
   public PlayerProfile = [];
   public Achievements = [];
+  public Strengths = [];
+  public Weaknesses = [];
   public Fixtures = [];
+  public Parents = [];
 
   instituteId: number
   fixtureId: number
-  tournamentTeamId : number
+  tournamentTeamId: number
 
   ngOnInit(): void {
 
@@ -80,6 +83,32 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
+    this._playerservice.getPlayerStrengths(this.userId)
+      .subscribe((data) => {
+        this.Strengths = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._playerservice.getPlayerWeaknesses(this.userId)
+      .subscribe((data) => {
+        this.Weaknesses = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
     this._playerservice.getPlayerFixtures(this.userId)
       .subscribe((data) => {
         this.Fixtures = data;
@@ -93,12 +122,61 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
+    this._playerservice.getPlayerParents(this.userId)
+      .subscribe((data) => {
+        this.Parents = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
   }
 
-  changeavailability(fixtureId,tournamentTeamId) {
-    this.fixtureId=fixtureId[0]
-    this.tournamentTeamId=tournamentTeamId
-    this._playerservice.ConfirmAvailability(this.PlayerTeams,this.userId,this.fixtureId,this.tournamentTeamId)
+  deleteAchieve(playerAchieveId) {
+    this._playerservice.deletePlayerAchieve(playerAchieveId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  deleteStrengths(strengthId) {
+    this._playerservice.deletePlayerStrength(strengthId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  deleteWeakness(weaknessesId) {
+    this._playerservice.deletePlayerWeakness(weaknessesId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  changeavailability(fixtureId, tournamentTeamId) {
+    this.fixtureId = fixtureId[0]
+    this.tournamentTeamId = tournamentTeamId
+    this._playerservice.ConfirmAvailability(this.PlayerTeams, this.userId, this.fixtureId, this.tournamentTeamId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -128,7 +206,7 @@ export class PlayerprofileComponent implements OnInit {
     }
   }
 
-  confirm(){
+  confirm() {
     if (this.currentUser.RoleId == Role.Parent) {
       return true
     } else {
@@ -145,6 +223,42 @@ export class PlayerprofileComponent implements OnInit {
   achieveSubmit() {
     this.modalClose2.nativeElement.click();
     this._playerservice.addAchievPlayer(this.achieve.value, this.userId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+  strength = this.fbAdmin.group({
+    playerStrengths: ['', [Validators.required, Validators.minLength(3)]],
+  });
+
+  @ViewChild('myModalClose4') modalClose4;
+
+  strengthsSubmit() {
+    this.modalClose4.nativeElement.click();
+    this._playerservice.addStrengthPlayer(this.strength.value, this.userId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success', response)
+        },
+        error => console.error('Error!', error)
+      );
+  }
+
+  weaknesses = this.fbAdmin.group({
+    playerWeaknesses: ['', [Validators.required, Validators.minLength(3)]],
+  });
+
+  @ViewChild('myModalClose5') modalClose5;
+
+  weaknessesSubmit() {
+    this.modalClose5.nativeElement.click();
+    this._playerservice.addWeaknessesPlayer(this.weaknesses.value, this.userId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -183,7 +297,7 @@ export class PlayerprofileComponent implements OnInit {
   @ViewChild('myModalClose3') modalClose3;
 
   close1() {
-    this.modalClose1.nativeElement.click();
+    this.modalClose3.nativeElement.click();
   }
 
   playerSubmit() {
