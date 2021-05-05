@@ -208,7 +208,8 @@ export class AdminteamComponent implements OnInit {
   }
 
   deleteAchieve(achieveId) {
-    this._adminservice.deleteAchieve(achieveId)
+    if (confirm('Are you sure to delete this Achievement?') == true){
+      this._adminservice.deleteAchieve(achieveId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -217,5 +218,6 @@ export class AdminteamComponent implements OnInit {
           console.error('Error!', error)
         }
       )
+    }
   }
 }

@@ -5,6 +5,8 @@ import { AdminService } from '../admin.service';
 import { AuthService } from '../auth.service';
 import { Role } from '../_models/role';
 import { ChatService } from '../_services/chat.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-adminpanel',
@@ -13,8 +15,8 @@ import { ChatService } from '../_services/chat.service';
 })
 export class AdminpanelComponent implements OnInit {
 
-  constructor(private chatService: ChatService,private _adminservice: AdminService, 
-    private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location,private chatService: ChatService, private _adminservice: AdminService,
+    private router: Router, private _authService: AuthService, private fbAdmin: FormBuilder) { }
 
   public Teams = [];
   public Coaches = [];
@@ -25,6 +27,7 @@ export class AdminpanelComponent implements OnInit {
   public InstituteProfile = [];
   public userInfo = [];
   public institute = [];
+  public AdminProfile = [];
 
   searchTeam;
   searchCoach;
@@ -33,6 +36,7 @@ export class AdminpanelComponent implements OnInit {
   currentUser
   name;
   instituteId: number
+  adminId
 
   saveArray = {
     messageContent: '',
@@ -51,6 +55,17 @@ export class AdminpanelComponent implements OnInit {
     this._adminservice.getInstituteProfile()
       .subscribe((data) => {
         this.InstituteProfile = data;
+        this._adminservice.getAdminProfile(this.InstituteProfile[0]?.userId)
+          .subscribe((data) => {
+            this.AdminProfile = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                }
+              }
+            }
+          );
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -173,6 +188,18 @@ export class AdminpanelComponent implements OnInit {
 
   }
 
+  back(){
+    this.location.back()
+  }
+
+  checkadmin() {
+    if (this.currentUser.RoleId==Role.Admin) {
+      return true
+    } else {
+      false
+    }
+  }
+
   checkcricket(sport) {
     if (sport == 'Cricket') {
       return true
@@ -218,6 +245,52 @@ export class AdminpanelComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  checkmale(playerGender) {
+    if (playerGender == 'male') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  checkfemale(playerGender) {
+    if (playerGender == 'female') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  get firstNameAdmin() {
+    return this.EditAdminProfile.get('firstNameAdmin');
+  }
+  get lastNameAdmin() {
+    return this.EditAdminProfile.get('lastNameAdmin');
+  }
+  get teleNoAdmin() {
+    return this.EditAdminProfile.get('teleNoAdmin');
+  }
+
+  EditAdminProfile = this.fbAdmin.group({
+    firstNameAdmin: ['', [Validators.minLength(3)]],
+    lastNameAdmin: ['', [Validators.minLength(3)]],
+    addressAdmin: [''],
+    teleNoAdmin: ['', [Validators.pattern('(07)[0-9]{8}')]]
+  });
+
+  @ViewChild('myModalClose1') modalClose1;
+
+  adminSubmit() {
+    this._adminservice.editProfile(this.EditAdminProfile.value,this.currentUser.userId)
+      .subscribe(
+        response => {
+          this.modalClose1.nativeElement.click();
+        },
+        error => console.error('Error!', error)
+      );
+    this.ngOnInit();
   }
 
 }

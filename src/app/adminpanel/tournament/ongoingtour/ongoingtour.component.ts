@@ -16,16 +16,19 @@ export class OngoingtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,private _authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   public Tournament = [];
   public UpcomingFixtures = [];
   public StartedFixtures = [];
   public FinishedFixtures = [];
   public Summery = [];
+  public PointTable = [];
+  public Structures = [];
   currentUser = this._authService.currentUserValue;
 
   serachFixture;
+  selectedstructure
 
   ngOnInit(): void {
 
@@ -98,6 +101,41 @@ export class OngoingtourComponent implements OnInit {
         }
       );
 
+    this._adminservice.getPointTable(this.tournamentId)
+      .subscribe((data) => {
+        this.PointTable = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getTourStructures(this.tournamentId)
+      .subscribe((data) => {
+        this.Structures = data;
+        this.selectedstructure = this.Structures[0].strutureId[0]
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+  }
+
+  iscreatedadmin() {
+    if (this.Tournament[0]?.userId == this.currentUser.userId) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   show() {

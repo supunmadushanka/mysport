@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="aaa">
 
-                                    <td *ngIf="show()"><button type="button" class="btn btn-success aaa" (click)="starttour(p.tournementId)">Start Tournamet</button></td>
+                                    <td *ngIf="show()  && iscreatedadmin(p.userId)"><button type="button" class="btn btn-success aaa" (click)="starttour(p.tournementId)">Start Tournamet</button></td>
                                     <td><button type="button" class="btn btn-primary aaa pad" (click)="getstructures(p.tournementId[0])">
                                             Info
                                         </button></td>
@@ -65,8 +65,8 @@
                                     {{p.tournamentName}}-{{p.sportName}}<br>
                                 </div>
                                 <div class="aaa">
-                                    <td *ngIf="show()"><button type="button" class="btn btn-info" (click)="finishtour(p.tournementId)">Finish Tournamet</button></td>
-                                    <td *ngIf="show()"><button type="button" class="btn btn-danger" (click)="postponetour(p.tournementId)">Postpone Tournamet</button></td>
+                                    <td *ngIf="show()  && iscreatedadmin(p.userId)"><button type="button" class="btn btn-info" (click)="finishtour(p.tournementId)">Finish Tournamet</button></td>
+                                    <td *ngIf="show()  && iscreatedadmin(p.userId)"><button type="button" class="btn btn-danger" (click)="postponetour(p.tournementId)">Postpone Tournamet</button></td>
                                     <td><button type="button" class="btn btn-primary aaa pad" (click)="getstructures(p.tournementId[0])">
                                             Info
                                         </button></td>
@@ -160,7 +160,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+            <button (click)="close()" type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
         </div>
     </div>
 </div>

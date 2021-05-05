@@ -152,6 +152,7 @@
                                 <th scope="col">Date</th>
                                 <th scope="col">Venue</th>
                                 <th scope="col">Availability</th>
+                                <th scope="col">Reason</th>
                                 <th scope="col">Confirmed</th>
                                 <th *ngIf="confirm()"></th>
                             </tr>
@@ -164,6 +165,7 @@
                                 <td>{{p.fixtureDate | date:'mediumDate'}}</td>
                                 <td>{{p.venue}}</td>
                                 <td>{{p.fixtureAvaial}}</td>
+                                <td>{{p.AvaialReason}}</td>
                                 <td>{{p.Confirm}}</td>
                                 <td *ngIf="confirm()"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
                             </tr>
@@ -301,7 +303,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose6>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -338,7 +340,7 @@
                                     match</small>
                             </div><br>
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
-                            <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                            <button [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
                         </form>
 
                     </div>

@@ -1,3 +1,7 @@
+.accordion-button {
+    height: 1em;
+}
+
 .table {
     width: 90%;
     margin-left: auto;
@@ -9,9 +13,16 @@
     background-color: white;
 }
 
+.col-md-6 {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
 .title {
     color: black;
     font-weight: 600;
+    font-size: 1.2em;
+    text-shadow: 1px 0px rgb(160, 159, 159);
 }
 
 .body {
@@ -54,9 +65,10 @@ td {
 }
 
 .Right {
+    overflow: hidden;
     width: 25%;
     float: right;
-    height: 100%;
+    height: 50em;
     background-image: url('../../assets/bluesky.jpg');
 }
 
@@ -71,14 +83,22 @@ td {
     color: aliceblue;
 }
 
+.col-md-9 {
+    padding-left: 1em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-shadow: 1px 1px white;
+}
+
 .Team {
     display: table;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 20px;
+    margin-top: 0;
     font-weight: 800;
-    font-size: 30px;
-    color: rgb(255, 255, 255);
+    font-size: 50px;
+    color: rgb(16, 41, 150);
+    text-shadow: 2px 2px white;
 }
 
 a {
@@ -286,8 +306,21 @@ a:hover {
 }
 
 //player
-.player {
+.playermale {
     background-image: url('../../assets/allplayer.jpg');
+    height: 4em;
+    width: 80%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 50px 0px rgb(32, 68, 167);
+}
+
+.playerfemale {
+    background-image: url('../../assets/female-player.png');
     height: 4em;
     width: 80%;
     background-size: 60% 100%;
@@ -326,4 +359,31 @@ a:hover {
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px #000000;
+}
+
+.login-page {
+    padding: 6% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 45px;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+body {
+    background-image: linear-gradient(rgb(41, 189, 194), rgb(50, 48, 206));
+}
+
+.modal-dialog {
+    width: 100%;
+}
+
+select option {
+    font-size: 1.5em;
+    margin: 2em;
 }

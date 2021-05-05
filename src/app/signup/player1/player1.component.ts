@@ -36,7 +36,6 @@ export class Player1Component implements OnInit {
     this._adminservice.getInstitutes()
       .subscribe((data) => {
         this.Institutes = data;
-        this.secretcode = data[0]?.secretNo
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -75,6 +74,11 @@ export class Player1Component implements OnInit {
     SecretCode: ['', [Validators.required]],
   })
 
+  setCode(secretNo){
+    alert('hi')
+    alert(secretNo)
+    this.secretcode=secretNo
+  }
   compare() {
     if (this.playerRegistration1.value.SecretCode == this.secretcode) {
       return true
@@ -84,6 +88,12 @@ export class Player1Component implements OnInit {
   }
 
   playerSubmit() {
+    
+    for(let index = 0; index < this.Institutes.length; index++){
+      if(this.Institutes[index].instituteId==this.playerRegistration1.value.PlayerInstitute){
+        this.secretcode=this.Institutes[index].secretNo
+      }
+    }
     if (this.compare()) {
       this._auth.registerUser(this.register)
         .subscribe(

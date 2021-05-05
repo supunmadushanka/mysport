@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../../admin.service';
@@ -144,8 +144,17 @@ export class TournamentComponent implements OnInit {
     }
   }
 
+  iscreatedadmin(userId) {
+    if (userId==this.currentUser.userId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   starttour(tournementId) {
-    this._adminservice.starttournament(tournementId)
+    if (confirm('Are you sure to start this Tournament?') == true){
+      this._adminservice.starttournament(tournementId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -153,10 +162,12 @@ export class TournamentComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+    }
   }
 
   finishtour(tournementId) {
-    this._adminservice.finishtournament(tournementId)
+    if (confirm('Are you sure to finish this Tournament?') == true){
+      this._adminservice.finishtournament(tournementId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -164,10 +175,12 @@ export class TournamentComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+    }
   }
 
   postponetour(tournementId) {
-    this._adminservice.postponetournament(tournementId)
+    if (confirm('Are you sure to postpone this Tournament?') == true){
+      this._adminservice.postponetournament(tournementId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -175,17 +188,28 @@ export class TournamentComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+    }
   }
 
   joinTour(tournementId) {
-    this._adminservice.JoinTournament(this.CreatedTournaments,tournementId)
+    if (confirm('Are you sure to join this Tournament?') == true){
+      this._adminservice.JoinTournament(this.CreatedTournaments,tournementId)
       .subscribe(
         response => {
-          this.ngOnInit();
           console.log('success', response)
         },
         error => console.error('Error!', error)
       );
+    }else{
+
+    }
+    this.ngOnInit();
+  }
+
+  @ViewChild('myModalClose1') modalClose1;
+
+  close(){
+    this.modalClose1.nativeElement.click();
   }
 
   checkcricket(sport) {

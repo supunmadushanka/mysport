@@ -41,6 +41,7 @@ import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
 import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ChatService } from './_services/chat.service';
+import { WaitForEmailComponent } from './wait-for-email/wait-for-email.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ChatService } from './_services/chat.service';
     CoachprofileComponent,
     ConfirmemailComponent,
     ChatboxComponent,
+    WaitForEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -37,12 +37,12 @@ export class OngoingfixtureComponent implements OnInit {
   firstplayer
   secondplayer
   sportId: string
-  extras1:number=0
-  extras2:number=0
-  realextra1:number
-  realextra2:number
-  description1:string
-  description2:string
+  extras1: number = 0
+  extras2: number = 0
+  realextra1: number
+  realextra2: number
+  description1: string
+  description2: string
 
   scoreModel = {
     playerScore: null,
@@ -52,7 +52,7 @@ export class OngoingfixtureComponent implements OnInit {
     status: null
   }
 
-  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location, private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
 
@@ -65,10 +65,10 @@ export class OngoingfixtureComponent implements OnInit {
     this._adminservice.UpcomingFixtureDetails(this.fixtureId)
       .subscribe((data) => {
         this.FixtureDetails = data;
-        this.realextra1=this.FixtureDetails[0]?.extras
-        this.realextra2=this.FixtureDetails[1]?.extras
-        this.description1=this.FixtureDetails[0]?.description
-        this.description2=this.FixtureDetails[1]?.description
+        this.realextra1 = this.FixtureDetails[0]?.extras
+        this.realextra2 = this.FixtureDetails[1]?.extras
+        this.description1 = this.FixtureDetails[0]?.description
+        this.description2 = this.FixtureDetails[1]?.description
 
         this._adminservice.getFixtureTeamPlayers(this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
           .subscribe((data) => {
@@ -202,7 +202,7 @@ export class OngoingfixtureComponent implements OnInit {
 
   }
 
-  back(){
+  back() {
     this.location.back()
   }
 
@@ -221,7 +221,7 @@ export class OngoingfixtureComponent implements OnInit {
     }
   }
 
-  instituteView1(){
+  instituteView1() {
     if (this.Institute[0]?.instituteId == this.firstTeamPlayers[0]?.instituteId[0]) {
       return true
     } else {
@@ -229,7 +229,7 @@ export class OngoingfixtureComponent implements OnInit {
     }
   }
 
-  instituteView2(){
+  instituteView2() {
     if (this.Institute[0]?.instituteId == this.secondTeamPlayers[0]?.instituteId[0]) {
       return true
     } else {
@@ -242,6 +242,14 @@ export class OngoingfixtureComponent implements OnInit {
       return true
     } else {
       return false
+    }
+  }
+
+  iscreatedadmin() {
+    if (this.Tournament[0]?.userId == this.currentUser.userId) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -301,50 +309,53 @@ export class OngoingfixtureComponent implements OnInit {
   }
 
   postponefixture() {
-    this._adminservice.PostponeFixture(this.FixtureDetails, this.fixtureId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-          this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
-        },
-        error => {
-          console.error('Error!', error)
-        }
-      );
+    if (confirm('Are you sure to postpone this fixture?') == true) {
+      this._adminservice.PostponeFixture(this.FixtureDetails, this.fixtureId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+            console.log('success', response)
+            this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        );
+    }
   }
 
   finishfixture() {
+    if (confirm('Are you sure to finish this fixture?') == true) {
+      if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
 
-    if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
+        this.wonteam = this.FixtureDetails[0].tournamentTeamId
+        this.lossteam = this.FixtureDetails[1].tournamentTeamId
+        this.wonscore = this.Total1[0]?.sumScore
+        this.lossscore = this.Total2[0]?.sumScore
 
-      this.wonteam = this.FixtureDetails[0].tournamentTeamId
-      this.lossteam = this.FixtureDetails[1].tournamentTeamId
-      this.wonscore = this.Total1[0]?.sumScore
-      this.lossscore = this.Total2[0]?.sumScore
+        this.wonteamname = this.FixtureDetails[0]?.teamName
 
-      this.wonteamname = this.FixtureDetails[0]?.teamName
+      } else {
 
-    } else {
+        this.wonteam = this.FixtureDetails[1].tournamentTeamId
+        this.lossteam = this.FixtureDetails[0].tournamentTeamId
+        this.wonscore = this.Total2[0]?.sumScore
+        this.lossscore = this.Total1[0]?.sumScore
 
-      this.wonteam = this.FixtureDetails[1].tournamentTeamId
-      this.lossteam = this.FixtureDetails[0].tournamentTeamId
-      this.wonscore = this.Total2[0]?.sumScore
-      this.lossscore = this.Total1[0]?.sumScore
+        this.wonteamname = this.FixtureDetails[1]?.teamName
 
-      this.wonteamname = this.FixtureDetails[1]?.teamName
+      }
 
+      this._adminservice.finishFixture(this.FixtureDetails, this.fixtureId, this.wonteam, this.wonscore, this.lossteam, this.lossscore)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+            console.log('success', response)
+            this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
+          },
+          error => console.error('Error!', error)
+        );
     }
-
-    this._adminservice.finishFixture(this.FixtureDetails, this.fixtureId, this.wonteam, this.wonscore, this.lossteam, this.lossscore)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-          this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
-        },
-        error => console.error('Error!', error)
-      );
   }
 
   finished() {
@@ -366,8 +377,8 @@ export class OngoingfixtureComponent implements OnInit {
   @ViewChild('myModalClose3') modalClose3;
   @ViewChild('myModalClose4') modalClose4;
 
-  submitExtra1(){
-    this._adminservice.updateExtra(this.scoreModel,this.extras1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
+  submitExtra1() {
+    this._adminservice.updateExtra(this.scoreModel, this.extras1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
       .subscribe(
         response => {
           this.modalClose3.nativeElement.click();
@@ -378,8 +389,8 @@ export class OngoingfixtureComponent implements OnInit {
       );
   }
 
-  submitExtra2(){
-    this._adminservice.updateExtra(this.scoreModel,this.extras2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+  submitExtra2() {
+    this._adminservice.updateExtra(this.scoreModel, this.extras2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
       .subscribe(
         response => {
           this.modalClose4.nativeElement.click();
@@ -390,8 +401,8 @@ export class OngoingfixtureComponent implements OnInit {
       );
   }
 
-  submitDescrip1(){
-    this._adminservice.updateDescript(this.scoreModel,this.description1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
+  submitDescrip1() {
+    this._adminservice.updateDescript(this.scoreModel, this.description1, this.fixtureId, this.FixtureDetails[0].tournamentTeamId)
       .subscribe(
         response => {
           this.ngOnInit();
@@ -401,8 +412,8 @@ export class OngoingfixtureComponent implements OnInit {
       );
   }
 
-  submitDescrip2(){
-    this._adminservice.updateDescript(this.scoreModel,this.description2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
+  submitDescrip2() {
+    this._adminservice.updateDescript(this.scoreModel, this.description2, this.fixtureId, this.FixtureDetails[1].tournamentTeamId)
       .subscribe(
         response => {
           this.ngOnInit();

@@ -58,7 +58,7 @@
                         <div *ngFor="let p of Achievements">
                             <div class="achievement">
                                 <div class="content">
-                                    <div>{{p.teamAchievements}}&nbsp;&nbsp;<i (click)="deleteAchieve(p.achieveId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                    <div>{{p.teamAchievements}}&nbsp;&nbsp;<i *ngIf="show()" (click)="deleteAchieve(p.achieveId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
                                     </div>
 
                                 </div>
@@ -89,7 +89,7 @@
                 <div style="font-size: large;font-weight: 600;">Message</div><i class='fas fa-comments' style='font-size:36px'></i>
             </button>
         </div><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+        <i *ngIf="show()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
 
         <div class="details">
             <p><span class="title">Coach Name : </span>{{TeamDetails[0]?.coachFName}} {{TeamDetails[0]?.coachLName}}

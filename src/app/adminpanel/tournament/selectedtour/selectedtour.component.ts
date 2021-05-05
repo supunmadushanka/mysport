@@ -17,11 +17,12 @@ export class SelectedtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,private _authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
   public Tournament = [];
   public UpcomingFixtures = [];
+  public Summery = [];
 
   serachFixture;
 
@@ -44,9 +45,22 @@ export class SelectedtourComponent implements OnInit {
         }
       );
 
-      this._adminservice.getUpcomingFixture(this.tournamentId)
+    this._adminservice.getUpcomingFixture(this.tournamentId)
       .subscribe((data) => {
         this.UpcomingFixtures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getaddedinstitutes(this.tournamentId)
+      .subscribe((data) => {
+        this.Summery = data;
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -61,8 +75,16 @@ export class SelectedtourComponent implements OnInit {
 
   @ViewChild('myModalClose') modalClose;
 
-  closeModel(){
+  closeModel() {
     this.modalClose.nativeElement.click();
+  }
+
+  iscreatedadmin() {
+    if (this.Tournament[0]?.userId == this.currentUser.userId) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   show() {
@@ -71,6 +93,16 @@ export class SelectedtourComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  removeinstitute(instituteId){
+    this._adminservice.removeinstitute(instituteId,this.tournamentId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => console.error('Error!', error)
+      );
   }
 
 }

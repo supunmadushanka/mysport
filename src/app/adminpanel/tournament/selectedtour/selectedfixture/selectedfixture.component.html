@@ -1,5 +1,6 @@
 <div style="width: 100%; overflow: hidden;">
-    <div class="Left">
+    <div class="Left"><br>
+        <a (click)="back()" class="previous round">&#8249; Back</a>
         <div class="Team">
             {{FixtureDetails[0]?.instituteName}} vs {{FixtureDetails[1]?.instituteName}}
         </div>
@@ -30,7 +31,7 @@
                     </div>
                 </div>
 
-                <div style="height: 450px; overflow: auto;">
+                <div style="height: 350px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
                             <div class="Left3">
@@ -44,7 +45,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+                </div><br><span *ngIf="addremoveshow()" class="aaa title">No of Players selected: {{firstTeamPlayers.length}}</span>
             </div>
 
             <div class="tab-pane fade" id="Achievement" role="tabpanel" aria-labelledby="Achievement-tab">
@@ -57,7 +59,7 @@
                     </div>
                 </div>
 
-                <div style="height: 450px; overflow: auto;">
+                <div style="height: 350px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
                             <div class="Left3">
@@ -71,7 +73,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br>
+                <span *ngIf="addremoveshow()" class="aaa title">No of Players selected: {{secondTeamPlayers.length}}</span>
             </div>
 
         </div>
@@ -87,7 +90,7 @@
                 Player</button>
         </div><br>
 
-        <div class="menu" *ngIf="startfixtureshow() && showadmin()">
+        <div class="menu" *ngIf="startfixtureshow() && showadmin() && iscreatedadmin()">
             <button (click)="startfixture()" type="button" class="btn btn-warning">Start Fixture</button>
         </div><br>
 
@@ -99,7 +102,7 @@
             <br>
         </div>
 
-        <div class="menu" *ngIf="addremoveshow() && show()">
+        <div class="menu" *ngIf="addremoveshow() && show() && iscreatedadmin()">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
                 <i class="fa fa-edit" style="font-size:26px" ></i>
             </button>&nbsp;&nbsp;

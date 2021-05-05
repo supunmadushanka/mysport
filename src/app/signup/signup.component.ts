@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
     confirmPassword: ['']
   }, { validator: PasswordValidator });
 
-  onSubmit() {
+  onSubmitt() {
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response => {
@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit {
       );
   }
 
-  onSubmitt() {
+  onSubmit() {
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response => {
@@ -74,6 +74,8 @@ export class SignupComponent implements OnInit {
                 this._auth.sendMail(this.registrationForm.value)
                   .subscribe(
                     response => {
+                      alert('You will recieve a email to confirm your email account')
+                      this.router.navigate(['/waitforemail']);
                       console.log('Success!', response)
                     },
                     error => {

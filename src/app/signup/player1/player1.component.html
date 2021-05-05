@@ -62,9 +62,8 @@
                 </select>
                 <small [class.d-none]="playerRegistration1.get('PlayerStructure').valid || playerRegistration1.get('PlayerStructure').untouched" class="text-danger">Required</small>
             </div><br>
-
             <div class="form-group">
-                <label for="PlayerInstitute">Team Structure</label>
+                <label for="PlayerInstitute">Select Institute</label>
                 <select [class.is-invalid]="playerRegistration1.get('PlayerInstitute').invalid && playerRegistration1.get('PlayerInstitute').touched" formControlName="PlayerInstitute" class="form-control" id="exampleFormControlSelect1">
                     <option class="option" *ngFor="let st of Institutes" [value]=st.instituteId>{{st.instituteName}}
                     </option>

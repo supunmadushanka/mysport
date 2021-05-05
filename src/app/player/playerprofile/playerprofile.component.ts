@@ -138,52 +138,60 @@ export class PlayerprofileComponent implements OnInit {
   }
 
   deleteAchieve(playerAchieveId) {
-    this._playerservice.deletePlayerAchieve(playerAchieveId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-        },
-        error => {
-          console.error('Error!', error)
-        }
-      )
+    if (confirm('Are you sure to delete this Achievement?') == true) {
+      this._playerservice.deletePlayerAchieve(playerAchieveId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
   }
 
   deleteStrengths(strengthId) {
-    this._playerservice.deletePlayerStrength(strengthId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-        },
-        error => {
-          console.error('Error!', error)
-        }
-      )
+    if (confirm('Are you sure to delete this Strength?') == true) {
+      this._playerservice.deletePlayerStrength(strengthId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
   }
 
   deleteWeakness(weaknessesId) {
-    this._playerservice.deletePlayerWeakness(weaknessesId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-        },
-        error => {
-          console.error('Error!', error)
-        }
-      )
+    if (confirm('Are you sure to delete this Strength?') == true) {
+      this._playerservice.deletePlayerWeakness(weaknessesId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
   }
 
   changeavailability(fixtureId, tournamentTeamId) {
-    this.fixtureId = fixtureId[0]
-    this.tournamentTeamId = tournamentTeamId
-    this._playerservice.ConfirmAvailability(this.PlayerTeams, this.userId, this.fixtureId, this.tournamentTeamId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-        },
-        error => console.error('Error!', error)
-      );
+    if (confirm('Are you sure to confirm this availability?') == true) {
+      this.fixtureId = fixtureId[0]
+      this.tournamentTeamId = tournamentTeamId
+      this._playerservice.ConfirmAvailability(this.PlayerTeams, this.userId, this.fixtureId, this.tournamentTeamId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+            console.log('success', response)
+          },
+          error => console.error('Error!', error)
+        );
+    }
   }
 
   navigateTeam(teamId) {
@@ -306,6 +314,7 @@ export class PlayerprofileComponent implements OnInit {
         response => {
           this.ngOnInit();
           console.log('success');
+          this.playerRegistration1.reset();
         },
         error => {
           console.error('Error!', error)
@@ -322,17 +331,22 @@ export class PlayerprofileComponent implements OnInit {
     confirmPassword: ['']
   }, { validator: PasswordValidator });
 
+  @ViewChild('myModalClose6') modalClose6;
+
+
   onSubmit() {
     this._playerservice.changePassword(this.registrationForm.value, this.userId)
       .subscribe(
         response => {
           this.ngOnInit();
+          this.registrationForm.reset();
           console.log('success');
         },
         error => {
           console.error('Error!', error)
         }
       )
+    this.modalClose6.nativeElement.click();
   }
 
 }

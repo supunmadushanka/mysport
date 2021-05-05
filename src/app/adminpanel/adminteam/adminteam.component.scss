@@ -15,11 +15,11 @@
 }
 
 .Right {
+    overflow: hidden;
     width: 25%;
     float: right;
-    height: 100%;
+    height: 43em;
     background-image: url('../../../assets/bluesky.jpg');
-    background-color: rgb(82, 109, 226);
 }
 
 .menu {

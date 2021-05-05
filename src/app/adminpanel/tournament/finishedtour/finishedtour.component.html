@@ -2,50 +2,54 @@
     <div class="Left">
         <br>
         <a routerLink="/tournament" class="previous round">&#8249; Back</a>
+        <div class="name aaa"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
+            <img class="rotate30" src="\assets\ball.png" width="60" height="60">
+        </div>
+
+        <br>
+        <div class="aaa">
+            <i class="fa fa-search" style="color: rgb(32, 41, 158);font-size: 1.5em;"></i>&nbsp;&nbsp;
+            <div class="search">
+                <input class="form-control" type="text" name="search" [(ngModel)]="serachFixture" autocomplete="off" placeholder="Search any">
+            </div>
+            <div class="teambutton">
+                <button type="button" (click)="serachFixture=''" class="btn btn-warning">Clear</button>&nbsp;
+            </div>
+        </div>
+
+        <div style="height: 350px; overflow: auto;">
+            <div style="padding-bottom: 1em;">
+                <div *ngFor="let p of FinishedFixtures | filter:serachFixture" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
+                    <div class="Left1">
+                        <div class="fixtureTitle">
+                            {{p.instituteone}} vs<br> {{p.institutetwo}}
+                        </div>
+                    </div>
+                    <div class="Right1">
+                        <div class="fixturdetails">
+                            <div>▫ {{p.strutureName}}</div>
+                            <div>▫ {{p.fixtureTime.substring(0,8)}}</div>
+                            <div>▫ {{p.fixtureDate | date:'mediumDate'}}</div>
+                            <div>▫ {{p.venue}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="points">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{wininstitute}} Won
+        </div>
     </div>
     <div class="Right">
-        <div class="summery"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#summery">Tournament<br>summery</button><br>
+        <div class="summery"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#summery">Tournament<br>summery</button><br><br>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Point
+                table</button>
         </div>
     </div>
 </div>
-<div class="name aaa"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
-    <img class="rotate30" src="\assets\ball.png" width="60" height="60">
-</div>
 
-<br>
-<div class="aaa">
-    <i class="fa fa-search" style="color: rgb(32, 41, 158);font-size: 1.5em;"></i>&nbsp;&nbsp;
-    <div class="search">
-        <input class="form-control" type="text" name="search" [(ngModel)]="serachFixture" autocomplete="off" placeholder="Search any">
-    </div>
-    <div class="teambutton">
-        <button type="button" (click)="serachFixture=''" class="btn btn-warning">Clear</button>&nbsp;
-    </div>
-</div>
 
-<div style="height: 350px; overflow: auto;">
-    <div style="padding-bottom: 1em;">
-        <div *ngFor="let p of FinishedFixtures | filter:serachFixture" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
-            <div class="Left1">
-                <div class="fixtureTitle">
-                    {{p.instituteone}} vs<br> {{p.institutetwo}}
-                </div>
-            </div>
-            <div class="Right1">
-                <div class="fixturdetails">
-                    <div>▫ {{p.strutureName}}</div>
-                    <div>▫ {{p.fixtureTime.substring(0,8)}}</div>
-                    <div>▫ {{p.fixtureDate | date:'mediumDate'}}</div>
-                    <div>▫ {{p.venue}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-<div class="points">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{wininstitute}} Won
-</div>
 
 
 
@@ -72,6 +76,50 @@
                             <tr *ngFor="let p of Summery">
                                 <td>{{p.instituteName}}</td>
                                 <td>{{p.point}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Point Table</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="aaa">
+                    <select [(ngModel)]="selectedstructure" class="form-control" id="structure">
+                        <option class="option" *ngFor="let st of Structures" [value]=st.strutureId[0]>{{st.strutureName}}
+                        </option>
+                    </select>
+                </div>
+                <br>
+                <div style="height: 350px; overflow: auto;">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr style="height: 1em;">
+                                <th scope="col">Institute</th>
+                                <th scope="col">Team</th>
+                                <th scope="col">Wins</th>
+                                <th scope="col">Losses</th>
+                                <th scope="col">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody class="body">
+                            <tr *ngFor="let p of PointTable | filter:selectedstructure">
+                                <td>{{p.instituteName}}</td>
+                                <td>{{p.teamName}}</td>
+                                <td>{{p.wins}}</td>
+                                <td>{{p.loss}}</td>
+                                <td>{{p.sumpoint}}</td>
                             </tr>
                         </tbody>
                     </table>

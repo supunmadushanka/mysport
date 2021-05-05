@@ -19,9 +19,12 @@ export class FinishedtourComponent implements OnInit {
   public Tournament = [];
   public FinishedFixtures = [];
   public Summery = [];
+  public PointTable = [];
+  public Structures = [];
 
   wininstitute: string
   serachFixture
+  selectedstructure
 
   ngOnInit(): void {
 
@@ -64,7 +67,34 @@ export class FinishedtourComponent implements OnInit {
         } else {
           this.wininstitute = this.Summery[1]?.instituteName
         }
-        
+
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getPointTable(this.tournamentId)
+      .subscribe((data) => {
+        this.PointTable = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getTourStructures(this.tournamentId)
+      .subscribe((data) => {
+        this.Structures = data;
+        this.selectedstructure=this.Structures[0].strutureId[0]
       },
         err => {
           if (err instanceof HttpErrorResponse) {

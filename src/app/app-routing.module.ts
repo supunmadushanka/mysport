@@ -32,6 +32,7 @@ import { ParentprofileComponent } from './parentprofile/parentprofile.component'
 import { CoachprofileComponent } from './institutecoach/coachprofile/coachprofile.component';
 import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
 import { ChatboxComponent } from './adminpanel/adminteam/chatbox/chatbox.component';
+import { WaitForEmailComponent } from './wait-for-email/wait-for-email.component';
 
 
 const routes: Routes = [
@@ -60,10 +61,14 @@ const routes: Routes = [
     component: Player1Component
   },
   {
+    path: 'waitforemail',
+    component: WaitForEmailComponent
+  },
+  {
     path: 'adminpanel',
     component: AdminpanelComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { roles: [Role.Admin,Role.Coach,Role.Player] }
   },
   {
     path: 'player',

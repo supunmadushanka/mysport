@@ -155,7 +155,7 @@ export class ChatboxComponent implements OnInit, AfterViewChecked {
   }
 
   IsAdmin(RoleId){
-    if(RoleId==Role.Admin || RoleId==Role.Admin){
+    if(RoleId==Role.Admin || RoleId==Role.Coach){
       return true
     }else{
       return false

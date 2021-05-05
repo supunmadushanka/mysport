@@ -9,7 +9,7 @@
                             <div class="media-body pad-hor">
                                 <div class="speech">
                                     <a class="media-heading"><span [class.text-danger]="IsAdmin(message.RoleId)">{{message.userName}}</span></a>
-                                    <p>{{message.messageContent}}</p>
+                                    <p><span [class.text-danger]="isAnnouncment(message.teamId)">{{message.messageContent}}</span></p>
                                     <p class="speech-time">
                                         <i class="fa fa-clock-o fa-fw"></i>{{message.messageDateTime | date:'short'}}
                                     </p>

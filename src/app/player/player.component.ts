@@ -192,6 +192,7 @@ export class PlayerComponent implements OnInit {
         response => {
           this.ngOnInit();
           console.log('success');
+          this.playerRegistration1.reset();
         },
         error => {
           console.error('Error!', error)
@@ -234,14 +235,16 @@ export class PlayerComponent implements OnInit {
 
   changeavailability() {
     this.modalClose2.nativeElement.click();
-    this._playerservice.ChangeAvailability(this.Reason.value, this.userId, this.fixtureId, this.tournamentTeamId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-        },
-        error => console.error('Error!', error)
-      );
+    if (confirm('Are you sure to change this availability?') == true) {
+      this._playerservice.ChangeAvailability(this.Reason.value, this.userId, this.fixtureId, this.tournamentTeamId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+            console.log('success', response)
+          },
+          error => console.error('Error!', error)
+        );
+    }
   }
 
 }

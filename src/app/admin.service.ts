@@ -204,6 +204,29 @@ export class AdminService {
     return this.http.get<any>(_url, { params });
   }
 
+  getPointTable(tournamentId) {
+    let params = new HttpParams()
+      .set('tournamentId', tournamentId)
+
+    let _url = environment.baseURL + "getpointtable";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getTourStructures(tournamentId) {
+    let params = new HttpParams()
+      .set('tournamentId', tournamentId)
+
+    let _url = environment.baseURL + "gettourstructures";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getaddedinstitutes(tournamentId) {
+    let params = new HttpParams()
+      .set('tournamentId', tournamentId)
+    let _url = environment.baseURL + "getaddedinstitutes";
+    return this.http.get<any>(_url, { params });
+  }
+
   getNewTour() {
     let _url = environment.baseURL + "getnewtournament";
     return this.http.get<any>(_url);
@@ -243,6 +266,14 @@ export class AdminService {
       .set('tournementId', tournementId)
 
     let _url = environment.baseURL + "getstructures";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getAdminProfile(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+
+    let _url = environment.baseURL + "getadminprofile";
     return this.http.get<any>(_url, { params });
   }
 
@@ -301,6 +332,11 @@ export class AdminService {
     return this.http.post<any>(this.createtournament, user)
   }
 
+  removeinstitute(instituteId,tournamentId) {
+    let _url = environment.baseURL + "removeinstitute/";
+    return this.http.delete<any>(_url + instituteId+"/"+tournamentId )
+  }
+
   starttournament(tournementId) {
     let params = new HttpParams()
       .set('tournementId', tournementId)
@@ -329,6 +365,13 @@ export class AdminService {
     let _url = environment.baseURL + "editfixture";
     let params = new HttpParams()
       .set('fixtureId', fixtureId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  editProfile(user, userId) {
+    let _url = environment.baseURL + "editadminprofile";
+    let params = new HttpParams()
+      .set('userId', userId)
     return this.http.post<any>(_url, user, { params })
   }
 
@@ -421,5 +464,7 @@ export class AdminService {
   createplayer(user) {
     return this.http.post<any>(this._createplayer, user)
   }
+
+
 
 }

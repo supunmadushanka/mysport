@@ -134,8 +134,14 @@ export class SelectedfixtureComponent implements OnInit {
 
   }
 
+  back(){
+    this.location.back()
+  }
+
   ReasonAlert(Reason) {
-    alert(Reason);
+    if(this.show()){
+      alert(Reason);
+    } 
   }
 
   show() {
@@ -148,6 +154,14 @@ export class SelectedfixtureComponent implements OnInit {
 
   showadmin() {
     if (this.currentUser.RoleId == Role.Admin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  iscreatedadmin() {
+    if (this.Tournament[0]?.userId==this.currentUser.userId) {
       return true;
     } else {
       return false;
@@ -201,24 +215,26 @@ export class SelectedfixtureComponent implements OnInit {
   }
 
   startfixture() {
-    if(this.disablestart()){
-      this._adminservice.startFixture(this.FixtureDetails, this.fixtureId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-          console.log('success', response)
-          this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
-        },
-        error => console.error('Error!', error)
-      );
-    }else{
-      alert('Fill '+this.noofplayers+' players')
+    if (confirm('Are you sure to start this fixture?') == true){
+      if(this.disablestart()){
+        this._adminservice.startFixture(this.FixtureDetails, this.fixtureId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+            console.log('success', response)
+            this.router.navigate(['/ongoingtour', this.FixtureDetails[1].tournementId]);
+          },
+          error => console.error('Error!', error)
+        );
+      }else{
+        alert('Fill '+this.noofplayers+' players')
+      }
     }
-    
   }
 
   deleteFixture() {
-    this._adminservice.deleteFixture(this.fixtureId)
+    if (confirm('Are you sure to delete this fixture?') == true){
+      this._adminservice.deleteFixture(this.fixtureId)
       .subscribe(
         response => {
           console.log('success', response)
@@ -227,6 +243,7 @@ export class SelectedfixtureComponent implements OnInit {
         error => console.error('Error!', error)
       );
     this.ngOnInit();
+    }
   }
 
   EditFixture = this.fbAdmin.group({

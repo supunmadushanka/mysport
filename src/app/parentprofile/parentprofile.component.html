@@ -123,12 +123,12 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="firstNameParent">First Name</label>
-                                    <input [class.is-invalid]="firstNameParent.invalid && firstNameParent.touched  " formControlName="firstNameParent" type="text" class="form-control form-control-lg" id="firstNameParent" placeholder="First name">
+                                    <input [class.is-invalid]="firstNameParent.invalid && firstNameParent.touched  " formControlName="firstNameParent" type="text" class="form-control form-control-lg" id="firstNameParent" placeholder="{{ParentProfile[0]?.parentFName}}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="secondNameParent">Last Name</label>
-                                    <input [class.is-invalid]="secondNameParent.invalid && secondNameParent.touched" formControlName="secondNameParent" type="text" class="form-control form-control-lg" id="secondNameParent" placeholder="Last name">
+                                    <input [class.is-invalid]="secondNameParent.invalid && secondNameParent.touched" formControlName="secondNameParent" type="text" class="form-control form-control-lg" id="secondNameParent" placeholder="{{ParentProfile[0]?.parentLName}}">
                                 </div>
 
                                 <div *ngIf="(firstNameParent.touched && firstNameParent.invalid) || secondNameParent.invalid && secondNameParent.touched">
@@ -141,14 +141,14 @@
 
                             <div class="form-group">
                                 <label for="AddressParent">Address</label>
-                                <input [class.is-invalid]="parentRegistration.get('AddressParent').invalid && parentRegistration.get('AddressParent').touched" formControlName="AddressParent" type="text" class="form-control form-control-lg" id="AddressParent" placeholder="1234 Main St">
+                                <input [class.is-invalid]="parentRegistration.get('AddressParent').invalid && parentRegistration.get('AddressParent').touched" formControlName="AddressParent" type="text" class="form-control form-control-lg" id="AddressParent" placeholder="{{ParentProfile[0]?.parentAddress}}">
                                 <small [class.d-none]="parentRegistration.get('AddressParent').valid || parentRegistration.get('AddressParent').untouched" class="text-danger">Address required</small>
                             </div><br>
 
 
                             <div class="form-group">
                                 <label for="teleNoParent">Telephone Number</label>
-                                <input [class.is-invalid]="teleNoParent.invalid && teleNoParent.touched" formControlName="teleNoParent" type="tel" class="form-control form-control-lg" id="teleNoParent" placeholder="+94 71 2345678">
+                                <input [class.is-invalid]="teleNoParent.invalid && teleNoParent.touched" formControlName="teleNoParent" type="tel" class="form-control form-control-lg" id="teleNoParent" placeholder="{{ParentProfile[0]?.ParentteleNum}}">
 
                                 <div *ngIf="teleNoParent.invalid && teleNoParent.touched">
                                     <small *ngIf="teleNoParent.errors?.required" class="text-danger">Telephone number
