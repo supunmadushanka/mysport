@@ -7,6 +7,7 @@ import { Role } from '../_models/role';
 import { ChatService } from '../_services/chat.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common'
+import { PasswordValidator } from '../shared/password.validator';
 
 @Component({
   selector: 'app-adminpanel',
@@ -16,7 +17,7 @@ import { Location } from '@angular/common'
 export class AdminpanelComponent implements OnInit {
 
   constructor(private location: Location,private chatService: ChatService, private _adminservice: AdminService,
-    private router: Router, private _authService: AuthService, private fbAdmin: FormBuilder) { }
+    private router: Router, private _authService: AuthService, private fbAdmin: FormBuilder,private fb2: FormBuilder) { }
 
   public Teams = [];
   public Coaches = [];
@@ -291,6 +292,34 @@ export class AdminpanelComponent implements OnInit {
         error => console.error('Error!', error)
       );
     this.ngOnInit();
+  }
+
+  @ViewChild('myModalClose3') modalClose3;
+
+  close1() {
+    this.modalClose3.nativeElement.click();
+  }
+
+  get password() {
+    return this.registrationForm.get('password');
+  }
+
+  registrationForm = this.fb2.group({
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.maxLength, Validators.pattern('[a-zA-Z1-9]*')]],
+    confirmPassword: ['']
+  }, { validator: PasswordValidator });
+
+  onSubmit() {
+    this._adminservice.changePassword(this.registrationForm.value, this.currentUser.userId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+          console.log('success');
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
   }
 
 }

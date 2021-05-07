@@ -6,6 +6,7 @@ import { FormBuilder,Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-coachprofile',
@@ -14,7 +15,7 @@ import { AuthService } from '../../auth.service';
 })
 export class CoachprofileComponent implements OnInit {
 
-  constructor(private _authService: AuthService, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
+  constructor(private location: Location,private _authService: AuthService, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
 
   userId: number
   private sub: any;
@@ -116,6 +117,20 @@ export class CoachprofileComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  deleteCoach(){
+    if (confirm('Befor deleting coach make sure to assign new coach to deleting coach teams\nAre you sure to delete Coach?') == true) {
+      this._coachservice.deleteCoach(this.userId)
+        .subscribe(
+          response => {
+            this.location.back()
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
   }
 
 }

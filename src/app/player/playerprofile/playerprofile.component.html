@@ -210,7 +210,16 @@
             <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
                 Password</button><br>
         </div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i><br>
+
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
+        </button>&nbsp;&nbsp;
+
+        <button type="button" class="btn btn-danger" (click)="deletePlayer()">
+            <i style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+        </button>
 
         <div class="details">
             <p><span class="title">Name : </span><span class="teamvalue">{{PlayerProfile[0]?.playerFName}} {{PlayerProfile[0]?.playerLName}}</span></p>
@@ -411,17 +420,26 @@
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="heightPlayer">
                                     Height</label>&nbsp;&nbsp;
-                                <input formControlName="heightPlayer" class="form-check-input" type="number" name="height" id="heightPlayer" step="1" min="0">cm
+                                <input formControlName="heightPlayer" type="number" name="height" id="heightPlayer" step="1" min="0">cm
                             </div>
                             <small [class.d-none]="playerRegistration1.get('heightPlayer').valid || playerRegistration1.get('heightPlayer').untouched" class="text-danger"><br>Height required</small>
                             <br><br>
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label" for="weightPlayer">
                                     Weight</label>&nbsp;&nbsp;
-                                <input formControlName="weightPlayer" class="form-check-input" type="number" name="height" id="weightPlayer" step="0.01" min="0">Kg
+                                <input formControlName="weightPlayer" type="number" name="height" id="weightPlayer" step="0.01" min="0">Kg
                             </div>
                             <small [class.d-none]="playerRegistration1.get('weightPlayer').valid || playerRegistration1.get('weightPlayer').untouched" class="text-danger"><br>Weight required</small>
-                            <br><br><br>
+                            <br><br>
+
+                            <div class="form-group">
+                                <label for="PlayerStructure">Team Structure</label>
+                                <select [class.is-invalid]="playerRegistration1.get('PlayerStructure').invalid && playerRegistration1.get('PlayerStructure').touched" formControlName="PlayerStructure" class="form-control" id="exampleFormControlSelect1">
+                                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}</option>
+                                </select>
+                                <small class="text-danger">After changing structure player will remove from all teams</small>
+                            </div><br>
+
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
                             <button (click)="close()" type="submit" class="btn btn-primary">Submit</button>
                         </form>

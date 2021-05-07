@@ -36,4 +36,9 @@ export class CoachService {
       .set('userId', userId)
     return this.http.post<any>(_url, user, { params })
   }
+
+  deleteCoach(userId){
+    let _url = environment.baseURL+"deletecoach/";
+    return this.http.delete<any>(_url + userId )
+  }
 }

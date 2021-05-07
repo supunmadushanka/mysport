@@ -36,7 +36,15 @@
             <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
                 Password</button><br>
         </div><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i><br>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
+        </button>&nbsp;&nbsp;
+
+        <button type="button" class="btn btn-danger" (click)="deleteCoach()">
+            <i style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+        </button>
+
         <div class="details">
             <p><span class="title">Name : </span><span class="teamvalue">{{CoachProfile[0]?.coachFName}} {{CoachProfile[0]?.coachLName}}</span></p>
             <p><span class="title">Address : </span><span class="teamvalue">{{CoachProfile[0]?.coachAddress}}</span></p>

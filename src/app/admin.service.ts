@@ -465,6 +465,11 @@ export class AdminService {
     return this.http.post<any>(this._createplayer, user)
   }
 
-
+  changePassword(user, userId) {
+    let _url= environment.baseURL+"changePassword";
+    let params = new HttpParams()
+      .set('userId', userId)
+    return this.http.post<any>(_url, user, { params })
+  }
 
 }

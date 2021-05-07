@@ -8,6 +8,7 @@ import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
 import { Role } from '../../_models/role';
 import { Location } from '@angular/common'
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-playerprofile',
@@ -21,7 +22,7 @@ export class PlayerprofileComponent implements OnInit {
 
   currentUser
 
-  constructor(private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
+  constructor(private _adminservice: AdminService,private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
     private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService, private location: Location) { }
 
   public PlayerTeams = [];
@@ -31,6 +32,7 @@ export class PlayerprofileComponent implements OnInit {
   public Weaknesses = [];
   public Fixtures = [];
   public Parents = [];
+  public Structures = [];
 
   instituteId: number
   fixtureId: number
@@ -135,6 +137,19 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
+      this._adminservice.getStructure()
+      .subscribe((data) => {
+        this.Structures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
   }
 
   deleteAchieve(playerAchieveId) {
@@ -171,6 +186,20 @@ export class PlayerprofileComponent implements OnInit {
         .subscribe(
           response => {
             this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
+  }
+
+  deletePlayer() {
+    if (confirm('Are you sure to delete Player?') == true) {
+      this._playerservice.deletePlayer(this.userId)
+        .subscribe(
+          response => {
+            this.location.back()
           },
           error => {
             console.error('Error!', error)
@@ -294,6 +323,7 @@ export class PlayerprofileComponent implements OnInit {
     heightPlayer: [''],
     weightPlayer: [''],
     bloodSelect: [''],
+    PlayerStructure:['']
   })
 
   @ViewChild('myModalClose1') modalClose1;

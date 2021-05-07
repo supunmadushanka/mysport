@@ -137,4 +137,9 @@ export class PlayerService {
     let _url = environment.baseURL+"deleteplayerweakness/";
     return this.http.delete<any>(_url + weaknessesId )
   }
+
+  deletePlayer(userId){
+    let _url = environment.baseURL+"deleteplayer/";
+    return this.http.delete<any>(_url + userId )
+  }
 }

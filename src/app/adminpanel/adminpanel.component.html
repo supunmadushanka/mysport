@@ -125,12 +125,15 @@
 
     <div class="Right"><br>
         <div class="menu" *ngIf="checkadmin()">
-            <button type="button" class="btn btn-dark" routerLink="/tournament">Tournaments</button>
+            <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournaments</button>
         </div><br>
 
         <div class="menu" *ngIf="checkadmin()">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Announcement</button>
+            <button type="button" class="btn mystyle btn-block btn-outline-light" data-toggle="modal" data-target="#exampleModal">Announcement</button>
         </div><br>
+
+        <button *ngIf="checkadmin()" type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#changepassword">Change
+            Password</button><br>
 
         <div class="col-md-8 aaa">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -287,6 +290,62 @@
                             <button [disabled]="EditAdminProfile.invalid" type="submit" class="btn btn-primary">Submit</button>
 
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="changepasswordTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-page">
+                    <div class="form">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group">
+                                <label for="signupPassword1">Enter new password</label>
+                                <input [class.is-invalid]="password.invalid && password.touched" formControlName="password" type="password" class="form-control form-control-lg" id="signupPassword1" required aria-describedby="passwordHelpsignup" required>
+
+                                <div *ngIf="password.invalid && password.touched;else elseBlock2">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                    <small *ngIf="password.errors?.minlength|| password.errors?.maxlength" class="text-danger">Your password must
+                                        be 8-20 characters long<br></small>
+                                    <small *ngIf="password.errors?.pattern" class="text-danger">must not contain spaces,
+                                        special characters, or
+                                        emoji</small>
+                                </div>
+
+                                <ng-template #elseBlock2>
+                                    <small id="passwordHelpsignup" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and
+                                        must not contain spaces,
+                                        special characters, or emoji.
+                                    </small>
+                                </ng-template>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword2">Re-enter Password</label>
+                                <input [class.is-invalid]="registrationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control form-control-lg" id="signupPassword2" required>
+
+                                <small class="text-danger" *ngIf="registrationForm.errors?.misMatch">Password do not
+                                    match</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button (click)="close1()" [disabled]="registrationForm.invalid" type="submit" class="btn btn-primary">Change</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
