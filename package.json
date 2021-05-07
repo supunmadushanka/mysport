@@ -14,6 +14,11 @@
         "node": "14.5.0",
         "npm": "6.14.5"
     },
+    "budgets": [{
+        "type": "initial",
+        "maximumWarning": "4mb",
+        "maximumError": "5mb"
+    }],
     "private": true,
     "dependencies": {
         "@angular/animations": "~10.0.4",
