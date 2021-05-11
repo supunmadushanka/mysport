@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class HomepageService {
 
   private _sendreview1 = environment.baseURL+"sendreview";
-  private _sendreview = 'https://mysport-codefreacks.herokuapp.com/sendreview';
+  private _sendreview = 'https://testserver-codefreaks.herokuapp.com/test';
 
   constructor(private http: HttpClient) { }
 

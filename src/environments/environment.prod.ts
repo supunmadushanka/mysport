@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseURL:"http://localhost:3000/api/",
+  baseURL:"https://mysport-codefreaks-server.herokuapp.com/api/",
   SOCKET_ENDPOINT: 'http://localhost:3001'
 };
