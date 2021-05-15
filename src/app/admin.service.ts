@@ -35,6 +35,27 @@ export class AdminService {
     return this.http.get<any>(_url, { params });
   }
 
+  getTeamTourUpcoming(teamId) {
+    let params = new HttpParams()
+      .set('teamId', teamId)
+    let _url = environment.baseURL + "getteamtourupcoming";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getTeamTourOngoing(teamId) {
+    let params = new HttpParams()
+      .set('teamId', teamId)
+    let _url = environment.baseURL + "getteamtourongoing";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getTeamTourFinished(teamId) {
+    let params = new HttpParams()
+      .set('teamId', teamId)
+    let _url = environment.baseURL + "getteamtourfinished";
+    return this.http.get<any>(_url, { params });
+  }
+
   getaddplayers(teamId) {
     let params = new HttpParams()
       .set('teamId', teamId)
@@ -201,6 +222,14 @@ export class AdminService {
       .set('tournamentId', tournamentId)
 
     let _url = environment.baseURL + "getsummery";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getInstituteInfo(instituteId) {
+    let params = new HttpParams()
+      .set('instituteId', instituteId)
+
+    let _url = environment.baseURL + "getinstituteinfo";
     return this.http.get<any>(_url, { params });
   }
 

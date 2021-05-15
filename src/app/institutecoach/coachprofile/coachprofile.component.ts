@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoachService } from '../../_services/coach.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder,Validators } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { ViewChild } from '@angular/core';
 import { PasswordValidator } from '../../shared/password.validator';
 import { AuthService } from '../../auth.service';
@@ -15,7 +15,7 @@ import { Location } from '@angular/common'
 })
 export class CoachprofileComponent implements OnInit {
 
-  constructor(private location: Location,private _authService: AuthService, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
+  constructor(private location: Location, private _authService: AuthService, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _coachservice: CoachService, private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder) { }
 
   userId: number
   private sub: any;
@@ -119,7 +119,7 @@ export class CoachprofileComponent implements OnInit {
       );
   }
 
-  deleteCoach(){
+  deleteCoach() {
     if (confirm('Befor deleting coach make sure to assign new coach to deleting coach teams\nAre you sure to delete Coach?') == true) {
       this._coachservice.deleteCoach(this.userId)
         .subscribe(
@@ -130,6 +130,31 @@ export class CoachprofileComponent implements OnInit {
             console.error('Error!', error)
           }
         )
+
+    }
+  }
+
+  checkcricket(sport) {
+    if (sport == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe(sport) {
+    if (sport == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby(sport) {
+    if (sport == 'Rugby') {
+      return true
+    } else {
+      false
     }
   }
 

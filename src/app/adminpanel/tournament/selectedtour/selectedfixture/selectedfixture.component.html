@@ -82,36 +82,37 @@
 
     </div>
     <div class="Right">
-        <br>
-        <div class="menu" *ngIf="addremoveshow() && show()">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
-                Player</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
-                Player</button>
-        </div><br>
-
-        <div class="menu" *ngIf="startfixtureshow() && showadmin() && iscreatedadmin()">
-            <button (click)="startfixture()" type="button" class="btn btn-warning">Start Fixture</button>
-        </div><br>
-
-        <div class="details">
-            <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
-            <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,5)}}</p>
-            <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
-            <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+        <div class="blur">
             <br>
-        </div>
+            <div class="menu" *ngIf="addremoveshow() && show()">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
+                Player</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
+                Player</button>
+            </div><br>
 
-        <div class="menu" *ngIf="addremoveshow() && show() && iscreatedadmin()">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <div class="menu" *ngIf="startfixtureshow() && showadmin() && iscreatedadmin()">
+                <button (click)="startfixture()" type="button" class="btn btn-warning">Start Fixture</button>
+            </div><br>
+
+            <div class="details">
+                <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+                <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,5)}}</p>
+                <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+                <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+                <br>
+            </div>
+
+            <div class="menu" *ngIf="addremoveshow() && show() && iscreatedadmin()">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
                 <i class="fa fa-edit" style="font-size:26px" ></i>
             </button>&nbsp;&nbsp;
 
-            <button type="button" class="btn btn-danger" (click)="deleteFixture()">
+                <button type="button" class="btn btn-danger" (click)="deleteFixture()">
                 <i style="font-size: 1.5em;" class="fa fa-trash pointer"></i>
             </button>
-        </div><br>
-
+            </div><br>
+        </div>
     </div>
 </div>
 

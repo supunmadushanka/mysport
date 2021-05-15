@@ -131,4 +131,20 @@ export class ParentprofileComponent implements OnInit {
     this.ngOnInit();
   }
 
+  checkmale(playerGender) {
+    if (playerGender == 'male') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  checkfemale(playerGender) {
+    if (playerGender == 'female') {
+      return true
+    } else {
+      return false
+    }
+  }
+
 }

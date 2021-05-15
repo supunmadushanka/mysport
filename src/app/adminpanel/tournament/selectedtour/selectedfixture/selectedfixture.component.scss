@@ -8,7 +8,14 @@
     width: 25%;
     float: right;
     height: 43em;
-    background-image: url('../../../../../assets/bluesky.jpg');
+    background-image: url('../../../../../assets/stadium.jpg');
+    background-position: center 30%;
+    background-size: 50%;
+    background-attachment: fixed;
+}
+
+.blur {
+    backdrop-filter: blur(2px);
 }
 
 .menu {
@@ -58,15 +65,15 @@ td {
     font-weight: 700;
     margin-left: 10%;
     font-size: 20px;
-    color: rgb(255, 255, 255);
+    color: rgb(216, 212, 212);
     text-shadow: 1px 1px #000000;
 }
 
 .title {
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: 800;
     font-size: 1.2em;
-    text-shadow: 1px 1px #ffffff;
+    text-shadow: 2px 1px #000000;
 }
 
 .Team {

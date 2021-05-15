@@ -123,94 +123,95 @@
 
     </div>
 
-    <div class="Right"><br>
-        <div class="menu" *ngIf="checkadmin()">
-            <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournaments</button>
-        </div><br>
+    <div class="Right">
+        <div class="blur"><br>
+            <div class="menu" *ngIf="checkadmin()">
+                <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournaments</button>
+            </div><br>
 
-        <div class="menu" *ngIf="checkadmin()">
-            <button type="button" class="btn mystyle btn-block btn-outline-light" data-toggle="modal" data-target="#exampleModal">Announcement</button>
-        </div><br>
+            <div class="menu" *ngIf="checkadmin()">
+                <button type="button" class="btn mystyle btn-block btn-outline-light" data-toggle="modal" data-target="#exampleModal">Announcement</button>
+            </div><br>
 
-        <button *ngIf="checkadmin()" type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#changepassword">Change
+            <button *ngIf="checkadmin()" type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#changepassword">Change
             Password</button><br>
 
-        <div class="col-md-8 aaa">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a style="color: black;font-size: 16px;text-shadow:1px 0px blanchedalmond;" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Summery</a>
-                </li>
-                <li class="nav-item">
-                    <a style="color: black;font-size: 16px;text-shadow:1px 0px blanchedalmond;" class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Details</a>
-                </li>
-            </ul>
-        </div>
+            <div class="col-md-8 aaa">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item itt">
+                        <a style="color: rgb(255, 255, 255);font-size: 16px;text-shadow:1px 1px rgb(0, 0, 0);" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Summery</a>
+                    </li>
+                    <li class="nav-item itt">
+                        <a style="color: rgb(255, 255, 255);font-size: 16px;text-shadow:1px 0px rgb(0, 0, 0);" class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Details</a>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="aaa" style="width: 80%;">
-            <div class="tab-content profile-tab" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="aaa">
-                        <div class="holder"><span class="large_numbering aaa">{{TeamCount[0]?.noOfTeams}}</span> <span class="some_heading">Teams</span></div><br><br><br>
-                        <div class="holder"><span class="large_numbering aaa">{{CoachCount[0]?.noOfCoaches}}</span>
-                            <span class="some_heading">Coaches</span></div><br><br><br>
-                        <div class="holder"><span class="large_numbering aaa">{{PlayerCount[0]?.noOfPlayers}}</span>
-                            <span class="some_heading">Players</span></div><br><br>
-                    </div>
-                </div>
-                <div style="padding-left: 2em;" class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <i *ngIf="checkadmin()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Institute Name:</span></label>
-                        </div>
-                        <div class="col-md-9">
-                            <p>{{InstituteProfile[0]?.instituteName}}</p>
+            <div class="aaa" style="width: 80%;">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="aaa">
+                            <div class="holder"><span class="large_numbering aaa">{{TeamCount[0]?.noOfTeams}}</span> <span class="some_heading">Teams</span></div><br><br><br>
+                            <div class="holder"><span class="large_numbering aaa">{{CoachCount[0]?.noOfCoaches}}</span>
+                                <span class="some_heading">Coaches</span></div><br><br><br>
+                            <div class="holder"><span class="large_numbering aaa">{{PlayerCount[0]?.noOfPlayers}}</span>
+                                <span class="some_heading">Players</span></div><br><br>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Institute Address:</span></label>
+                    <div style="padding-left: 2em;" class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <i *ngIf="checkadmin()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Institute Name:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.instituteName}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <p>{{InstituteProfile[0]?.instituteLocation}}</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Institute Address:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.instituteLocation}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Admin Name:</span></label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin Name:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminFName}} {{AdminProfile[0]?.adminLName}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <p>{{AdminProfile[0]?.adminFName}} {{AdminProfile[0]?.adminLName}}</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin tele No:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminTeliNo}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Admin tele No:</span></label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Admin Address:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{AdminProfile[0]?.adminAddress}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <p>{{AdminProfile[0]?.adminTeliNo}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Admin Address:</span></label>
-                        </div>
-                        <div class="col-md-9">
-                            <p>{{AdminProfile[0]?.adminAddress}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><span class="title">Code:</span></label>
-                        </div>
-                        <div class="col-md-9">
-                            <p>{{InstituteProfile[0]?.secretNo}}</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label><span class="title">Code:</span></label>
+                            </div>
+                            <div class="col-md-9">
+                                <p>{{InstituteProfile[0]?.secretNo}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -238,7 +239,7 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: none;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
                     <span aria-hidden="true">&times;</span>
@@ -300,7 +301,7 @@
 <div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="changepasswordTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: none;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
                     <span aria-hidden="true">&times;</span>

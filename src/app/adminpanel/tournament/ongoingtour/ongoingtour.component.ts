@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../../../admin.service';
 import { Role } from '../../../_models/role';
 import { AuthService } from '../../../auth.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-ongoingtour',
@@ -16,7 +17,7 @@ export class OngoingtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   public Tournament = [];
   public UpcomingFixtures = [];
@@ -25,6 +26,7 @@ export class OngoingtourComponent implements OnInit {
   public Summery = [];
   public PointTable = [];
   public Structures = [];
+  public InstituteInfo = [];
   currentUser = this._authService.currentUserValue;
 
   serachFixture;
@@ -130,6 +132,10 @@ export class OngoingtourComponent implements OnInit {
 
   }
 
+  back() {
+    this.location.back()
+  }
+
   iscreatedadmin() {
     if (this.Tournament[0]?.userId == this.currentUser.userId) {
       return true;
@@ -144,6 +150,24 @@ export class OngoingtourComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  @ViewChild('myModalClose2') modalClose2;
+
+  getInfo(instituteId){
+    this.modalClose2.nativeElement.click();
+    this._adminservice.getInstituteInfo(instituteId)
+      .subscribe((data) => {
+        this.InstituteInfo = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
   }
 
 }

@@ -1,7 +1,7 @@
 <div style="width: 100%; overflow: hidden;">
     <div class="Left">
         <br>
-        <a (click)="back()" class="previous round pointer">&#8249; Back</a><br><br>
+        <a (click)="back()" class="previous round pointer">&#8249; Back</a>
         <div class="aaa" style="padding-right: 0.3em;padding-top: 0.4em; background-color: rgb(255, 255, 255);">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -42,28 +42,23 @@
             <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
 
                 <div style="height: 500px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Name</th>
-                                <th scope="col">Coach</th>
-                                <th scope="col" class="Sport">Sport</th>
-                                <th scope="col">Structure</th>
-                                <th scope="col" class="wins">Wins</th>
-                                <th scope="col" class="Losses">Losses</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let e of PlayerTeams" (click)="navigateTeam(e.teamId)" class="pointer">
-                                <td>{{e.teamName}}</td>
-                                <td>{{e.coachFName}} {{e.coachLName}}</td>
-                                <td>{{e.sportName}}</td>
-                                <td>{{e.strutureName}}</td>
-                                <td>{{e.teamWins}}</td>
-                                <td>{{e.teamLoss}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div style="padding-bottom: 2em;">
+                        <div *ngFor="let e of PlayerTeams" (click)="navigateTeam(e.teamId)" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
+                            <div class="Left1">
+                                <div [class.cricketname]="checkcricket(e.sportName)" [class.footballname]="checkfootballe(e.sportName)" [class.footballname]="checkrugby(e.sportName)">{{e.teamName}}
+                                </div>
+                            </div>
+                            <div class="Right1">
+                                <div class="Details">
+                                    <div>▫ {{e.sportName}}</div>
+                                    <div>▫ {{e.strutureName}}</div>
+                                    <div>▫ Coach {{e.coachFName}}</div>
+                                    <div>▫ Wins-{{e.teamWins}}</div>
+                                    <div>▫ Losses-{{e.teamLoss}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <br>
                 </div>
 
@@ -76,20 +71,15 @@
                 </div>
 
                 <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Achievements</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of Achievements">
-                                <td>{{p.playerAchievements}}&nbsp;&nbsp;
-                                    <i (click)="deleteAchieve(p.playerAchieveId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div *ngFor="let p of Achievements">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerAchievements}}&nbsp;&nbsp;<i (click)="deleteAchieve(p.playerAchieveId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -100,20 +90,15 @@
                 </div>
 
                 <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Strengths</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of Strengths">
-                                <td>{{p.playerStrengths}}&nbsp;&nbsp;
-                                    <i (click)="deleteStrengths(p.strengthId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div *ngFor="let p of Strengths">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerStrengths}}&nbsp;&nbsp;<i (click)="deleteStrengths(p.strengthId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -124,53 +109,121 @@
                 </div>
 
                 <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Weaknesses</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of Weaknesses">
-                                <td>{{p.playerWeaknesses}}&nbsp;&nbsp;
-                                    <i (click)="deleteWeakness(p.weaknessesId)" style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div *ngFor="let p of Weaknesses">
+                        <div class="achievement">
+                            <div class="content">
+                                <div>{{p.playerWeaknesses}}&nbsp;&nbsp;<i (click)="deleteWeakness(p.weaknessesId)" style="font-size: 0.8em;" class="fa fa-trash pointer"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="fixture" role="tabpanel" aria-labelledby="fixture-tab">
+
+                <div class="col-md-4 aaa">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link active" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">Ongoing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link" id="finished-tab" data-toggle="tab" href="#finished" role="tab" aria-controls="finished" aria-selected="false">Finished</a>
+                        </li>
+                    </ul>
+                </div><br>
+
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="text" name="search" [(ngModel)]="searchFixture" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchFixture=''" class="btn btn-warning">Clear</button>&nbsp;
+                    </div>
+                </div>
+
                 <div style="height: 500px; overflow: auto;padding-top: 1.5em;">
-                    <table class="table table-hover table-bordered ">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Tournament</th>
-                                <th scope="col">Match</th>
-                                <th scope="col">Time</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Venue</th>
-                                <th scope="col">Availability</th>
-                                <th scope="col">Reason</th>
-                                <th scope="col">Confirmed</th>
-                                <th *ngIf="confirm()"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of Fixtures">
-                                <td>{{p.tournamentName}}</td>
-                                <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
-                                <td>{{p.fixtureTime}}</td>
-                                <td>{{p.fixtureDate | date:'mediumDate'}}</td>
-                                <td>{{p.venue}}</td>
-                                <td>{{p.fixtureAvaial}}</td>
-                                <td>{{p.AvaialReason}}</td>
-                                <td>{{p.Confirm}}</td>
-                                <td *ngIf="confirm()"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                        <th scope="col">Availability</th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Confirmed</th>
+                                        <th *ngIf="confirm()"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of Fixtures | filter:searchFixture">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                        <td>{{p.fixtureAvaial}}</td>
+                                        <td>{{p.AvaialReason}}</td>
+                                        <td>{{p.Confirm}}</td>
+                                        <td *ngIf="confirm()" style="margin:auto;display:block;"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of OngoingFixtures | filter:searchFixture" [routerLink]="['/ongoing',p.fixtureId[0]]" class="pointer">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="finished-tab">
+                            <table class="table table-hover table-bordered ">
+                                <thead class="thead-dark">
+                                    <tr style="height: 1em;">
+                                        <th scope="col">Tournament</th>
+                                        <th scope="col">Match</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Venue</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="body">
+                                    <tr *ngFor="let p of FinishedFixtures | filter:searchFixture" [routerLink]="['/ongoing',p.fixtureId[0]]" class="pointer">
+                                        <td>{{p.tournamentName}}</td>
+                                        <td>{{p.instituteone}} vs {{p.institutetwo}}</td>
+                                        <td>{{p.fixtureTime.substring(0,5)}}</td>
+                                        <td>{{p.fixtureDate | date:'mediumDate'}}</td>
+                                        <td>{{p.venue}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -202,35 +255,42 @@
     </div>
 
     <div class="Right">
-        <div class="Team">
-            <p></p>
-        </div>
+        <div class="blur">
+            <div class="Team">
+                <p></p>
+            </div>
 
-        <div class="menu">
-            <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
-                Password</button><br>
-        </div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="menu">
+                <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
+                    Password</button><br>
+            </div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
-            <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
-        </button>&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
+            </button>&nbsp;&nbsp;
 
-        <button type="button" class="btn btn-danger" (click)="deletePlayer()">
-            <i style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
-        </button>
+            <button type="button" class="btn btn-danger" (click)="deletePlayer()">
+                <i style="font-size: 1.2em;" class="fa fa-trash pointer"></i>
+            </button>
 
-        <div class="details">
-            <p><span class="title">Name : </span><span class="teamvalue">{{PlayerProfile[0]?.playerFName}} {{PlayerProfile[0]?.playerLName}}</span></p>
-            <p><span class="title">Address : </span><span class="teamvalue">{{PlayerProfile[0]?.playerAddress}}</span></p>
-            <p><span class="title">Telephone No : </span><span class="teamvalue">{{PlayerProfile[0]?.playerteleNum}}</span></p>
-            <p><span class="title">Date of Birth : </span><span class="teamvalue">{{PlayerProfile[0]?.playerDOB | date:'mediumDate'}}</span></p>
-            <p><span class="title">Gender : </span><span class="teamvalue">{{PlayerProfile[0]?.playerGender}}</span></p>
-            <p><span class="title">Height : </span><span class="teamvalue">{{PlayerProfile[0]?.playerHeight}}</span></p>
-            <p><span class="title">Weight : </span><span class="teamvalue">{{PlayerProfile[0]?.playerWeight}}</span></p>
-            <p><span class="title">Blood Group : </span><span class="teamvalue">{{PlayerProfile[0]?.playerBloodGroup}}</span></p>
-            <br>
+            <div class="details">
+                <p><span class="title">Name : </span><span class="teamvalue">{{PlayerProfile[0]?.playerFName}}
+                        {{PlayerProfile[0]?.playerLName}}</span></p>
+                <p><span class="title">Address : </span><span class="teamvalue">{{PlayerProfile[0]?.playerAddress}}</span></p>
+                <p><span class="title">Telephone No : </span><span class="teamvalue">{{PlayerProfile[0]?.playerteleNum}}</span></p>
+                <p><span class="title">Date of Birth : </span><span class="teamvalue">{{PlayerProfile[0]?.playerDOB |
+                        date:'mediumDate'}}</span></p>
+                <p><span class="title">Gender : </span><span class="teamvalue">{{PlayerProfile[0]?.playerGender}}</span>
+                </p>
+                <p><span class="title">Height : </span><span class="teamvalue">{{PlayerProfile[0]?.playerHeight}}</span>
+                </p>
+                <p><span class="title">Weight : </span><span class="teamvalue">{{PlayerProfile[0]?.playerWeight}}</span>
+                </p>
+                <p><span class="title">Blood Group : </span><span class="teamvalue">{{PlayerProfile[0]?.playerBloodGroup}}</span></p>
+                <br>
+            </div>
         </div>
     </div>
 </div>
@@ -310,7 +370,7 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: none;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose6>
                     <span aria-hidden="true">&times;</span>
@@ -363,7 +423,7 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: none;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose1>
                     <span aria-hidden="true">&times;</span>
@@ -435,9 +495,11 @@
                             <div class="form-group">
                                 <label for="PlayerStructure">Team Structure</label>
                                 <select [class.is-invalid]="playerRegistration1.get('PlayerStructure').invalid && playerRegistration1.get('PlayerStructure').touched" formControlName="PlayerStructure" class="form-control" id="exampleFormControlSelect1">
-                                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>{{st.strutureName}}</option>
+                                    <option class="option" *ngFor="let st of Structures" [value]=st.strutureId>
+                                        {{st.strutureName}}</option>
                                 </select>
-                                <small class="text-danger">After changing structure player will remove from all teams</small>
+                                <small class="text-danger">After changing structure player will remove from all
+                                    teams</small>
                             </div><br>
 
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;

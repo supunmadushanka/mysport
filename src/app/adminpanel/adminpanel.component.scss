@@ -19,10 +19,10 @@
 }
 
 .title {
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: 600;
-    font-size: 1.2em;
-    text-shadow: 1px 0px rgb(160, 159, 159);
+    text-shadow: 3px 1px black;
+    backdrop-filter: blur(2px);
 }
 
 .body {
@@ -40,6 +40,11 @@ td {
 td {
     font-size: large;
     font-weight: 600;
+}
+
+.tabs a:hover,
+.itt a.active {
+    background-color: rgb(121, 5, 150);
 }
 
 //th.Sport{
@@ -69,7 +74,14 @@ td {
     width: 25%;
     float: right;
     height: 50em;
-    background-image: url('../../assets/bluesky.jpg');
+    background-image: url('../../assets/stadium.jpg');
+    background-position: center 30%;
+    background-size: 50%;
+    background-attachment: fixed;
+}
+
+.blur {
+    backdrop-filter: blur(2px);
 }
 
 .menu {
@@ -84,10 +96,11 @@ td {
 }
 
 .col-md-9 {
+    color: white;
     padding-left: 1em;
     font-size: 1.1em;
     font-weight: 600;
-    text-shadow: 1px 1px white;
+    text-shadow: 1px 1px rgb(48, 48, 48);
 }
 
 .Team {
@@ -362,7 +375,7 @@ a:hover {
 }
 
 .login-page {
-    padding: 6% 0 0;
+    padding: 1% 0 0;
     margin: auto;
 }
 
@@ -389,7 +402,7 @@ select option {
 }
 
 .login-page {
-    padding: 6% 0 0;
+    padding: 1% 0 0;
     margin: auto;
 }
 

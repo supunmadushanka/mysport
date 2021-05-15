@@ -1,5 +1,5 @@
 <br>
-<a routerLink="/tournament" class="previous round">&#8249; Back</a>
+<a (click)="back()" class="previous round">&#8249; Back</a>
 <div class="name aaa"><img class="rotate230" src="\assets\ball.png" width="60" height="60">{{Tournament[0]?.tournamentName}}
     <img class="rotate30" src="\assets\ball.png" width="60" height="60">
 </div>
@@ -35,10 +35,9 @@
             </div>
         </div>
 
-        <div class="tab-content" id="pills-tabContent">
-
+        <div class="tab-content" id="pills-tabContent" style="padding-bottom: 4em;">
             <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
-                <div style="height: 350px; overflow: auto;">
+                <div style="height: 400px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of UpcomingFixtures| filter:serachFixture" [routerLink]="['/selectedfixture',p.fixtureId]" class="pointer fixture">
                             <div class="Left1">
@@ -60,7 +59,7 @@
             </div>
 
             <div class="tab-pane fade" id="Coach" role="tabpanel" aria-labelledby="Coach-tab">
-                <div style="height: 350px; overflow: auto;">
+                <div style="height: 400px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of StartedFixtures| filter:serachFixture" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
                             <div class="Left1">
@@ -82,7 +81,7 @@
             </div>
 
             <div class="tab-pane fade" id="Player" role="tabpanel" aria-labelledby="Player-tab">
-                <div style="height: 350px; overflow: auto;">
+                <div style="height: 400px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
                         <div *ngFor="let p of FinishedFixtures| filter:serachFixture" [routerLink]="['/ongoing',p.fixtureId]" class="pointer fixture">
                             <div class="Left1">
@@ -118,7 +117,7 @@
 <div class="modal fade" id="summery" tabindex="-1" role="dialog" aria-labelledby="summeryTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="display: none;">
                 <h5 class="modal-title" id="exampleModalLongTitle">Summery</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
                     <span aria-hidden="true">&times;</span>
@@ -126,22 +125,22 @@
             </div>
 
             <div class="modal-body">
-                <div style="height: 350px; overflow: auto;">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
-                            <tr style="height: 1em;">
-                                <th scope="col">Institute</th>
-                                <th scope="col">Points</th>
-                            </tr>
-                        </thead>
-                        <tbody class="body">
-                            <tr *ngFor="let p of Summery">
-                                <td>{{p.instituteName}}</td>
-                                <td>{{p.point}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Institute</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of Summery">
+                            <td>{{p.instituteName}}&nbsp;&nbsp;<i (click)="getInfo(p.instituteId)" data-toggle="modal" data-target="#info" class='far fa-question-circle pointer' style='font-size:26px;color: rgb(32, 68, 167)'></i></td>
+                            <td>{{p.point}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>
@@ -160,7 +159,8 @@
 
                 <div class="aaa">
                     <select [(ngModel)]="selectedstructure" class="form-control" id="structure">
-                        <option class="option" *ngFor="let st of Structures" [value]=st.strutureId[0]>{{st.strutureName}}
+                        <option class="option" *ngFor="let st of Structures" [value]=st.strutureId[0]>
+                            {{st.strutureName}}
                         </option>
                     </select>
                 </div>
@@ -186,6 +186,63 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="infoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Summery</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose2>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="aaa">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Institute Name:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.instituteName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Institute Address:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.instituteLocation}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin Name:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminFName}}&nbsp;{{InstituteInfo[0]?.adminLName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin tele No:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminTeliNo}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label><span class="title">Admin Address:</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{InstituteInfo[0]?.adminAddress}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

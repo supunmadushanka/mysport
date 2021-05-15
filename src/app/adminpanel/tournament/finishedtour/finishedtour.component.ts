@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router'
 import { AdminService } from '../../../admin.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-finishedtour',
@@ -14,13 +15,14 @@ export class FinishedtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router) { }
 
   public Tournament = [];
   public FinishedFixtures = [];
   public Summery = [];
   public PointTable = [];
   public Structures = [];
+  public InstituteInfo = [];
 
   wininstitute: string
   serachFixture
@@ -104,6 +106,29 @@ export class FinishedtourComponent implements OnInit {
           }
         }
       );
+  }
+
+  @ViewChild('myModalClose2') modalClose2;
+
+  getInfo(instituteId){
+    this.modalClose2.nativeElement.click();
+
+    this._adminservice.getInstituteInfo(instituteId)
+      .subscribe((data) => {
+        this.InstituteInfo = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+  }
+
+  back() {
+    this.location.back()
   }
 
 }

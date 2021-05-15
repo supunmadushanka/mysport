@@ -24,7 +24,7 @@ export class AdminteamComponent implements OnInit {
   teamid: number;
   private sub: any;
 
-  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
+  constructor(private location: Location, private route: ActivatedRoute, private _adminservice: AdminService, private router: Router,
     private fbAdmin: FormBuilder, private _authService: AuthService, private fbteam: FormBuilder) { }
 
   currentUser = this._authService.currentUserValue;
@@ -34,9 +34,14 @@ export class AdminteamComponent implements OnInit {
   public Achievements = [];
   public addplayers = [];
   public Coaches = [];
+  public UpcomingTournaments = [];
+  public OngoingTournaments = [];
+  public FinishedTournaments = [];
 
   searchPlayer;
   sportName;
+  searchTour;
+  status;
 
   ngOnInit(): void {
 
@@ -84,6 +89,45 @@ export class AdminteamComponent implements OnInit {
         }
       );
 
+    this._adminservice.getTeamTourUpcoming(this.teamid)
+      .subscribe((data) => {
+        this.UpcomingTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getTeamTourOngoing(this.teamid)
+      .subscribe((data) => {
+        this.OngoingTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getTeamTourFinished(this.teamid)
+      .subscribe((data) => {
+        this.FinishedTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
     this._adminservice.getaddplayers(this.teamid)
       .subscribe((data) => {
         this.addplayers = data;
@@ -111,7 +155,7 @@ export class AdminteamComponent implements OnInit {
       );
   }
 
-  back(){
+  back() {
     this.location.back()
   }
 
@@ -208,16 +252,41 @@ export class AdminteamComponent implements OnInit {
   }
 
   deleteAchieve(achieveId) {
-    if (confirm('Are you sure to delete this Achievement?') == true){
+    if (confirm('Are you sure to delete this Achievement?') == true) {
       this._adminservice.deleteAchieve(achieveId)
-      .subscribe(
-        response => {
-          this.ngOnInit();
-        },
-        error => {
-          console.error('Error!', error)
-        }
-      )
+        .subscribe(
+          response => {
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
     }
   }
+
+  checkcricketTour(sport) {
+    if (sport == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballTour(sport) {
+    if (sport == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugbyTour(sport) {
+    if (sport == 'Rugby') {
+      return true
+    } else {
+      false
+    }
+  }
+
 }

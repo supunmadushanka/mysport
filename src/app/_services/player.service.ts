@@ -63,6 +63,20 @@ export class PlayerService {
     return this.http.get<any>(_url, { params });
   }
 
+  getPlayerFixturesOngoing(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerfixturesongoing";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getPlayerFixturesFinished(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerfixturesfinished";
+    return this.http.get<any>(_url, { params });
+  }
+
   getPlayerParents(userId) {
     let params = new HttpParams()
       .set('userId', userId)

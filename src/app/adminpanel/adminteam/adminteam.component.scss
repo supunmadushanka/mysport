@@ -19,7 +19,15 @@
     width: 25%;
     float: right;
     height: 100%;
-    background-image: url('../../../assets/bluesky.jpg');
+    background-image: url('../../../assets/stadium.jpg');
+    background-position: center 30%;
+    background-size: 50%;
+    background-attachment: fixed;
+    padding-bottom: 5em;
+}
+
+.blur {
+    backdrop-filter: blur(2px);
 }
 
 .menu {
@@ -76,6 +84,7 @@ td {
     font-size: 20px;
     color: rgb(255, 255, 255);
     text-shadow: 1px 1px #000000;
+    padding-bottom: 2.5em;
 }
 
 .search {
@@ -88,10 +97,10 @@ td {
 }
 
 .title {
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: 800;
     font-size: 1.2em;
-    text-shadow: 1px 1px #ffffff;
+    text-shadow: 2px 1px #000000;
 }
 
 a {
@@ -213,7 +222,7 @@ a:hover {
 }
 
 .login-page {
-    padding: 6% 0 0;
+    padding: 1% 0 0;
     margin: auto;
 }
 
@@ -237,4 +246,53 @@ body {
 select option {
     font-size: 1.5em;
     margin: 2em;
+}
+
+.crickettour {
+    background-image: url('../../../assets/crickettour.webp');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.footballtour {
+    background-image: url('../../../assets/footballtour.png');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.rugbytour {
+    background-image: url('../../../assets/rugbytour.jpg');
+    height: 5em;
+    width: 70%;
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -480px 0 50px 0px rgb(32, 68, 167);
+}
+
+.Left3 {
+    width: 40%;
+    float: left;
+}
+
+.Right3 {
+    width: 60%;
+    float: right;
 }

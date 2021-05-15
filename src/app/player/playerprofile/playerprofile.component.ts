@@ -31,12 +31,15 @@ export class PlayerprofileComponent implements OnInit {
   public Strengths = [];
   public Weaknesses = [];
   public Fixtures = [];
+  public OngoingFixtures = [];
+  public FinishedFixtures = [];
   public Parents = [];
   public Structures = [];
 
   instituteId: number
   fixtureId: number
   tournamentTeamId: number
+  searchFixture
 
   ngOnInit(): void {
 
@@ -114,6 +117,32 @@ export class PlayerprofileComponent implements OnInit {
     this._playerservice.getPlayerFixtures(this.userId)
       .subscribe((data) => {
         this.Fixtures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+      this._playerservice.getPlayerFixturesOngoing(this.userId)
+      .subscribe((data) => {
+        this.OngoingFixtures = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+      this._playerservice.getPlayerFixturesFinished(this.userId)
+      .subscribe((data) => {
+        this.FinishedFixtures = data;
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -377,6 +406,30 @@ export class PlayerprofileComponent implements OnInit {
         }
       )
     this.modalClose6.nativeElement.click();
+  }
+
+  checkcricket(sport) {
+    if (sport == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe(sport) {
+    if (sport == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby(sport) {
+    if (sport == 'Rugby') {
+      return true
+    } else {
+      false
+    }
   }
 
 }

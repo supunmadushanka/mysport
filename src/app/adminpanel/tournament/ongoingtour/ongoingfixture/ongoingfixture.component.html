@@ -96,32 +96,34 @@
 
     </div>
     <div class="Right">
-        <br>
-        <div class="details">
-            <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
-            <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,8)}}</p>
-            <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
-            <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
-            <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[0]?.teamName}} Score:
+        <div class="blur">
+            <br>
+            <div class="details">
+                <p><span class="title">Structure : </span>{{FixtureDetails[0]?.strutureName}}</p>
+                <p><span class="title">Time : </span>{{FixtureDetails[0]?.fixtureTime.substring(0,8)}}</p>
+                <p><span class="title">Date : </span>{{FixtureDetails[0]?.fixtureDate | date:'mediumDate'}}</p>
+                <p><span class="title">Venue : </span>{{FixtureDetails[0]?.venue}}</p>
+                <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[0]?.teamName}} Score:
                 </span>{{this.Total1[0]?.sumScore+realextra1}}</p>
-            <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[1]?.teamName}} Score:
+                <p *ngIf="showwhenfinished()"><span class="title">{{FixtureDetails[1]?.teamName}} Score:
                 </span>{{this.Total2[0]?.sumScore+realextra2}}</p>
 
-            <br>
-        </div>
-        <div class="menu" *ngIf="finished() && show() && iscreatedadmin()">
-            <button class="btn btn-danger btn-block middle" (click)="postponefixture()">Postpone Fixture</button><br>
-            <button class="btn btn-success btn-block middle" (click)="finishfixture()">Finish Fixture</button><br>
-        </div>
-        <div>
-            <div *ngIf="instituteView1()">
-                <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description
-                    <i class='far fa-question-circle' style='font-size:26px'></i></button>
-            </div><br>
-            <div *ngIf="instituteView2()">
-                <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description</button>
+                <br>
             </div>
-            <p *ngIf="showwhenfinished()"><span class="wonteam aaa">{{wonteamname}} Won</span></p>
+            <div class="menu" *ngIf="finished() && show() && iscreatedadmin()">
+                <button class="btn btn-danger btn-block middle" (click)="postponefixture()">Postpone Fixture</button><br>
+                <button class="btn btn-success btn-block middle" (click)="finishfixture()">Finish Fixture</button><br>
+            </div>
+            <div>
+                <div *ngIf="instituteView1()">
+                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description
+                    <i class='far fa-question-circle' style='font-size:26px'></i></button>
+                </div><br>
+                <div *ngIf="instituteView2()">
+                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description</button>
+                </div>
+                <p *ngIf="showwhenfinished()"><span class="wonteam aaa">{{wonteamname}} Won</span></p>
+            </div>
         </div>
     </div>
 </div>

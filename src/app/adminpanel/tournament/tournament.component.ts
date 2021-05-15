@@ -235,4 +235,5 @@ export class TournamentComponent implements OnInit {
       false
     }
   }
+
 }

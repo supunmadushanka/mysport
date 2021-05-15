@@ -80,5 +80,8 @@ export class CreatefixtureComponent implements OnInit {
       );
   }
 
+  back(){
+    this.location.back();
+  }
 
 }

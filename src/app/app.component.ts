@@ -2,15 +2,16 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators }  from '@angular/forms';
 import {Router} from '@angular/router'
 import { AuthService } from './auth.service';
+import { HomepageService } from './_services/homepage.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss','./mystyles/templatemo-finance-business.css']
 })
 export class AppComponent {
 
-  constructor( private fb1 : FormBuilder,private router : Router,public _auth : AuthService){
+  constructor(private fb: FormBuilder,private _home: HomepageService,private fb1 : FormBuilder,private router : Router,public _auth : AuthService){
   }
 
   loginForm = this.fb1.group({
@@ -32,5 +33,24 @@ export class AppComponent {
           this.loginForm.reset()
       }
       );
+  }
+
+  sendmail = this.fb.group({
+    FullName: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    message: ['', [Validators.required]]
+  })
+
+  ReviewSubmit() {
+    this._home.SendReview(this.sendmail.value)
+      .subscribe(
+        response => {
+          alert('Email successfully send')
+          this.sendmail.reset();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
   }
 }

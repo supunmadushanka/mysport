@@ -118,4 +118,28 @@ export class InstitutecoachComponent implements OnInit {
       );
   }
 
+  checkcricket(sport) {
+    if (sport == 'Cricket') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe(sport) {
+    if (sport == 'Football') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby(sport) {
+    if (sport == 'Rugby') {
+      return true
+    } else {
+      false
+    }
+  }
+
 }

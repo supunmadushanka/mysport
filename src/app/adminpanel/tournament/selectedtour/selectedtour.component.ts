@@ -6,6 +6,7 @@ import { AdminService } from '../../../admin.service';
 import { ViewChild } from '@angular/core';
 import { Role } from '../../../_models/role';
 import { AuthService } from '../../../auth.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-selectedtour',
@@ -17,12 +18,13 @@ export class SelectedtourComponent implements OnInit {
   tournamentId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
+  constructor(private location: Location,private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
 
   currentUser = this._authService.currentUserValue;
   public Tournament = [];
   public UpcomingFixtures = [];
   public Summery = [];
+  public InstituteInfo = [];
 
   serachFixture;
 
@@ -103,6 +105,29 @@ export class SelectedtourComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+  
+  @ViewChild('myModalClose2') modalClose2;
+
+  getInfo(instituteId){
+    this.modalClose2.nativeElement.click();
+
+    this._adminservice.getInstituteInfo(instituteId)
+      .subscribe((data) => {
+        this.InstituteInfo = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+  }
+
+  back() {
+    this.location.back()
   }
 
 }
