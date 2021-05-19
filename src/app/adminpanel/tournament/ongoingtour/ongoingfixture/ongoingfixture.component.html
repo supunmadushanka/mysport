@@ -141,13 +141,13 @@
             <div class="modal-body">
                 Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=scoreModel.playerScore><br><br>
                 <div *ngIf="isCricket()">
-                    Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
-                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
                     <label for="cars">Status:</label>
                     <select name="cars" id="cars" [(ngModel)]=scoreModel.status>
                         <option value="out">Out</option>
                         <option value="notout">NotOut</option>
-                    </select>
+                    </select><br>
+                    <hr> Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
+                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
                 </div>
                 <button class="btn btn-success" (click)="submitPlayerScore()">Submit</button>
             </div>

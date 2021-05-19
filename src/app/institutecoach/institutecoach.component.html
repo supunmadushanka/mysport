@@ -26,21 +26,26 @@
 
     <div class="Right">
         <br>
-
-        <div class="menu">
-            <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
-                Password</button><br>
-            <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/adminpanel">Institute</button><br><br>
-            <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournament</button>
-        </div><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i><br>
-        <div class="details">
-            <p><span class="title">Name : </span><span class="teamvalue">{{CoachProfile[0]?.coachFName}} {{CoachProfile[0]?.coachLName}}</span></p>
-            <p><span class="title">Address : </span><span class="teamvalue">{{CoachProfile[0]?.coachAddress}}</span></p>
-            <p><span class="title">Telephone No : </span><span class="teamvalue">{{CoachProfile[0]?.coachNumber}}</span></p>
-            <p><span class="title">Date of Birth : </span><span class="teamvalue">{{CoachProfile[0]?.coachDOB | date:'mediumDate'}}</span></p>
-            <p><span class="title">Gender : </span><span class="teamvalue">{{CoachProfile[0]?.coachGender}}</span></p>
-            <br>
+        <div class="blur">
+            <div class="menu">
+                <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
+                    Password</button><br>
+                <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/adminpanel">Institute</button><br><br>
+                <button type="button" class="btn mystyle btn-block btn-outline-light" routerLink="/tournament">Tournament</button>
+            </div><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i><br>
+            <div class="details">
+                <p><span class="title">Name : </span><span class="teamvalue">{{CoachProfile[0]?.coachFName}}
+                        {{CoachProfile[0]?.coachLName}}</span></p>
+                <p><span class="title">Address : </span><span class="teamvalue">{{CoachProfile[0]?.coachAddress}}</span>
+                </p>
+                <p><span class="title">Telephone No : </span><span class="teamvalue">{{CoachProfile[0]?.coachNumber}}</span></p>
+                <p><span class="title">Date of Birth : </span><span class="teamvalue">{{CoachProfile[0]?.coachDOB |
+                        date:'mediumDate'}}</span></p>
+                <p><span class="title">Gender : </span><span class="teamvalue">{{CoachProfile[0]?.coachGender}}</span>
+                </p>
+                <br>
+            </div>
         </div>
     </div>
 </div>

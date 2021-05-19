@@ -96,9 +96,6 @@ export class SignupComponent implements OnInit {
           this.registrationForm.reset()
         }
       );
-
-
-    this.router.navigate(['/home']);
   }
 
 }

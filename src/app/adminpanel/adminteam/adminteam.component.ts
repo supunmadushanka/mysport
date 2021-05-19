@@ -37,11 +37,15 @@ export class AdminteamComponent implements OnInit {
   public UpcomingTournaments = [];
   public OngoingTournaments = [];
   public FinishedTournaments = [];
+  public UpcomingSession = [];
+  public FinishedSession = [];
 
   searchPlayer;
   sportName;
   searchTour;
   status;
+  searchSession;
+  currentsession;
 
   ngOnInit(): void {
 
@@ -118,6 +122,32 @@ export class AdminteamComponent implements OnInit {
     this._adminservice.getTeamTourFinished(this.teamid)
       .subscribe((data) => {
         this.FinishedTournaments = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getUpcomingSession(this.teamid)
+      .subscribe((data) => {
+        this.UpcomingSession = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._adminservice.getFinishedSession(this.teamid)
+      .subscribe((data) => {
+        this.FinishedSession = data;
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -287,6 +317,61 @@ export class AdminteamComponent implements OnInit {
     } else {
       false
     }
+  }
+
+  //Session
+
+  AddSession = this.fbteam.group({
+    DateTime: ['', Validators.required],
+    Venue: ['', [Validators.required, Validators.minLength(4)]]
+  })
+
+  @ViewChild('myModalClose3') modalClose3;
+
+  SessionSubmit() {
+    this.modalClose3.nativeElement.click();
+    this._adminservice.AddSession(this.AddSession.value, this.teamid)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  SetSession(sessionId, sessionSummery) {
+    this.currentsession = sessionId
+    this.DescriptModel.description = sessionSummery
+  }
+
+  DescriptModel = {
+    description: ''
+  }
+
+  submitDescrip() {
+    this._adminservice.AddSessionDescript(this.DescriptModel, this.teamid, this.currentsession)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+  }
+
+  FinishSession(sessionId) {
+    this._adminservice.FinishSession(this.DescriptModel, sessionId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
   }
 
 }

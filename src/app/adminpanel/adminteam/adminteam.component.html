@@ -3,7 +3,7 @@
         <br>
         <a (click)="back()" class="previous round">&#8249; Back</a>
         <div class="menu" style="padding-top: 0em;">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills mb-3 mainnav" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="Players-tab" data-toggle="pill" href="#Players" role="tab" aria-controls="Players" aria-selected="true">
                         <h5>Players</h5>
@@ -17,6 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link" id="Tournament-tab" data-toggle="pill" href="#Tournament" role="tab" #achievetab aria-controls="Tournament" aria-selected="false">
                         <h5>Tournaments</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="Practice-tab" data-toggle="pill" href="#Practice" role="tab" #achievetab aria-controls="Practice" aria-selected="false">
+                        <h5>Practice Sessions</h5>
                     </a>
                 </li>
             </ul>
@@ -155,6 +160,75 @@
                 </div>
             </div>
 
+            <div class="tab-pane fade" id="Practice" role="tabpanel" aria-labelledby="Practice-tab">
+                <div class="col-md-3 aaa">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link active" id="uppractice-tab" data-toggle="tab" href="#uppractice" role="tab" aria-controls="uppractice" aria-selected="true">Upcoming</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: rgb(13, 52, 179);font-size: 16px;" class="nav-link" id="finpractice-tab" data-toggle="tab" href="#finpractice" role="tab" aria-controls="finpractice" aria-selected="false">Finished</a>
+                        </li>
+                    </ul>
+                </div><br>
+                <div class="aaa">
+                    <i class="fa fa-search" style="color: blanchedalmond;font-size: 1.5em;"></i>&nbsp;&nbsp;
+                    <div class="search">
+                        <input class="form-control" type="date" name="search" [(ngModel)]="searchSession" autocomplete="off" placeholder="Search any">
+                    </div>
+                    <div class="teambutton">
+                        <button type="button" (click)="searchSession=''" class="btn btn-warning">Clear</button>&nbsp;
+                        <button type="button" *ngIf="show()" class="btn btn-success" data-toggle="modal" data-target=".addfixture">Create Session</button>
+                    </div>
+                </div>
+                <div style="height: 530px; overflow: auto;">
+                    <div class="tab-content profile-tab" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="uppractice" role="tabpanel" aria-labelledby="uppractice-tab">
+                            <div style="padding-bottom: 1em;">
+                                <div *ngFor="let p of UpcomingSession| filter:searchSession" class="session">
+                                    <div class="Left4">
+                                        <br>
+                                        <div class="allignbutton">
+                                            <button type="button" *ngIf="show()" class="btn btn-success sessionbutton" (click)="FinishSession(p.sessionId)">Finish
+                                                Session</button>
+                                            <button type="button" class="btn btn-success sessionbutton" (click)="SetSession(p.sessionId,p.sessionSummery)" data-toggle="modal" data-target=".description">Description</button>
+                                        </div>
+                                    </div>
+                                    <div class="Right4">
+                                        <div class="sessiondetails">
+                                            <div>▫ {{p.venue}}</div>
+                                            <div>▫ {{p.sessionDateTime | date:'mediumDate'}}</div>
+                                            <div>▫ {{p.sessionDateTime | date:'shortTime'}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="finpractice" role="tabpanel" aria-labelledby="finpractice-tab">
+                            <div style="padding-bottom: 1em;">
+                                <div *ngFor="let p of FinishedSession| filter:searchSession" class="session">
+                                    <div class="Left4">
+                                        <br>
+                                        <div class="allignbutton">
+                                            <button type="button" class="btn btn-success sessionbutton" (click)="SetSession(p.sessionId,p.sessionSummery)" data-toggle="modal" data-target=".description">Description</button>
+                                        </div>
+                                    </div>
+                                    <div class="Right4">
+                                        <div class="sessiondetails">
+                                            <div>▫ {{p.venue}}</div>
+                                            <div>▫ {{p.sessionDateTime | date:'mediumDate'}}</div>
+                                            <div>▫ {{p.sessionDateTime | date:'shortTime'}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -167,17 +241,17 @@
 
             <div class="menu" *ngIf="show()">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target=".addplayer">Add
-                Player</button>&nbsp;&nbsp;
+                    Player</button>&nbsp;&nbsp;
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".removeplayer">Remove
-                Player</button>
+                    Player</button>
             </div><br>
 
             <div class="menu">
                 <button (click)="child.scrollToBottom()" type="button" class="btn btn-warning" data-toggle="modal" data-target="#message">
-                <div style="font-size: large;font-weight: 600;">Message</div><i class='fas fa-comments' style='font-size:36px'></i>
-            </button>
+                    <div style="font-size: large;font-weight: 600;">Message</div><i class="fa fa-comments" style="font-size:36px"></i>
+                </button>
             </div><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i *ngIf="show()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".bd-example-modal-lg"></i>
+            <i *ngIf="show()" class="fa fa-edit pointer" style="font-size:36px;color: black;" data-toggle="modal" data-target=".editteam"></i>
             <div class="details">
                 <p><span class="title">Coach Name : </span>{{TeamDetails[0]?.coachFName}} {{TeamDetails[0]?.coachLName}}
                 </p>
@@ -190,10 +264,9 @@
             </div>
         </diV>
     </div>
-
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade editteam" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="display: none;">
@@ -214,12 +287,49 @@
                             <div class="form-group">
                                 <label for="Coach">Coach</label>
                                 <select [class.is-invalid]="EditTeam.get('Coach').invalid && EditTeam.get('Coach').touched" formControlName="Coach" class="form-control" id="exampleFormControlSelect1">
-                                    <option class="option" *ngFor="let c of Coaches| filter:sportName" [value]=c.userId>{{c.coachFName}} {{c.coachLName}}</option>
+                                    <option class="option" *ngFor="let c of Coaches| filter:sportName" [value]=c.userId>
+                                        {{c.coachFName}} {{c.coachLName}}</option>
                                 </select>
                                 <small [class.d-none]="EditTeam.get('Coach').valid || EditTeam.get('Coach').untouched" class="text-danger">Required</small>
                             </div><br>
                             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
                             <button [disabled]="EditTeam.invalid" type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addfixture" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="display: none;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #myModalClose3>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login-page">
+                    <div class="form">
+                        <form [formGroup]="AddSession" (ngSubmit)="SessionSubmit()">
+
+                            <div class="form-group">
+                                <label for="DateTime">Date & Time</label>
+                                <input [class.is-invalid]="AddSession.get('DateTime').invalid && AddSession.get('DateTime').touched" formControlName="DateTime" type="datetime-local" class="form-control form-control-lg" id="DateTime" placeholder="2020/01/01 10.00 a.m">
+                                <small [class.d-none]="AddSession.get('DateTime').valid || AddSession.get('DateTime').untouched" class="text-danger">Date & Time is required</small>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="Venue">Venue</label>
+                                <input [class.is-invalid]="AddSession.get('Venue').invalid && AddSession.get('Venue').touched" formControlName="Venue" type="text" class="form-control form-control-lg" id="Venue" placeholder="SCC colombo">
+                                <small [class.d-none]="AddSession.get('Venue').valid || AddSession.get('Venue').untouched" class="text-danger">Venue Required</small>
+                            </div><br>
+
+                            <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
+                            <button [disabled]="AddSession.invalid" type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -331,6 +441,43 @@
                 </table>
             </div>
             <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal" #ModalClose>Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade description" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <textarea id="w3review" name="w3review" rows="25" cols="10" [(ngModel)]=DescriptModel.description>
+
+            </textarea>
+            <button *ngIf="show()" class="btn btn-success" (click)="submitDescrip()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade attendance" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div style="height: 500px; overflow: auto; padding-top: 1em;">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                        <tr style="height: 1em;">
+                            <th scope="col">Name</th>
+                            <th scope="col">Mobile No</th>
+                            <th class="Add"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="body">
+                        <tr *ngFor="let p of addplayers">
+                            <td>{{p.playerFname}} {{p.playerLName}}</td>
+                            <td>{{p.playerteleNum}}</td>
+                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

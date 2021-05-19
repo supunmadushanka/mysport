@@ -35,6 +35,20 @@ export class AdminService {
     return this.http.get<any>(_url, { params });
   }
 
+  getUpcomingSession(teamId) {
+    let params = new HttpParams()
+      .set('teamId', teamId)
+    let _url = environment.baseURL + "getupcomingsession";
+    return this.http.get<any>(_url, { params });
+  }
+
+  getFinishedSession(teamId) {
+    let params = new HttpParams()
+      .set('teamId', teamId)
+    let _url = environment.baseURL + "getfinishedsession";
+    return this.http.get<any>(_url, { params });
+  }
+
   getTeamTourUpcoming(teamId) {
     let params = new HttpParams()
       .set('teamId', teamId)
@@ -331,6 +345,29 @@ export class AdminService {
       .set('teamid', teamid)
     return this.http.post<any>(_url, user, { params })
   }
+
+  AddSession(user,teamid) {
+    let _url = environment.baseURL + "addsession";
+    let params = new HttpParams()
+      .set('teamid', teamid)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  AddSessionDescript(user,teamid,sessionId) {
+    let _url = environment.baseURL + "addsessiondescrip";
+    let params = new HttpParams()
+      .set('teamid', teamid)
+      .set('sessionId', sessionId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  FinishSession(user,sessionId) {
+    let _url = environment.baseURL + "finishsession";
+    let params = new HttpParams()
+      .set('sessionId', sessionId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
 
   addAchieve(user, teamId) {
     let params = new HttpParams()

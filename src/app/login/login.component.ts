@@ -51,19 +51,19 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  onSubmitt() {
-    this._auth.sendMail(this.loginForm.value)
-      .subscribe(
-        response => {
-          console.log('Success!', response)
-        },
-        error => {
-          console.error('Error!', error)
-          alert("Invalid login")
-          this.loginForm.reset()
-        }
-      );
-  }
+  // onSubmitt() {
+  //   this._auth.sendMail(this.loginForm.value)
+  //     .subscribe(
+  //       response => {
+  //         console.log('Success!', response)
+  //       },
+  //       error => {
+  //         console.error('Error!', error)
+  //         alert("Invalid login")
+  //         this.loginForm.reset()
+  //       }
+  //     );
+  // }
 
 }
 

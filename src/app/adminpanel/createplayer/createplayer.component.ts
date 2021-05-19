@@ -20,9 +20,6 @@ export class CreateplayerComponent implements OnInit {
   number
 
   ngOnInit(): void {
-
-    this.number=Math.random().toString(36).substr(2, 9);
-
     this._adminservice.getStructure()
       .subscribe((data) => {
         this.Structures = data;
@@ -63,13 +60,23 @@ export class CreateplayerComponent implements OnInit {
     userEmail: ''
   }
 
+  getRandomString(length) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+  }
+
   playerSubmit() {
+    this.number=this.getRandomString(10)
     this.chechusermodel.userEmail = this.createPlayer.value.emailAddress
     this._auth.chechuser(this.chechusermodel)
       .subscribe(
         response => {
           console.log('Success!', response)
-          this.createPlayer.value.password=this.number
+          this.createPlayer.value.password = this.number
           this._adminservice.createplayer(this.createPlayer.value)
             .subscribe(
               response => {
