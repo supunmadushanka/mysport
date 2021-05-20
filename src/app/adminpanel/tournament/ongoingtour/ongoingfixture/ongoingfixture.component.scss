@@ -119,17 +119,43 @@ td {
     margin-left: auto;
 }
 
-.player {
+.cricketplayer {
     background-image: url('../../../../../assets/cricketplayer.jpg');
-    height: 4em;
+    height: 5em;
+    width: 80%;
+    background-size: 90% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.footballplayer {
+    background-image: url('../../../../../assets/footballplayer.jpg');
+    height: 5em;
+    width: 80%;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -450px 0 90px 0px rgb(32, 68, 167);
+}
+
+.rugbyplayer {
+    background-image: url('../../../../../assets/rugbyplayer.jpg');
+    height: 7em;
     width: 80%;
     background-size: 60% 100%;
     background-repeat: no-repeat;
     margin-left: auto;
     margin-right: auto;
     display: table;
-    margin-top: 1em;
-    box-shadow: inset -550px 0 50px 0px rgb(32, 68, 167);
+    margin-top: 2em;
+    box-shadow: inset -500px 0 90px 0px rgb(32, 68, 167);
 }
 
 .Left3 {

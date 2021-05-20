@@ -49,7 +49,12 @@ export class OngoingfixtureComponent implements OnInit {
     overs: null,
     givescore: null,
     wickets: null,
-    status: null
+    status: null,
+    balls:null,
+    Tries:null,
+    Penalties:null,
+    FieldGoals:null,
+    Conversions:null,
   }
 
   constructor(private location: Location, private route: ActivatedRoute, private _adminservice: AdminService, private router: Router, private _authService: AuthService) { }
@@ -120,8 +125,10 @@ export class OngoingfixtureComponent implements OnInit {
 
                 if (this.Total1[0]?.sumScore > this.Total2[0]?.sumScore) {
                   this.wonteamname = this.FixtureDetails[0]?.teamName
-                } else {
+                } else if((this.Total1[0]?.sumScore < this.Total2[0]?.sumScore)) {
                   this.wonteamname = this.FixtureDetails[1]?.teamName
+                }else{
+                  this.wonteamname='draw'
                 }
 
               },
@@ -261,6 +268,18 @@ export class OngoingfixtureComponent implements OnInit {
     }
   }
 
+  setScore(playerScore,wickets,givescore,overs,outnotout,balls,Tries,FieldGoals,Conversions){
+    this.scoreModel.playerScore=playerScore
+    this.scoreModel.wickets=wickets
+    this.scoreModel.givescore=givescore
+    this.scoreModel.overs=overs
+    this.scoreModel.status=outnotout
+    this.scoreModel.balls=balls
+    this.scoreModel.Tries=Tries
+    this.scoreModel.FieldGoals=FieldGoals
+    this.scoreModel.Conversions=Conversions
+  }
+
   currentPlayer(userId) {
     this.currentUserId = userId
   }
@@ -288,6 +307,10 @@ export class OngoingfixtureComponent implements OnInit {
     this.scoreModel.givescore = null
     this.scoreModel.wickets = null
     this.scoreModel.status = null
+    this.scoreModel.balls = null
+    this.scoreModel.Tries = null
+    this.scoreModel.FieldGoals = null
+    this.scoreModel.Conversions = null
   }
 
   submitPlayerScore1() {
@@ -306,6 +329,10 @@ export class OngoingfixtureComponent implements OnInit {
     this.scoreModel.givescore = null
     this.scoreModel.wickets = null
     this.scoreModel.status = null
+    this.scoreModel.balls = null
+    this.scoreModel.Tries = null
+    this.scoreModel.FieldGoals = null
+    this.scoreModel.Conversions = null
   }
 
   postponefixture() {
@@ -421,5 +448,29 @@ export class OngoingfixtureComponent implements OnInit {
         },
         error => console.error('Error!', error)
       );
+  }
+
+  checkcricket() {
+    if (this.Tournament[0]?.sportId[0] == 's0001') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkfootballe() {
+    if (this.Tournament[0]?.sportId[0] == 's0002') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby() {
+    if (this.Tournament[0]?.sportId[0] == 's0003') {
+      return true
+    } else {
+      false
+    }
   }
 }

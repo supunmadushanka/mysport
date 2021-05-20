@@ -181,6 +181,7 @@ export class SelectedfixtureComponent implements OnInit {
     this._adminservice.addPlayerFixture(this.sample, this.fixtureId, userId)
       .subscribe(
         response => {
+          this.ngOnInit();
           console.log('success', response)
         },
         error => console.error('Error!', error)
@@ -192,6 +193,7 @@ export class SelectedfixtureComponent implements OnInit {
     this._adminservice.removePlayerFixture(this.sample, this.fixtureId, userId)
       .subscribe(
         response => {
+          this.ngOnInit();
           console.log('success', response)
         },
         error => console.error('Error!', error)
@@ -266,5 +268,27 @@ export class SelectedfixtureComponent implements OnInit {
       );
   }
 
+  checkcricket() {
+    if (this.Tournament[0]?.sportId[0] == 's0001') {
+      return true
+    } else {
+      false
+    }
+  }
 
+  checkfootballe() {
+    if (this.Tournament[0]?.sportId[0] == 's0002') {
+      return true
+    } else {
+      false
+    }
+  }
+
+  checkrugby() {
+    if (this.Tournament[0]?.sportId[0] == 's0003') {
+      return true
+    } else {
+      false
+    }
+  }
 }

@@ -33,7 +33,7 @@
 
                 <div style="height: 350px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
-                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="ReasonAlert(p.AvaialReason)" class="pointer" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
                             <div class="Left3">
                                 <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>
@@ -61,7 +61,7 @@
 
                 <div style="height: 350px; overflow: auto;">
                     <div style="padding-bottom: 1em;">
-                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="ReasonAlert(p.AvaialReason)" class="player pointer">
+                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="ReasonAlert(p.AvaialReason)" class="pointer" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
                             <div class="Left3">
                                 <div class="playername">{{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>

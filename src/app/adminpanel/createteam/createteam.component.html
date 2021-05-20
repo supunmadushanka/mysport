@@ -4,7 +4,6 @@
     <div class="form">
         <form [formGroup]="CreateTeam" (ngSubmit)="TeamSubmit()">
             <h3>Enter Teams details</h3><br>
-
             <div class="form-group">
                 <label for="TeamName">Team Name</label>
                 <input [class.is-invalid]="CreateTeam.get('TeamName').invalid && CreateTeam.get('TeamName').touched" formControlName="TeamName" type="text" class="form-control form-control-lg" id="TeamName" required placeholder="Team ABC">
@@ -34,7 +33,6 @@
                 </select>
                 <small [class.d-none]="CreateTeam.get('Coach').valid || CreateTeam.get('Coach').untouched" class="text-danger">Coach Required</small>
             </div><br>
-
             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
             <button [disabled]="CreateTeam.invalid" type="submit" class="btn btn-primary">Submit</button>
         </form>

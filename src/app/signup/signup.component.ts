@@ -65,33 +65,26 @@ export class SignupComponent implements OnInit {
     this._auth.chechuser(this.registrationForm.value)
       .subscribe(
         response => {
-          console.log('Success!', response)
-
           this._auth.tempregister(this.registrationForm.value)
             .subscribe(
               response => {
-                console.log('Success!', response)
                 this._auth.sendMail(this.registrationForm.value)
                   .subscribe(
                     response => {
-                      alert('You will recieve a email to confirm your email account')
                       this.router.navigate(['/waitforemail']);
-                      console.log('Success!', response)
                     },
                     error => {
                       console.error('Error!', error)
-                      console.log('Hi error!')
                     }
                   )
+                  this.router.navigate(['/waitforemail']);
               },
               error => {
                 console.error('Error!', error)
-                console.log('Hi error!')
               }
             )
         },
         error => {
-          console.error('Error!', error)
           alert("Already have an account")
           this.registrationForm.reset()
         }

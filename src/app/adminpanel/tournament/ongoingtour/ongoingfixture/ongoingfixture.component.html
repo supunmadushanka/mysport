@@ -34,15 +34,20 @@
 
                 <div style="height: 330px; overflow: auto;">
                     <div style="padding-bottom: 0em;">
-                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="currentPlayer(p.userId)" class="player">
+                        <div *ngFor="let p of firstTeamPlayers | filter:firstplayer" (click)="currentPlayer(p.userId)" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
                             <div class="Left3">
                                 <div class="playername pointer" (click)="navigateplayer1(p.playerID)">
                                     {{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>
                             <div class="Right3">
-                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team1model">
-                                    <div>Score: {{p.playerScore}}</div>
-                                    <div *ngIf="isCricket()">Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})<br> {{p.outnotout}}
+                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team1model" (click)="setScore(p.playerScore,p.wickets,p.givescore,p.overs,p.outnotout,p.ballFaced,p.Tries,p.FieldGoals,p.Conversions)">
+                                    <div>Score: {{p.playerScore}}<span *ngIf="isCricket()">({{p.ballFaced}})</span></div>
+                                    <div *ngIf="isCricket()">{{p.outnotout}}<br>
+                                        <hr>Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})
+                                    </div>
+                                    <div *ngIf="checkrugby()">
+                                        Tries:{{p.Tries}}<br> FieldGoals:{{p.FieldGoals}}
+                                        <br> Conversions: {{p.Conversions}}
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +57,9 @@
                 <div class="points">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total1[0]?.sumScore+realextra1}}
                     <span *ngIf="isCricket()">-{{Wicket1[0]?.wickets}}({{Total2[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span data-toggle="modal" data-target="#extra1" class="pointer">Extras={{FixtureDetails[0]?.extras}}</span>
+                    <span data-toggle="modal" data-target="#extra1" class="pointer">
+                        <span *ngIf="checkcricket()">Extras=</span><span *ngIf="checkfootballe() || checkrugby()">Penalty=</span> {{FixtureDetails[0]?.extras}}
+                    </span>
                 </div>
             </div>
 
@@ -68,15 +75,20 @@
 
                 <div style="height: 330px; overflow: auto;">
                     <div style="padding-bottom: 0em;">
-                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="currentPlayer(p.userId)" class="player">
+                        <div *ngFor="let p of secondTeamPlayers | filter:secondplayer" (click)="currentPlayer(p.userId)" [class.cricketplayer]="checkcricket()" [class.footballplayer]="checkfootballe()" [class.rugbyplayer]="checkrugby()">
                             <div class="Left3">
                                 <div class="playername pointer" (click)="navigateplayer2(p.playerID)">
                                     {{p.playerFName}}<br> {{p.playerLName}}</div>
                             </div>
                             <div class="Right3">
-                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team2model">
-                                    <div>Score: {{p.playerScore}}</div>
-                                    <div *ngIf="isCricket()">Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})<br> {{p.outnotout}}
+                                <div class="playerdetails pointer" data-toggle="modal" data-target="#team2model" (click)="setScore(p.playerScore,p.wickets,p.givescore,p.overs,p.outnotout,p.ballFaced,p.Tries,p.FieldGoals,p.Conversions)">
+                                    <div>Score: {{p.playerScore}}<span *ngIf="isCricket()">({{p.ballFaced}})</span></div>
+                                    <div *ngIf="isCricket()">{{p.outnotout}}<br>
+                                        <hr>Bowling: {{p.wickets}}-{{p.givescore}}({{p.overs}})
+                                    </div>
+                                    <div *ngIf="checkrugby()">
+                                        Tries:{{p.Tries}}<br> FieldGoals:{{p.FieldGoals}}
+                                        <br> Conversions: {{p.Conversions}}
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +99,9 @@
                 <div class="points">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Score={{Total2[0]?.sumScore+realextra2}}
                     <span *ngIf="isCricket()">-{{Wicket2[0]?.wickets}}({{Total1[0]?.overs}})</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span data-toggle="modal" data-target="#extra2" class="pointer">Extras={{FixtureDetails[1]?.extras}}</span>
+                    <span data-toggle="modal" data-target="#extra2" class="pointer">
+                        <span *ngIf="checkcricket()">Extras=</span><span *ngIf="checkfootballe() || checkrugby()">Penalty=</span> {{FixtureDetails[1]?.extras}}
+                    </span>
                 </div>
             </div>
 
@@ -117,12 +131,16 @@
             <div>
                 <div *ngIf="instituteView1()">
                     <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg1">Description
-                    <i class='far fa-question-circle' style='font-size:26px'></i></button>
+                    <i class='fa fa-info-circle' style='font-size:26px'></i></button>
                 </div><br>
                 <div *ngIf="instituteView2()">
-                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description</button>
+                    <button type="button" class="btn btn-primary middle" data-toggle="modal" data-target=".bd-example-modal-lg2">Description
+                    <i class='fa fa-info-circle' style='font-size:26px'></i>
+                    </button>
                 </div>
-                <p *ngIf="showwhenfinished()"><span class="wonteam aaa">{{wonteamname}} Won</span></p>
+                <p *ngIf="showwhenfinished()"><span class="wonteam aaa" *ngIf="wonteamname!='draw'">{{wonteamname}} Won</span>
+                    <span class="wonteam aaa" *ngIf="wonteamname=='draw'">Draw</span>
+                </p>
             </div>
         </div>
     </div>
@@ -141,6 +159,7 @@
             <div class="modal-body">
                 Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=scoreModel.playerScore><br><br>
                 <div *ngIf="isCricket()">
+                    Enter Balls faced: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.balls><br><br>
                     <label for="cars">Status:</label>
                     <select name="cars" id="cars" [(ngModel)]=scoreModel.status>
                         <option value="out">Out</option>
@@ -148,6 +167,10 @@
                     </select><br>
                     <hr> Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
                     wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
+                </div>
+                <div *ngIf="checkrugby()">
+                    Tries: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Tries><br><br> Field Goals: &nbsp;&nbsp;&nbsp;
+                    <input type="number" value="" step="1" [(ngModel)]=scoreModel.FieldGoals><br><br> Conversions: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Conversions><br><br>
                 </div>
                 <button class="btn btn-success" (click)="submitPlayerScore()">Submit</button>
             </div>
@@ -167,15 +190,19 @@
 
             <div class="modal-body">
                 Enter Score:&nbsp;&nbsp;&nbsp;<input type="number" value="" [(ngModel)]=scoreModel.playerScore><br><br>
-
                 <div *ngIf="isCricket()">
-                    Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
-                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
+                    Enter Balls faced: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.balls><br><br>
                     <label for="cars">Status:</label>
                     <select name="cars" id="cars" [(ngModel)]=scoreModel.status>
                         <option value="out">Out</option>
                         <option value="notout">NotOut</option>
-                    </select>
+                    </select><br>
+                    <hr>Enter Overs: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="0.1" [(ngModel)]=scoreModel.overs><br><br> Enter given marks: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.givescore><br><br> Enter
+                    wickets: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.wickets><br><br>
+                </div>
+                <div *ngIf="checkrugby()">
+                    Tries: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Tries><br><br> Field Goals: &nbsp;&nbsp;&nbsp;
+                    <input type="number" value="" step="1" [(ngModel)]=scoreModel.FieldGoals><br><br> Conversions: &nbsp;&nbsp;&nbsp;<input type="number" value="" step="1" [(ngModel)]=scoreModel.Conversions><br><br>
                 </div>
                 <button class="btn btn-success" (click)="submitPlayerScore1()">Submit</button>
 

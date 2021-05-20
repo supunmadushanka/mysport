@@ -33,6 +33,13 @@
                     <div class="search">
                         <input class="form-control" type="text" name="search" [(ngModel)]="searchTeam" autocomplete="off" placeholder="Search any">
                     </div>
+                    <div class="search">
+                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="searchTeam">
+                            <option class="option">Cricket</option>
+                            <option class="option">Football</option>
+                            <option class="option">Rugby</option>
+                        </select>
+                    </div>
                     <div class="teambutton">
                         <button type="button" (click)="searchTeam=''" class="btn btn-warning">Clear</button>&nbsp;
                         <button *ngIf="checkadmin()" type="button" class="btn btn-success" routerLink="/createteam">Create Team</button>
