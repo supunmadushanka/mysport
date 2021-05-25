@@ -49,6 +49,13 @@ export class AdminService {
     return this.http.get<any>(_url, { params });
   }
 
+  getSessionPlayers(sessionId) {
+    let params = new HttpParams()
+      .set('sessionId', sessionId)
+    let _url = environment.baseURL + "getsessionplayers";
+    return this.http.get<any>(_url, { params });
+  }
+
   getTeamTourUpcoming(teamId) {
     let params = new HttpParams()
       .set('teamId', teamId)
@@ -368,6 +375,27 @@ export class AdminService {
     return this.http.post<any>(_url, user, { params })
   }
 
+  AddSessionPlayers(user,sessionId,userId) {
+    let _url = environment.baseURL + "addsessionplayers";
+    let params = new HttpParams()
+      .set('sessionId', sessionId)
+      .set('userId', userId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  SetParticipated(user,sessionPlayerId) {
+    let _url = environment.baseURL + "setparticipated";
+    let params = new HttpParams()
+      .set('sessionPlayerId', sessionPlayerId)
+    return this.http.post<any>(_url, user, { params })
+  }
+
+  SetNotParticipated(user,sessionPlayerId) {
+    let _url = environment.baseURL + "setnotparticipated";
+    let params = new HttpParams()
+      .set('sessionPlayerId', sessionPlayerId)
+    return this.http.post<any>(_url, user, { params })
+  }
 
   addAchieve(user, teamId) {
     let params = new HttpParams()

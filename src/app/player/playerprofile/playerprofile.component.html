@@ -2,8 +2,8 @@
     <div class="Left">
         <br>
         <a (click)="back()" class="previous round pointer">&#8249; Back</a>
-        <div class="aaa" style="padding-right: 0.3em;padding-top: 0.4em; background-color: rgb(255, 255, 255);">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <div class="aaa" style="padding-right: 0.3em;padding-top: 0.4em;">
+            <ul class="nav nav-pills mb-3 mainnav" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="Team-tab" data-toggle="pill" href="#Team" role="tab" aria-controls="Team" aria-selected="true">
                         <h5 class="navtitle">Teams</h5>
@@ -41,7 +41,7 @@
 
             <div class="tab-pane fade show active" id="Team" role="tabpanel" aria-labelledby="Team-tab">
 
-                <div style="height: 500px; overflow: auto;">
+                <div style="height: 600px; overflow: auto;">
                     <div style="padding-bottom: 2em;">
                         <div *ngFor="let e of PlayerTeams" (click)="navigateTeam(e.teamId)" class="pointer" [class.Team1]="checkcricket(e.sportName)" [class.Team2]="checkfootballe(e.sportName)" [class.Team3]="checkrugby(e.sportName)">
                             <div class="Left1">
@@ -174,7 +174,7 @@
                                         <td>{{p.fixtureAvaial}}</td>
                                         <td>{{p.AvaialReason}}</td>
                                         <td>{{p.Confirm}}</td>
-                                        <td *ngIf="confirm()" style="margin:auto;display:block;"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
+                                        <td *ngIf="confirm()"><button (click)="changeavailability(p.fixtureId,p.tournamentTeamId)" type="button" class="btn btn-info aaa">Confirm</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -263,10 +263,10 @@
             <div class="menu">
                 <button type="button" class="btn btn-danger aaa" data-toggle="modal" data-target="#exampleModalCenter">Change
                     Password</button><br>
-            </div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-
+            </div><br>
+            <div class="aaa"><span class="presentage1">Practice Sessions Attendance : </span><span class="presentage2"><span class="presentage3">{{attendance}}%</span></span>
+            </div>
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
                 <i class="fa fa-edit pointer" style="font-size:26px;"></i><br>
             </button>&nbsp;&nbsp;

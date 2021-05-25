@@ -51,6 +51,17 @@
                 <small [class.d-none]="CreateFixture.get('fixtureTime').valid || CreateFixture.get('fixtureTime').untouched" class="text-danger">Time Required</small>
             </div><br>
 
+            <div class="form-group">
+                <label for="FixtureType">Fixture Type</label>
+                <select [class.is-invalid]="CreateFixture.get('FixtureType').invalid && CreateFixture.get('FixtureType').touched" formControlName="FixtureType" class="form-control" id="exampleFormControlSelect1">
+                    <option class="option" value="quali">qualifying</option>
+                    <option class="option" value="Quarter">Quarter finals</option>
+                    <option class="option" value="Semi">Semi finals</option>
+                    <option class="option" value="Final">Final</option>
+                </select>
+                <small [class.d-none]="CreateFixture.get('FixtureType').valid || CreateFixture.get('FixtureType').untouched" class="text-danger">Type Required</small>
+            </div><br>
+
             <button type="reset" class="btn btn btn-outline-dark">Reset</button>&nbsp;&nbsp;&nbsp;
             <button [disabled]="CreateFixture.invalid" type="submit" class="btn btn-primary">Submit</button>
 

@@ -130,4 +130,28 @@ export class SelectedtourComponent implements OnInit {
     this.location.back()
   }
 
+  checkquali(typeId){
+    if(typeId=='quali' || typeId==null){
+      return true
+    }
+  }
+
+  checkquater(typeId){
+    if(typeId=='Quarter'){
+      return true
+    }
+  }
+
+  checksemi(typeId){
+    if(typeId=='Semi'){
+      return true
+    }
+  }
+
+  checkfinal(typeId){
+    if(typeId=='Final'){
+      return true
+    }
+  }
+
 }

@@ -22,7 +22,7 @@ export class PlayerprofileComponent implements OnInit {
 
   currentUser
 
-  constructor(private _adminservice: AdminService,private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
+  constructor(private _adminservice: AdminService, private fbAdmin: FormBuilder, private fb2: FormBuilder, private _playerservice: PlayerService,
     private router: Router, private route: ActivatedRoute, private fbPlayer1: FormBuilder, private _authService: AuthService, private location: Location) { }
 
   public PlayerTeams = [];
@@ -35,11 +35,13 @@ export class PlayerprofileComponent implements OnInit {
   public FinishedFixtures = [];
   public Parents = [];
   public Structures = [];
+  public PlayerAttendance = [];
 
   instituteId: number
   fixtureId: number
   tournamentTeamId: number
   searchFixture
+  attendance
 
   ngOnInit(): void {
 
@@ -65,6 +67,25 @@ export class PlayerprofileComponent implements OnInit {
     this._playerservice.getProfile(this.userId)
       .subscribe((data) => {
         this.PlayerProfile = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+
+    this._playerservice.getPlayerAttendance(this.userId)
+      .subscribe((data) => {
+        this.PlayerAttendance = data;
+        
+        if(this.PlayerAttendance[0]?.sessioncount==null || this.PlayerAttendance[0]?.sessioncount==''){
+          this.attendance=0;
+        }else{
+          this.attendance=(this.PlayerAttendance[0]?.yescount/this.PlayerAttendance[0]?.sessioncount)*100
+        }
       },
         err => {
           if (err instanceof HttpErrorResponse) {
@@ -127,7 +148,7 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
-      this._playerservice.getPlayerFixturesOngoing(this.userId)
+    this._playerservice.getPlayerFixturesOngoing(this.userId)
       .subscribe((data) => {
         this.OngoingFixtures = data;
       },
@@ -140,7 +161,7 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
-      this._playerservice.getPlayerFixturesFinished(this.userId)
+    this._playerservice.getPlayerFixturesFinished(this.userId)
       .subscribe((data) => {
         this.FinishedFixtures = data;
       },
@@ -166,7 +187,7 @@ export class PlayerprofileComponent implements OnInit {
         }
       );
 
-      this._adminservice.getStructure()
+    this._adminservice.getStructure()
       .subscribe((data) => {
         this.Structures = data;
       },
@@ -352,7 +373,7 @@ export class PlayerprofileComponent implements OnInit {
     heightPlayer: [''],
     weightPlayer: [''],
     bloodSelect: [''],
-    PlayerStructure:['']
+    PlayerStructure: ['']
   })
 
   @ViewChild('myModalClose1') modalClose1;

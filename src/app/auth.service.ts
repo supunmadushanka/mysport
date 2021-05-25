@@ -22,6 +22,7 @@ export class AuthService {
   private _parentregister = environment.baseURL+"parentregister";
   private _adminregister = environment.baseURL+"adminregister";
   private _sendemail = environment.baseURL+"sendmail";
+  private _recoverpassword= environment.baseURL+"recoverpassword";
 
   constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser')));
@@ -92,6 +93,10 @@ export class AuthService {
 
   ParentRegister(user) {
     return this.http.post<any>(this._parentregister, user)
+  }
+
+  RecoverPassword(user) {
+    return this.http.post<any>(this._recoverpassword, user)
   }
 
 }

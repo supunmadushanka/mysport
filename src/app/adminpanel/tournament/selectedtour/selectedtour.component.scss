@@ -126,7 +126,7 @@ a:hover {
     display: inline-block;
 }
 
-.fixture {
+.fixturequali {
     background-image: url('../../../../assets/1Vs1.jpg');
     height: 4em;
     width: 70%;
@@ -135,8 +135,48 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     display: table;
-    margin-top: 1em;
+    margin-top: 2em;
     box-shadow: inset -800px 0 50px 0px rgb(32, 68, 167);
+}
+
+//32, 68, 167
+.fixturequater {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(172, 154, 0);
+}
+
+.fixturesemi {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(192, 103, 2);
+}
+
+.fixturefinal {
+    background-image: url('../../../../assets/1Vs1.jpg');
+    height: 4em;
+    width: 70%;
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    margin-top: 2em;
+    box-shadow: inset -800px 0 50px 0px rgb(192, 2, 2);
 }
 
 .Left1 {

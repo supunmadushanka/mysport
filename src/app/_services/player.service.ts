@@ -28,6 +28,13 @@ export class PlayerService {
     return this.http.get<any>(_url, { params });
   }
 
+  getPlayerAttendance(userId) {
+    let params = new HttpParams()
+      .set('userId', userId)
+    let _url = environment.baseURL+"getplayerattendance";
+    return this.http.get<any>(_url, { params });
+  }
+
   getPlayerCode(userId) {
     let params = new HttpParams()
       .set('userId', userId)

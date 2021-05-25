@@ -39,6 +39,7 @@ export class AdminteamComponent implements OnInit {
   public FinishedTournaments = [];
   public UpcomingSession = [];
   public FinishedSession = [];
+  public SessionPlayers = [];
 
   searchPlayer;
   sportName;
@@ -372,6 +373,59 @@ export class AdminteamComponent implements OnInit {
           console.error('Error!', error)
         }
       )
+
+    for (var i = 0; i < this.TeamPlayers.length; i++) {
+      this._adminservice.AddSessionPlayers(this.TeamPlayers, sessionId,this.TeamPlayers[i].userId)
+        .subscribe(
+          response => {
+            this.ngOnInit();
+          },
+          error => {
+            console.error('Error!', error)
+          }
+        )
+    }
+  }
+
+  GetSessionPlayers(sessionId){
+    this._adminservice.getSessionPlayers(sessionId)
+      .subscribe((data) => {
+        this.SessionPlayers = data;
+      },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 401) {
+              this.router.navigate(['/home'])
+            }
+          }
+        }
+      );
+  }
+
+  SetParticipated(sessionPlayerId) {
+    this._adminservice.SetParticipated(this.AddSession.value,sessionPlayerId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+      this.ngOnInit();
+  }
+
+  SetNotParticipated(sessionPlayerId) {
+    this._adminservice.SetNotParticipated(this.AddSession.value,sessionPlayerId)
+      .subscribe(
+        response => {
+          this.ngOnInit();
+        },
+        error => {
+          console.error('Error!', error)
+        }
+      )
+      this.ngOnInit();
   }
 
 }

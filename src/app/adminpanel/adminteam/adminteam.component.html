@@ -212,6 +212,7 @@
                                         <br>
                                         <div class="allignbutton">
                                             <button type="button" class="btn btn-success sessionbutton" (click)="SetSession(p.sessionId,p.sessionSummery)" data-toggle="modal" data-target=".description">Description</button>
+                                            <button type="button" class="btn btn-success sessionbutton" data-toggle="modal" data-target=".attendance" (click)="GetSessionPlayers(p.sessionId)">Attendance</button>
                                         </div>
                                     </div>
                                     <div class="Right4">
@@ -460,20 +461,22 @@
 <div class="modal fade attendance" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div style="height: 500px; overflow: auto; padding-top: 1em;">
+            <div style="height: 650px; overflow: auto; padding-top: 1em;">
                 <table class="table table-hover table-bordered">
                     <thead class="thead-dark">
                         <tr style="height: 1em;">
                             <th scope="col">Name</th>
-                            <th scope="col">Mobile No</th>
-                            <th class="Add"></th>
+                            <th scope="col">Attendance</th>
+                            <th class="Add" *ngIf="show()"></th>
                         </tr>
                     </thead>
                     <tbody class="body">
-                        <tr *ngFor="let p of addplayers">
-                            <td>{{p.playerFname}} {{p.playerLName}}</td>
-                            <td>{{p.playerteleNum}}</td>
-                            <td><button (click)="AddPlayer(p.userId)" type="button" class="btn btn-primary">Add</button></td>
+                        <tr *ngFor="let p of SessionPlayers">
+                            <td>{{p.playerFName}} {{p.playerLName}}</td>
+                            <td>{{p.attendance}}</td>
+                            <td *ngIf="show()"><button *ngIf="p.attendance==null || p.attendance=='no'" (click)="SetParticipated(p.sessionPlayerId)" type="button" class="btn btn-primary">Participated</button>
+                                <button *ngIf="p.attendance=='yes'" (click)="SetNotParticipated(p.sessionPlayerId)" type="button" class="btn btn-danger">Not Participated</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

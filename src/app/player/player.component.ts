@@ -27,11 +27,13 @@ export class PlayerComponent implements OnInit {
   public Weaknesses = [];
   public Parents = [];
   public PlayerCode = [];
+  public PlayerAttendance = [];
 
   instituteId: number
   fixtureId: number
   tournamentTeamId: number
   searchFixture
+  attendance
 
   ngOnInit(): void {
 
@@ -55,6 +57,24 @@ export class PlayerComponent implements OnInit {
         this._playerservice.getProfile(this.userId)
           .subscribe((data) => {
             this.PlayerProfile = data;
+          },
+            err => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.router.navigate(['/home'])
+                }
+              }
+            }
+          );
+
+        this._playerservice.getPlayerAttendance(this.userId)
+          .subscribe((data) => {
+            this.PlayerAttendance = data;
+            if(this.PlayerAttendance[0]?.sessioncount==null || this.PlayerAttendance[0]?.sessioncount==''){
+              this.attendance=0;
+            }else{
+              this.attendance=(this.PlayerAttendance[0]?.yescount/this.PlayerAttendance[0]?.sessioncount)*100
+            }
           },
             err => {
               if (err instanceof HttpErrorResponse) {

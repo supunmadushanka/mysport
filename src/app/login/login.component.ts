@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { AuthService } from '../auth.service';
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb1: FormBuilder, private router: Router, public _auth: AuthService) { }
 
   currentUser
+  number
 
   ngOnInit(): void {
   }
@@ -50,6 +51,34 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+  getRandomString(length) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+  }
+
+  @ViewChild('myModalClose') modalClose;
+
+  changepassword(){
+    this.loginForm.value.password=this.getRandomString(10)
+    this.modalClose.nativeElement.click();
+
+    this._auth.RecoverPassword(this.loginForm.value)
+      .subscribe(
+        response => {
+          this.loginForm.reset();
+        },
+        error => {
+          this.loginForm.reset()
+        }
+      );
+  }
+
+  
 
   // onSubmitt() {
   //   this._auth.sendMail(this.loginForm.value)

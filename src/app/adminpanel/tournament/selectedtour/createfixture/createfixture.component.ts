@@ -66,7 +66,8 @@ export class CreatefixtureComponent implements OnInit {
     fixtureTime: ['', [Validators.required]],
     FirstTeam: ['', [Validators.required]],
     SecondTeam: ['', [Validators.required]],
-    FixtureStructure: ['', [Validators.required]]
+    FixtureStructure: ['', [Validators.required]],
+    FixtureType:['', [Validators.required]]
   });
 
   FixtureSubmit() {
